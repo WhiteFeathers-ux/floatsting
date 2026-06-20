@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Float &amp; Sting — Strong &amp; Lean</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Float &amp; Sting">
+<meta name="theme-color" content="#7A2B22">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1A1410;--oxblood:#7A2B22;--oxblood-deep:#531C16;
+    --gold:#C99A3C;--gold-bright:#E7BC57;
+    --bone:#ECE3CE;--bone-dim:#DDD1B6;--bone-line:#C9BC9C;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bone);color:var(--ink);font-family:'Hanken Grotesk',-apple-system,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  .mono{font-family:'Space Mono',ui-monospace,Menlo,monospace}
+
+  .hero{background:var(--oxblood);background-image:radial-gradient(circle at 18% 12%, rgba(231,188,87,.16), transparent 42%),repeating-linear-gradient(45deg, rgba(0,0,0,.05) 0 2px, transparent 2px 9px);color:var(--bone);border-bottom:5px solid var(--gold);padding:44px 0 38px}
+  .eyebrow{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:16px}
+  .hero h1{font-family:'Anton','Impact','Arial Narrow',sans-serif;font-weight:400;line-height:.86;font-size:clamp(54px,15vw,116px);text-transform:uppercase;text-shadow:3px 3px 0 var(--oxblood-deep)}
+  .hero h1 .amp{color:var(--gold-bright);font-size:.62em;margin:0 .04em}
+  .hero .sub{max-width:600px;margin-top:16px;font-size:16.5px;color:#f3ecdd}
+  .hero .sub b{color:var(--gold-bright);font-weight:700}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+  .chip{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border:1.5px solid var(--gold);color:var(--gold-bright);padding:7px 12px;border-radius:2px}
+
+  .sec{padding:48px 0 6px}
+  .sec-head{display:flex;align-items:flex-end;gap:15px;margin-bottom:18px}
+  .snum{font-family:'Anton','Impact','Arial Narrow',sans-serif;font-size:clamp(40px,9vw,64px);line-height:.8;color:transparent;-webkit-text-stroke:2px var(--oxblood)}
+  .stag{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--oxblood);font-weight:700}
+  .sec-head h2{font-family:'Anton','Impact','Arial Narrow',sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(26px,6vw,40px);line-height:.95}
+  .lead{font-size:16.5px;max-width:640px;margin:8px 0 22px;color:#3b302a}
+
+  .map{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-bottom:8px}
+  .mcell{border-radius:5px;padding:11px 8px;text-align:center;border:1.5px solid var(--bone-line);background:#fff;min-height:96px;display:flex;flex-direction:column;gap:4px}
+  .mcell .md{font-family:'Anton','Impact','Arial Narrow',sans-serif;font-size:15px;text-transform:uppercase;color:var(--oxblood);letter-spacing:.04em}
+  .mcell .mf{font-size:11px;line-height:1.25;color:#473a32;font-weight:600}
+  .mcell.up{border-top:4px solid var(--oxblood)}
+  .mcell.lo{border-top:4px solid var(--gold)}
+  .mcell.full{border-top:4px solid var(--oxblood-deep)}
+  .mcell.box{border-top:4px solid var(--ink);background:#fbf7ec}
+  .mcell.rest{border-style:dashed;background:var(--bone-dim)}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 4px;font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:12px;color:#5b4d42}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .sw{width:13px;height:13px;border-radius:3px;display:inline-block}
+  .sw.up{background:var(--oxblood)}.sw.lo{background:var(--gold)}.sw.full{background:var(--oxblood-deep)}.sw.box{background:var(--ink)}.sw.rest{background:var(--bone-dim);border:1px dashed var(--bone-line)}
+
+  .days{display:grid;gap:14px}
+  .day-panel{background:#fff;border:1.5px solid var(--bone-line);border-radius:6px;padding:18px 18px 16px;border-left:6px solid var(--oxblood)}
+  .day-panel.lo{border-left-color:var(--gold)}
+  .day-panel.full{border-left-color:var(--oxblood-deep)}
+  .day-panel.box{border-left-color:var(--ink);background:#fbf7ec}
+  .day-panel.rest{border-left-color:var(--bone-line);border-style:dashed;background:var(--bone-dim)}
+  .dp-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .dp-head .dot{width:13px;height:13px;border-radius:50%;background:var(--oxblood);flex:none}
+  .day-panel.lo .dot{background:var(--gold)}
+  .day-panel.full .dot{background:var(--oxblood-deep)}
+  .day-panel.box .dot{background:var(--ink)}
+  .day-panel.rest .dot{background:var(--bone-line)}
+  .dp-name{font-family:'Anton','Impact','Arial Narrow',sans-serif;font-size:21px;text-transform:uppercase;letter-spacing:.02em;line-height:1}
+  .dp-tag{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#6b5b50;margin-top:3px}
+  .freq{margin-left:auto;font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bone);background:var(--oxblood);padding:4px 9px;border-radius:2px}
+  .day-panel.lo .freq{background:var(--gold);color:var(--ink)}
+  .day-panel.full .freq{background:var(--oxblood-deep)}
+  .day-panel.box .freq{background:var(--ink)}
+  .day-panel.rest .freq{background:var(--bone-line);color:var(--ink)}
+  ul.ex{list-style:none;display:grid;gap:8px}
+  ul.ex li{display:flex;justify-content:space-between;gap:14px;align-items:baseline;font-size:14.5px;padding-bottom:7px;border-bottom:1px solid var(--bone-dim)}
+  ul.ex li:last-child{border-bottom:none;padding-bottom:0}
+  ul.ex .nm{font-weight:600;color:#2c231d}
+  ul.ex .nm i{font-style:normal;color:var(--oxblood);font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:12px;margin-right:7px}
+  ul.ex .nm b{color:var(--oxblood-deep)}
+  ul.ex .pr{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:12.5px;font-weight:700;color:var(--oxblood-deep);white-space:nowrap;text-align:right}
+  .dp-note{margin-top:12px;font-size:13.5px;color:#473a32;background:var(--bone);border:1px solid var(--bone-line);border-radius:4px;padding:10px 12px}
+  .dp-note b{color:var(--oxblood)}
+
+  .principles{list-style:none;margin:0 0 26px;display:grid;gap:10px}
+  .principles li{display:flex;gap:13px;align-items:baseline}
+  .principles .n{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-weight:700;color:var(--gold);font-size:14px;flex:none;width:28px}
+  .principles b{font-weight:800}.principles span{font-size:15px;color:#3b302a}
+  .diagrams{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;background:var(--ink);border-radius:6px;padding:18px;margin-bottom:22px;border:3px solid var(--gold)}
+  .diagram{text-align:center}
+  .diagram svg{width:100%;height:auto;max-width:150px}
+  .diagram .dlabel{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-weight:700;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-bright);margin-top:2px}
+  .diagram .dnote{font-size:12px;color:#cdbf9f;margin-top:1px}
+  .sole{fill:var(--oxblood)}.toe{fill:var(--oxblood-deep)}
+  .flabel{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-weight:700;font-size:13px;fill:var(--bone)}
+  .ghost{opacity:.32}
+  .arrow{stroke:var(--gold-bright);stroke-width:3;fill:none;stroke-linecap:round}
+  .bounce{animation:bob 1.6s ease-in-out infinite}.bounce2{animation:bob 1.6s ease-in-out infinite .8s}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  .drills{font-size:14.5px;color:#473a32;background:#fff;border:1.5px solid var(--bone-line);border-radius:4px;padding:15px 17px}
+  .drills b{text-transform:uppercase;font-size:12px;letter-spacing:.15em;color:var(--oxblood);display:block;margin-bottom:6px;font-family:'Space Mono',ui-monospace,Menlo,monospace}
+
+  .panel{background:var(--ink);color:var(--bone);border-radius:8px;padding:24px 22px;border:3px solid var(--gold)}
+  .panel h3{font-family:'Anton','Impact','Arial Narrow',sans-serif;text-transform:uppercase;color:var(--gold-bright);font-size:22px;letter-spacing:.03em;margin-bottom:14px}
+  .panel ul{list-style:none;display:grid;gap:11px}
+  .panel li{font-size:14.5px;padding-left:22px;position:relative;color:#e8dfcc}
+  .panel li::before{content:"›";position:absolute;left:0;color:var(--gold);font-weight:700}
+  .panel b{color:var(--gold-bright)}
+
+  .timer{background:var(--ink);color:var(--bone);border-radius:10px;padding:26px 22px 24px;text-align:center;border:3px solid var(--gold)}
+  .timer .phase{font-family:'Space Mono',ui-monospace,Menlo,monospace;letter-spacing:.26em;text-transform:uppercase;font-size:13px;color:var(--gold-bright);font-weight:700}
+  .ring-wrap{position:relative;width:190px;height:190px;margin:14px auto 6px}
+  .ring-wrap svg{transform:rotate(-90deg)}
+  .ring-bg{fill:none;stroke:#33271f;stroke-width:11}
+  .ring-fg{fill:none;stroke:var(--gold);stroke-width:11;stroke-linecap:round;transition:stroke-dashoffset .3s linear}
+  .clock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .clock .t{font-family:'Anton','Impact','Arial Narrow',sans-serif;font-size:50px;line-height:1}
+  .clock .rd{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:12px;color:#b9a980;margin-top:4px;letter-spacing:.1em}
+  .controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .btn{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;border:2px solid var(--gold);background:transparent;color:var(--gold-bright);padding:10px 18px;border-radius:3px;transition:background .15s,color .15s}
+  .btn:hover{background:var(--gold);color:var(--ink)}
+  .btn.primary{background:var(--gold);color:var(--ink)}.btn.primary:hover{background:var(--gold-bright)}
+  .rounds-set{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px;font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:13px;color:#cdbf9f}
+  .stepper{display:flex;gap:6px}
+  .stepper button{width:30px;height:30px;border:1.5px solid var(--gold);background:transparent;color:var(--gold-bright);font-size:17px;cursor:pointer;border-radius:3px;line-height:1}
+  .stepper button:hover{background:var(--gold);color:var(--ink)}
+  .sound-toggle{margin-top:12px;font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:12px;color:#b9a980;cursor:pointer;user-select:none}
+  .sound-toggle input{margin-right:6px;accent-color:var(--gold)}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+  footer{background:var(--ink);color:var(--bone-dim);padding:32px 0 40px;margin-top:34px}
+  footer h4{font-family:'Anton','Impact','Arial Narrow',sans-serif;text-transform:uppercase;color:var(--gold-bright);font-size:20px;letter-spacing:.04em;margin-bottom:12px}
+  footer ul{list-style:none;display:grid;gap:9px}
+  footer li{font-size:13.5px;padding-left:20px;position:relative}
+  footer li::before{content:"›";position:absolute;left:0;color:var(--gold);font-weight:700}
+  footer .seal{margin-top:20px;font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border-top:1px solid #3a2c23;padding-top:14px}
+
+  @media(max-width:680px){.map{grid-template-columns:repeat(2,1fr)}.diagrams{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){ul.ex li{flex-direction:column;gap:2px}ul.ex .pr{text-align:left}}
+  @media(prefers-reduced-motion:reduce){.bounce,.bounce2{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Float &amp; Sting · The Strong-and-Lean Build</div>
+    <h1>Strong<span class="amp">&amp;</span>Lean</h1>
+    <p class="sub">Three focused lifting days, two boxing days, two real rest days. Heavy compounds build the <b>strong</b>; rope, footwork &amp; recomp eating keep you <b>lean</b>. Everything that matters gets hit twice — and your Ali footwork stays right where you want it.</p>
+    <div class="chips">
+      <span class="chip">3 Lift Days</span>
+      <span class="chip">2 Boxing Days</span>
+      <span class="chip">2 Rest Days</span>
+      <span class="chip">Legs · Chest · Back ×2</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- MAP -->
+  <section class="sec">
+    <div class="sec-head"><div class="snum">01</div><div><div class="stag">The Overview</div><h2>The Map</h2></div></div>
+    <p class="lead">Legs lead the week so they've recovered before footwork. Full-body Friday is the second touch for everything. Two rest days, both boxing days kept.</p>
+    <div class="map">
+      <div class="mcell lo"><div class="md">Mon</div><div class="mf">Lower (heavy)</div></div>
+      <div class="mcell up"><div class="md">Tue</div><div class="mf">Upper</div></div>
+      <div class="mcell box"><div class="md">Wed</div><div class="mf">Boxing + footwork</div></div>
+      <div class="mcell rest"><div class="md">Thu</div><div class="mf">Full rest</div></div>
+      <div class="mcell full"><div class="md">Fri</div><div class="mf">Full body</div></div>
+      <div class="mcell box"><div class="md">Sat</div><div class="mf">Footwork + conditioning</div></div>
+      <div class="mcell rest"><div class="md">Sun</div><div class="mf">Full rest</div></div>
+    </div>
+    <div class="legend">
+      <span><i class="sw lo"></i>Lower</span>
+      <span><i class="sw up"></i>Upper</span>
+      <span><i class="sw full"></i>Full body</span>
+      <span><i class="sw box"></i>Boxing &amp; footwork</span>
+      <span><i class="sw rest"></i>Rest</span>
+    </div>
+  </section>
+
+  <!-- DAYS -->
+  <section class="sec">
+    <div class="sec-head"><div class="snum">02</div><div><div class="stag">Day by Day</div><h2>The Work</h2></div></div>
+    <p class="lead">Keep the <b>first compound of Mon &amp; Tue genuinely heavy</b> — that's your strength driver. Everything after builds shape and stays leaner in the rep range. Progression: 1–2 reps shy of failure on compounds, add weight at the top of the range; isolation 0–1 shy.</p>
+
+    <div class="days">
+
+      <!-- MON -->
+      <div class="day-panel lo">
+        <div class="dp-head"><span class="dot"></span><div><div class="dp-name">Mon · Lower</div><div class="dp-tag">Heavy Legs + Calves</div></div><span class="freq">Lift</span></div>
+        <ul class="ex">
+          <li><span class="nm"><i>1</i>Back Squat <b>(heavy)</b></span><span class="pr">4×4–6 · 3–4m</span></li>
+          <li><span class="nm"><i>2</i>Romanian Deadlift</span><span class="pr">3×6–8 · 2.5–3.5m</span></li>
+          <li><span class="nm"><i>3</i>Bulgarian Split Squat</span><span class="pr">3×8–12/side · 2m</span></li>
+          <li><span class="nm"><i>4</i>Lying / Seated Leg Curl</span><span class="pr">3×10–15 · 90s</span></li>
+          <li><span class="nm"><i>5</i>Standing Calf Raise</span><span class="pr">3×8–12 · 90–120s</span></li>
+        </ul>
+        <div class="dp-note">Legs first in the week so they're recovered before Wednesday's footwork. Squat is your strength centerpiece — chase load here.</div>
+      </div>
+
+      <!-- TUE -->
+      <div class="day-panel up">
+        <div class="dp-head"><span class="dot"></span><div><div class="dp-name">Tue · Upper</div><div class="dp-tag">Chest + Back + Shoulders + Arms</div></div><span class="freq">Lift</span></div>
+        <ul class="ex">
+          <li><span class="nm"><i>1</i>Bench Press <b>(heavy)</b></span><span class="pr">4×4–6 · 2.5–4m</span></li>
+          <li><span class="nm"><i>2</i>Weighted Pull-ups <b>(heavy)</b></span><span class="pr">4×5–8 · 2.5–3.5m</span></li>
+          <li><span class="nm"><i>3</i>Incline DB Press</span><span class="pr">3×6–10 · 2–3m</span></li>
+          <li><span class="nm"><i>4</i>Chest-Supported / Cable Row</span><span class="pr">3×8–12 · 2m</span></li>
+          <li><span class="nm"><i>5</i>Lateral Raises</span><span class="pr">3×12–20 · 60s</span></li>
+          <li><span class="nm"><i>6</i>EZ-Bar Curl</span><span class="pr">3×6–10 · 75s</span></li>
+          <li><span class="nm"><i>7</i>Overhead Cable Triceps Ext</span><span class="pr">3×8–12 · 75s</span></li>
+        </ul>
+        <div class="dp-note">Bench and weighted pull-ups are your upper-body strength lifts — keep them heavy and well-rested. Optional easy mile after if you want extra conditioning.</div>
+      </div>
+
+      <!-- WED -->
+      <div class="day-panel box">
+        <div class="dp-head"><span class="dot"></span><div><div class="dp-name">Wed · Boxing Skill</div><div class="dp-tag">Hands, Defense + Light Footwork</div></div><span class="freq">Box</span></div>
+        <ul class="ex">
+          <li><span class="nm"><i>1</i>Shadowbox — hands &amp; defense</span><span class="pr">3×3:00</span></li>
+          <li><span class="nm"><i>2</i>Bag work — combinations</span><span class="pr">3–4×3:00</span></li>
+          <li><span class="nm"><i>3</i>Footwork <b>technique</b> (slow, no jumping)</span><span class="pr">10 min</span></li>
+          <li><span class="nm"><i>4</i>Neck (flexion / extension)</span><span class="pr">2×12–25</span></li>
+        </ul>
+        <div class="dp-note">Skill-focused and low on the legs — it sits between leg day and full-body day on purpose. Stance, step-drag, slow circling, slow Ali shuffle.</div>
+      </div>
+
+      <!-- THU -->
+      <div class="day-panel rest">
+        <div class="dp-head"><span class="dot"></span><div><div class="dp-name">Thu · Full Rest</div><div class="dp-tag">Recover</div></div><span class="freq">Rest</span></div>
+        <ul class="ex"><li><span class="nm">No training. Optional easy walk + mobility.</span><span class="pr">—</span></li></ul>
+        <div class="dp-note">Mid-week reset so Friday's full-body session is fresh and Saturday's footwork is sharp.</div>
+      </div>
+
+      <!-- FRI -->
+      <div class="day-panel full">
+        <div class="dp-head"><span class="dot"></span><div><div class="dp-name">Fri · Full Body</div><div class="dp-tag">2nd Touch — Everything</div></div><span class="freq">Lift</span></div>
+        <ul class="ex">
+          <li><span class="nm"><i>1</i>Front Squat or Leg Press</span><span class="pr">3×8–12 · 3m</span></li>
+          <li><span class="nm"><i>2</i>Overhead Press or Incline Press</span><span class="pr">3×6–10 · 2.5m</span></li>
+          <li><span class="nm"><i>3</i>Lat Pulldown or Cable Row</span><span class="pr">3×8–12 · 2m</span></li>
+          <li><span class="nm"><i>4</i>Hip Thrust or RDL</span><span class="pr">3×8–12 · 2.5m</span></li>
+          <li><span class="nm"><i>5</i>Lateral Raise + Curl/Pushdown (superset)</span><span class="pr">2–3×12–15 · 60s</span></li>
+          <li><span class="nm"><i>6</i>Seated Calf Raise</span><span class="pr">2–3×12–20 · 75s</span></li>
+        </ul>
+        <div class="dp-note">Moderate, slightly higher reps than Mon/Tue — this is the second weekly hit that takes chest, back and legs to 2×. Pump work, not a max-out.</div>
+      </div>
+
+      <!-- SAT -->
+      <div class="day-panel box">
+        <div class="dp-head"><span class="dot"></span><div><div class="dp-name">Sat · The Dance</div><div class="dp-tag">Ali Footwork + Conditioning + Abs</div></div><span class="freq">Box</span></div>
+        <ul class="ex">
+          <li><span class="nm"><i>1</i>Jump Rope (side-to-side, alt feet)</span><span class="pr">4–5×3:00</span></li>
+          <li><span class="nm"><i>2</i>Footwork drills (cones, circle bag, in/out)</span><span class="pr">15–20 min</span></li>
+          <li><span class="nm"><i>3</i>Bag rounds — movement + combos</span><span class="pr">2–3×3:00</span></li>
+          <li><span class="nm"><i>4</i>Abs — knee raises / cable crunch / plank</span><span class="pr">2–3 rounds</span></li>
+        </ul>
+        <div class="dp-note">Your main Ali session and your conditioning in one. The rope work <b>is</b> your cardio — lean comes from here, not from grinding miles.</div>
+      </div>
+
+      <!-- SUN -->
+      <div class="day-panel rest">
+        <div class="dp-head"><span class="dot"></span><div><div class="dp-name">Sun · Full Rest</div><div class="dp-tag">Recover &amp; Adapt</div></div><span class="freq">Rest</span></div>
+        <ul class="ex"><li><span class="nm">No training, no cardio. Eat, sleep, reset.</span><span class="pr">—</span></li></ul>
+        <div class="dp-note">Two full rest days a week is what lets you train hard on the other five and actually keep the strength climbing.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTWORK -->
+  <section class="sec">
+    <div class="sec-head"><div class="snum">03</div><div><div class="stag">Ali Footwork</div><h2>The Feet</h2></div></div>
+    <p class="lead">Slow technique on Wednesday, speed on Saturday. Five principles behind the movement.</p>
+    <ul class="principles">
+      <li><span class="n">01</span><span><b>Stay on the balls of your feet.</b> Light, springy, never flat-footed.</span></li>
+      <li><span class="n">02</span><span><b>Circle laterally, both ways.</b> Glide side to side, not just forward and back.</span></li>
+      <li><span class="n">03</span><span><b>In and out.</b> Dart in to throw, dart straight back out of range.</span></li>
+      <li><span class="n">04</span><span><b>Never cross your feet.</b> Step and drag to keep your base.</span></li>
+      <li><span class="n">05</span><span><b>The Ali shuffle.</b> Quick foot-switch — flashy, but a great speed builder.</span></li>
+    </ul>
+    <div class="diagrams">
+      <div class="diagram">
+        <svg viewBox="0 0 160 165" role="img" aria-label="Boxing stance">
+          <g transform="translate(58,58) rotate(-12)"><ellipse class="sole" cx="0" cy="0" rx="12" ry="20"/><ellipse class="toe" cx="0" cy="-18" rx="9" ry="6"/><text class="flabel" x="0" y="5" text-anchor="middle">L</text></g>
+          <g transform="translate(100,108) rotate(22)"><ellipse class="sole" cx="0" cy="0" rx="12" ry="20"/><ellipse class="toe" cx="0" cy="-18" rx="9" ry="6"/><text class="flabel" x="0" y="5" text-anchor="middle">R</text></g>
+        </svg>
+        <div class="dlabel">Stance</div><div class="dnote">lead forward</div>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 160 165" role="img" aria-label="Circle laterally">
+          <defs><marker id="a1" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--gold-bright)"/></marker><marker id="a1b" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--gold-bright)"/></marker></defs>
+          <path class="arrow" d="M28,82 A52,52 0 0 1 132,82" marker-end="url(#a1)"/>
+          <path class="arrow" d="M132,90 A52,52 0 0 1 28,90" marker-end="url(#a1b)"/>
+          <g class="bounce" transform="translate(66,86) rotate(-10)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/><text class="flabel" x="0" y="5" text-anchor="middle">L</text></g>
+          <g class="bounce2" transform="translate(96,96) rotate(16)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/><text class="flabel" x="0" y="5" text-anchor="middle">R</text></g>
+        </svg>
+        <div class="dlabel">Circle Out</div><div class="dnote">both directions</div>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 160 165" role="img" aria-label="In and out">
+          <defs><marker id="a2" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--gold-bright)"/></marker><marker id="a2b" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--gold-bright)"/></marker></defs>
+          <path class="arrow" d="M128,40 L128,16" marker-end="url(#a2)"/>
+          <path class="arrow" d="M128,118 L128,144" marker-end="url(#a2b)"/>
+          <g class="ghost" transform="translate(80,52)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/></g>
+          <g class="bounce" transform="translate(80,108)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/><text class="flabel" x="0" y="5" text-anchor="middle">L</text></g>
+        </svg>
+        <div class="dlabel">In &amp; Out</div><div class="dnote">strike, reset</div>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 160 165" role="img" aria-label="The Ali shuffle">
+          <defs><marker id="a3" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--gold-bright)"/></marker><marker id="a3b" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--gold-bright)"/></marker></defs>
+          <g class="ghost" transform="translate(56,52)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/></g>
+          <g class="ghost" transform="translate(104,112)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/></g>
+          <g class="bounce" transform="translate(56,112)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/><text class="flabel" x="0" y="5" text-anchor="middle">L</text></g>
+          <g class="bounce2" transform="translate(104,52)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/><text class="flabel" x="0" y="5" text-anchor="middle">R</text></g>
+          <path class="arrow" d="M60,86 C64,98 96,66 100,80" marker-end="url(#a3)"/>
+          <path class="arrow" d="M100,86 C96,74 64,108 60,96" marker-end="url(#a3b)"/>
+        </svg>
+        <div class="dlabel">The Shuffle</div><div class="dnote">slow → fast</div>
+      </div>
+    </div>
+    <div class="drills">
+      <b>Drills that build it</b>
+      Jump rope (side-to-side &amp; alternating-foot) · shadowbox while constantly circling · lateral cone shuffles · calf raises &amp; ankle hops for the spring · circle a bag while jabbing. Build the shuffle slow, then fast.
+    </div>
+  </section>
+
+  <!-- RECOVER & FUEL -->
+  <section class="sec">
+    <div class="sec-head"><div class="snum">04</div><div><div class="stag">Eat For The Goal</div><h2>Strong &amp; Lean Fueling</h2></div></div>
+    <p class="lead">Strong-and-lean is a recomp, not a bulk. You're feeding strength and recovery without burying your definition.</p>
+    <div class="panel">
+      <h3>The Levers</h3>
+      <ul>
+        <li><b>Eat around maintenance, or a slight surplus.</b> No need to force-feed. This is the lane where you add strength and stay lean at the same time.</li>
+        <li><b>Protein is the anchor: ~110–155 g/day</b> (about 0.7–1.0 g per lb). High protein protects muscle in a recomp and drives strength recovery.</li>
+        <li><b>Carbs around training.</b> Fuel the heavy compounds and the rope work — they make you perform and look fuller without much fat cost.</li>
+        <li><b>Boxing now works *for* you.</b> Since you're not chasing a big surplus, the rope and footwork calories aren't fighting your goal — they're what keeps you lean.</li>
+        <li><b>Sleep is non-negotiable.</b> Strength gains live in recovery. Two rest days plus good sleep is why the heavy lifts keep climbing.</li>
+        <li><b>Watch the calves.</b> Rope + calf raises stack up. If the Achilles or shins complain, drop dedicated calf sets first.</li>
+        <li><b>Deload every 6–8 weeks.</b> Halve the lifting volume for a week and keep footwork to technique only.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TIMER -->
+  <section class="sec">
+    <div class="sec-head"><div class="snum">⏱</div><div><div class="stag">Use It Now</div><h2>The Bell</h2></div></div>
+    <p class="lead">3 minutes work, 1 minute rest. Run your shadowbox, bag and footwork rounds on it.</p>
+    <div class="timer">
+      <div class="phase" id="phase">Ready</div>
+      <div class="ring-wrap">
+        <svg width="190" height="190" viewBox="0 0 200 200"><circle class="ring-bg" cx="100" cy="100" r="88"/><circle class="ring-fg" id="ring" cx="100" cy="100" r="88"/></svg>
+        <div class="clock"><div class="t" id="time">3:00</div><div class="rd" id="roundlbl">Round 1 / 3</div></div>
+      </div>
+      <div class="controls"><button class="btn primary" id="startBtn">Start</button><button class="btn" id="resetBtn">Reset</button></div>
+      <div class="rounds-set"><span>Rounds</span><div class="stepper"><button id="minus" aria-label="fewer rounds">–</button><span id="roundCount" style="min-width:22px;display:inline-block;text-align:center">3</span><button id="plus" aria-label="more rounds">+</button></div></div>
+      <label class="sound-toggle"><input type="checkbox" id="soundChk" checked>Bell sound</label>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h4>Protect Yourself At All Times</h4>
+    <ul>
+      <li>Warm up before every session and stretch after.</li>
+      <li>Progress gradually — overuse injuries come from doing too much too soon.</li>
+      <li>Technique first, speed second, power last.</li>
+      <li>If you spar, do it at a real gym with supervision and headgear.</li>
+      <li>This is general fitness guidance, not personal-training or medical advice. Check with a professional before starting if you have any health concerns.</li>
+    </ul>
+    <div class="seal">Float &amp; Sting · Strong &amp; Lean</div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const WORK=180, REST=60;
+    let totalRounds=3, round=1, phase='ready', remaining=WORK, running=false, tick=null, soundOn=true;
+    const R=88, CIRC=2*Math.PI*R;
+    const elTime=document.getElementById('time'),elPhase=document.getElementById('phase'),elRoundLbl=document.getElementById('roundlbl'),elRing=document.getElementById('ring'),elStart=document.getElementById('startBtn'),elReset=document.getElementById('resetBtn'),elCount=document.getElementById('roundCount'),elSound=document.getElementById('soundChk');
+    elRing.style.strokeDasharray=CIRC;elRing.style.strokeDashoffset=0;
+    let audioCtx=null;
+    function bell(times){if(!soundOn)return;try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();let t=audioCtx.currentTime;for(let i=0;i<times;i++){const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.value=660;o.connect(g);g.connect(audioCtx.destination);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.4,t+0.01);g.gain.exponentialRampToValueAtTime(0.0001,t+0.5);o.start(t);o.stop(t+0.5);t+=0.6;}}catch(e){}}
+    function fmt(s){const m=Math.floor(s/60),ss=s%60;return m+':'+(ss<10?'0':'')+ss;}
+    function render(){elTime.textContent=fmt(remaining);const total=(phase==='rest')?REST:WORK;elRing.style.strokeDashoffset=CIRC*(1-remaining/total);elRoundLbl.textContent='Round '+round+' / '+totalRounds;if(phase==='work'){elPhase.textContent='Work';elPhase.style.color='var(--gold-bright)';}else if(phase==='rest'){elPhase.textContent='Rest';elPhase.style.color='#9fc28a';}else if(phase==='done'){elPhase.textContent='Done — Nice Work';elPhase.style.color='var(--gold-bright)';}else{elPhase.textContent='Ready';elPhase.style.color='var(--gold-bright)';}}
+    function step(){remaining--;if(remaining<0){if(phase==='work'){if(round>=totalRounds){phase='done';running=false;clearInterval(tick);bell(3);elStart.textContent='Start';elStart.classList.add('primary');render();return;}phase='rest';remaining=REST;bell(1);}else{round++;phase='work';remaining=WORK;bell(2);}}render();}
+    function start(){if(phase==='ready'||phase==='done'){round=1;phase='work';remaining=WORK;bell(2);}running=true;elStart.textContent='Pause';elStart.classList.remove('primary');clearInterval(tick);tick=setInterval(step,1000);render();}
+    function pause(){running=false;clearInterval(tick);elStart.textContent='Resume';elStart.classList.add('primary');}
+    function reset(){running=false;clearInterval(tick);round=1;phase='ready';remaining=WORK;elStart.textContent='Start';elStart.classList.add('primary');render();}
+    elStart.addEventListener('click',()=>{running?pause():start();});
+    elReset.addEventListener('click',reset);
+    document.getElementById('plus').addEventListener('click',()=>{if(totalRounds<15){totalRounds++;elCount.textContent=totalRounds;render();}});
+    document.getElementById('minus').addEventListener('click',()=>{if(totalRounds>1){totalRounds--;if(round>totalRounds)round=totalRounds;elCount.textContent=totalRounds;render();}});
+    elSound.addEventListener('change',e=>{soundOn=e.target.checked;});
+    render();
+  })();
+</script>
+<script>
+  if('serviceWorker' in navigator){
+    window.addEventListener('load',function(){
+      navigator.serviceWorker.register('sw.js').catch(function(){});
+    });
+  }
+</script>
+</body>
+</html>
