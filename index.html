@@ -89,11 +89,11 @@
   .principles li{display:flex;gap:13px;align-items:baseline}
   .principles .n{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-weight:700;color:var(--gold);font-size:14px;flex:none;width:28px}
   .principles b{font-weight:800}.principles span{font-size:15px;color:#3b302a}
-  .diagrams{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;background:var(--ink);border-radius:6px;padding:18px;margin-bottom:22px;border:3px solid var(--gold)}
-  .diagram{text-align:center}
-  .diagram svg{width:100%;height:auto;max-width:150px}
-  .diagram .dlabel{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-weight:700;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-bright);margin-top:2px}
-  .diagram .dnote{font-size:12px;color:#cdbf9f;margin-top:1px}
+  .diagrams{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:var(--ink);border-radius:6px;padding:16px 14px;margin-bottom:22px;border:2px solid var(--gold);align-items:start}
+  .diagram{text-align:center;padding:8px 4px 6px;background:rgba(236,227,206,.03);border-radius:8px}
+  .diagram svg{width:100%;height:auto;max-width:160px}
+  .diagram .dlabel{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-weight:700;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-bright);margin-top:6px}
+  .diagram .dnote{font-size:12.5px;color:#cdbf9f;margin-top:2px;line-height:1.3}
   .sole{fill:var(--oxblood)}.toe{fill:var(--oxblood-deep)}
   .flabel{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-weight:700;font-size:13px;fill:var(--bone)}
   .ghost{opacity:.32}
@@ -141,6 +141,26 @@
   @media(max-width:680px){.map{grid-template-columns:repeat(2,1fr)}.diagrams{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:480px){ul.ex li{flex-direction:column;gap:2px}ul.ex .pr{text-align:left}}
   @media(prefers-reduced-motion:reduce){.bounce,.bounce2{animation:none}html{scroll-behavior:auto}}
+
+  .diagram .ft{fill:var(--bone);stroke:#b6a98a;stroke-width:1.5}
+  .diagram .ft-toe{fill:var(--gold-bright)}
+  .diagram .ft-lbl{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-weight:700;font-size:13px;fill:var(--ink)}
+  .diagram .ghost-ft{fill:none;stroke:var(--bone);stroke-width:1.6;stroke-dasharray:4 4;opacity:.5}
+  .diagram .tgt-ring{fill:none;stroke:var(--gold-bright);stroke-width:3}
+  .diagram .tgt-dot{fill:var(--gold-bright)}
+  .diagram .fk{fill:none;stroke:var(--gold-bright);stroke-width:3.4;stroke-linecap:round}
+  .diagram .face{fill:none;stroke:var(--gold-bright);stroke-width:2;stroke-dasharray:3 5;opacity:.55}
+  .diagram .orbit{fill:none;stroke:var(--bone);stroke-width:1.4;stroke-dasharray:4 6;opacity:.4}
+  .diagram .spark{fill:none;stroke:var(--gold-bright);stroke-width:2.4;stroke-linecap:round}
+  .diagram .glbl{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-weight:700;font-size:12px;fill:var(--gold-bright)}
+  .diagram .ahf{fill:var(--gold-bright)}
+  @media(max-width:560px){
+    .snum{font-size:36px;-webkit-text-stroke-width:1.6px}
+    .sec-head{gap:11px}
+    .diagrams{gap:8px;padding:14px 10px}
+    .diagram svg{max-width:150px}
+    .diagram .dlabel{font-size:12px}
+  }
 </style>
 </head>
 <body>
@@ -284,47 +304,7 @@
       <li><span class="n">04</span><span><b>Never cross your feet.</b> Step and drag to keep your base.</span></li>
       <li><span class="n">05</span><span><b>The Ali shuffle.</b> Quick foot-switch — flashy, but a great speed builder.</span></li>
     </ul>
-    <div class="diagrams">
-      <div class="diagram">
-        <svg viewBox="0 0 160 165" role="img" aria-label="Boxing stance">
-          <g transform="translate(58,58) rotate(-12)"><ellipse class="sole" cx="0" cy="0" rx="12" ry="20"/><ellipse class="toe" cx="0" cy="-18" rx="9" ry="6"/><text class="flabel" x="0" y="5" text-anchor="middle">L</text></g>
-          <g transform="translate(100,108) rotate(22)"><ellipse class="sole" cx="0" cy="0" rx="12" ry="20"/><ellipse class="toe" cx="0" cy="-18" rx="9" ry="6"/><text class="flabel" x="0" y="5" text-anchor="middle">R</text></g>
-        </svg>
-        <div class="dlabel">Stance</div><div class="dnote">lead forward</div>
-      </div>
-      <div class="diagram">
-        <svg viewBox="0 0 160 165" role="img" aria-label="Circle laterally">
-          <defs><marker id="a1" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--gold-bright)"/></marker><marker id="a1b" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--gold-bright)"/></marker></defs>
-          <path class="arrow" d="M28,82 A52,52 0 0 1 132,82" marker-end="url(#a1)"/>
-          <path class="arrow" d="M132,90 A52,52 0 0 1 28,90" marker-end="url(#a1b)"/>
-          <g class="bounce" transform="translate(66,86) rotate(-10)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/><text class="flabel" x="0" y="5" text-anchor="middle">L</text></g>
-          <g class="bounce2" transform="translate(96,96) rotate(16)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/><text class="flabel" x="0" y="5" text-anchor="middle">R</text></g>
-        </svg>
-        <div class="dlabel">Circle Out</div><div class="dnote">both directions</div>
-      </div>
-      <div class="diagram">
-        <svg viewBox="0 0 160 165" role="img" aria-label="In and out">
-          <defs><marker id="a2" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--gold-bright)"/></marker><marker id="a2b" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--gold-bright)"/></marker></defs>
-          <path class="arrow" d="M128,40 L128,16" marker-end="url(#a2)"/>
-          <path class="arrow" d="M128,118 L128,144" marker-end="url(#a2b)"/>
-          <g class="ghost" transform="translate(80,52)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/></g>
-          <g class="bounce" transform="translate(80,108)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/><text class="flabel" x="0" y="5" text-anchor="middle">L</text></g>
-        </svg>
-        <div class="dlabel">In &amp; Out</div><div class="dnote">strike, reset</div>
-      </div>
-      <div class="diagram">
-        <svg viewBox="0 0 160 165" role="img" aria-label="The Ali shuffle">
-          <defs><marker id="a3" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--gold-bright)"/></marker><marker id="a3b" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--gold-bright)"/></marker></defs>
-          <g class="ghost" transform="translate(56,52)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/></g>
-          <g class="ghost" transform="translate(104,112)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/></g>
-          <g class="bounce" transform="translate(56,112)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/><text class="flabel" x="0" y="5" text-anchor="middle">L</text></g>
-          <g class="bounce2" transform="translate(104,52)"><ellipse class="sole" cx="0" cy="0" rx="11" ry="18"/><text class="flabel" x="0" y="5" text-anchor="middle">R</text></g>
-          <path class="arrow" d="M60,86 C64,98 96,66 100,80" marker-end="url(#a3)"/>
-          <path class="arrow" d="M100,86 C96,74 64,108 60,96" marker-end="url(#a3b)"/>
-        </svg>
-        <div class="dlabel">The Shuffle</div><div class="dnote">slow → fast</div>
-      </div>
-    </div>
+    <div class="diagrams"><div class="diagram"><svg viewBox="0 0 220 175" role="img" aria-label="Boxing stance, lead foot forward facing the opponent"><defs><marker id="ah1" markerWidth="7" markerHeight="7" refX="3.6" refY="3.2" orient="auto-start-reverse"><path class="ahf" d="M0,0 L7,3.2 L0,6.4 Z"/></marker></defs><g transform="translate(110,30)"><circle class="tgt-ring" r="13"/><circle class="tgt-dot" r="4"/></g><path class="face" d="M110,114 L110,50" marker-end="url(#ah1)"/><g transform="translate(92,116)"><g transform="rotate(-10)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/></g><text class="ft-lbl" x="0" y="5" text-anchor="middle">L</text></g><g transform="translate(126,148)"><g transform="rotate(28)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/></g><text class="ft-lbl" x="0" y="5" text-anchor="middle">R</text></g></svg><div class="dlabel">Stance</div><div class="dnote">facing your man</div></div><div class="diagram"><svg viewBox="0 0 220 175" role="img" aria-label="Circle around the opponent in both directions"><defs><marker id="ah2" markerWidth="7" markerHeight="7" refX="3.6" refY="3.2" orient="auto-start-reverse"><path class="ahf" d="M0,0 L7,3.2 L0,6.4 Z"/></marker></defs><circle class="orbit" cx="110" cy="92" r="58"/><g transform="translate(110,92)"><circle class="tgt-ring" r="13"/><circle class="tgt-dot" r="4"/></g><path class="fk" d="M62,60 A58,58 0 0 1 158,60" marker-start="url(#ah2)" marker-end="url(#ah2)"/><g transform="translate(99,146)"><g transform="rotate(4)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/></g><text class="ft-lbl" x="0" y="5" text-anchor="middle">L</text></g><g transform="translate(123,154)"><g transform="rotate(4)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/></g><text class="ft-lbl" x="0" y="5" text-anchor="middle">R</text></g></svg><div class="dlabel">Circle Out</div><div class="dnote">orbit, both ways</div></div><div class="diagram"><svg viewBox="0 0 220 175" role="img" aria-label="Dart in to strike then dart back out of range"><defs><marker id="ah3" markerWidth="7" markerHeight="7" refX="3.6" refY="3.2" orient="auto-start-reverse"><path class="ahf" d="M0,0 L7,3.2 L0,6.4 Z"/></marker></defs><g transform="translate(110,28)"><circle class="tgt-ring" r="13"/><circle class="tgt-dot" r="4"/></g><g class="spark" transform="translate(110,48)"><path d="M0,-8 L0,8 M-8,0 L8,0 M-5,-5 L5,5 M5,-5 L-5,5"/></g><g transform="translate(103,78)"><g transform="rotate(0)"><rect class="ghost-ft" x="-11" y="-20" width="22" height="40" rx="9"/></g></g><g transform="translate(119,82)"><g transform="rotate(0)"><rect class="ghost-ft" x="-11" y="-20" width="22" height="40" rx="9"/></g></g><g transform="translate(103,134)"><g transform="rotate(0)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/></g><text class="ft-lbl" x="0" y="5" text-anchor="middle">L</text></g><g transform="translate(119,142)"><g transform="rotate(0)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/></g><text class="ft-lbl" x="0" y="5" text-anchor="middle">R</text></g><path class="fk" d="M150,138 L150,66" marker-end="url(#ah3)"/><text class="glbl" x="158" y="106">IN</text><path class="fk" d="M70,68 L70,140" marker-end="url(#ah3)"/><text class="glbl" x="40" y="106">OUT</text></svg><div class="dlabel">In &amp; Out</div><div class="dnote">strike, then reset</div></div><div class="diagram"><svg viewBox="0 0 220 175" role="img" aria-label="Quickly switch which foot is forward"><defs><marker id="ah4" markerWidth="7" markerHeight="7" refX="3.6" refY="3.2" orient="auto-start-reverse"><path class="ahf" d="M0,0 L7,3.2 L0,6.4 Z"/></marker></defs><text class="glbl" x="78" y="40" text-anchor="middle">1</text><text class="glbl" x="142" y="40" text-anchor="middle">2</text><g transform="translate(78,72)"><g transform="rotate(0)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/></g><text class="ft-lbl" x="0" y="5" text-anchor="middle">L</text></g><g transform="translate(78,124)"><g transform="rotate(0)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/></g><text class="ft-lbl" x="0" y="5" text-anchor="middle">R</text></g><g transform="translate(142,72)"><g transform="rotate(0)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/></g><text class="ft-lbl" x="0" y="5" text-anchor="middle">R</text></g><g transform="translate(142,124)"><g transform="rotate(0)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/></g><text class="ft-lbl" x="0" y="5" text-anchor="middle">L</text></g><path class="fk" d="M100,98 L120,98" marker-start="url(#ah4)" marker-end="url(#ah4)"/></svg><div class="dlabel">The Shuffle</div><div class="dnote">switch, fast</div></div></div>
     <div class="drills">
       <b>Drills that build it</b>
       Jump rope (side-to-side &amp; alternating-foot) · shadowbox while constantly circling · lateral cone shuffles · calf raises &amp; ankle hops for the spring · circle a bag while jabbing. Build the shuffle slow, then fast.
