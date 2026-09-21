@@ -28,7 +28,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 <header class="hero">
   <div class="wrap">
     <h1>Your training week.</h1>
-    <p class="sub">Push / pull lifting, easy running and beginner swimming. <b>Lifting comes first.</b></p>
+    <p class="sub">45–60 minute lifts with abs, plus separate running and swimming. <b>Lifting comes first.</b></p>
     <div class="hero-meta"><span><strong>5</strong> training days</span><span><strong>2</strong> full rest days</span><span>Goal <strong>153 → 160 lb</strong></span></div>
   </div>
 </header>
@@ -66,8 +66,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       <li><span class="n">04</span><span><b>Keep the big lifts controlled.</b> Use a comfortable full range of motion. No max testing or forced reps. Keep the same exercise choices for 6–8 weeks so progress is comparable.</span></li>
       <li><span class="n">05</span><span><b>Recover, then progress.</b> If performance drops across several sessions or soreness persists into the next workout, take a lighter week: roughly half the sets and easier loads. Skip missed sessions rather than stacking them onto rest days.</span></li>
     </ul>
-    <p class="lead"><b>Session workload:</b> push days have 14 working sets across 7–8 exercises; pull days have 15 across 7 exercises, including abs. Warm-ups and cardio are additional. The 6–9 direct ab sets per week replace existing ab training, rather than being added on top. This is a starting prescription to adjust to performance and recovery, not a requirement to do more every session.</p>
-    <div class="drills"><b>Why this structure</b>Push includes knee-dominant leg work; pull includes hip hinges and leg curls. The rotation averages about 10 direct weekly sets each for chest, back, quads and hamstrings, with smaller amounts of direct arm and shoulder work plus compound lifts. The exact split is a coaching choice, not a proven best routine for everyone. <a href="https://pubmed.ncbi.nlm.nih.gov/41843416/" target="_blank" rel="noopener">ACSM resistance-training position stand (2026)</a>.</div>
+    <p class="lead"><b>45–60 minutes for lifting and abs.</b> Includes warm-ups; swimming and running are separate. Push days have 12 working sets across 5–6 exercises; pull days have 13 across 6 exercises, including abs. Allow roughly 10–15 minutes for warm-ups and 30–45 for working sets, rests and equipment changes. Keep the listed rest periods. If equipment waits push the session toward 60 minutes, omit the calf exercise on push days or curls on pull days; keep the ab work. Do not make up omitted sets on rest days. The 6–9 direct ab sets per week replace existing ab training rather than adding to it.</p>
+    <div class="drills"><b>Why this structure</b>Push includes knee-dominant leg work; pull includes hip hinges and leg curls. This shorter rotation averages 7.5 direct weekly sets each for chest and quads and 10 each for back and hamstrings, plus smaller amounts of arm and shoulder work. Secondary chest flies, leg extensions and reverse pec deck were removed to reduce equipment changes and fit the time budget. Lower volume can still build muscle; this is a practical time-versus-volume tradeoff, not a claim that 7.5 sets is optimal. The exact split is a coaching choice, not a proven best routine for everyone. <a href="https://pubmed.ncbi.nlm.nih.gov/41843416/" target="_blank" rel="noopener">ACSM resistance-training position stand (2026)</a>.</div>
     </div></details>
   </section>
 
@@ -156,39 +156,33 @@ const WORKOUTS = {
   pushA: {type:'up', name:'Push A', tag:'Chest + Quads + Shoulders + Triceps', freq:'Push', short:'Push A', ex:[
     ['1','Bench Press','3×6–10 · 2–3m'],
     ['2','Back Squat or Hack Squat','3×6–10 · 2–3m'],
-    ['3','Cable Chest Fly','1×10–15 · 90s'],
-    ['4','Leg Extension','1×10–15 · 90s'],
-    ['5','Lateral Raise','2×12–20 · 60–90s'],
-    ['6','Cable Triceps Pushdown','2×10–15 · 90s'],
-    ['7','Standing Calf Raise','2×10–15 · 90s']
+    ['3','Lateral Raise','2×12–20 · 60–90s'],
+    ['4','Cable Triceps Pushdown','2×10–15 · 90s'],
+    ['5','Standing Calf Raise','2×10–15 · 90s']
   ], note:'Chest press and knee-dominant leg work lead. Use a chest-press machine if benching is unfamiliar, and keep the squat variation consistent.'},
   pushB: {type:'up', name:'Push B', tag:'Quads + Chest + Shoulders + Triceps', freq:'Push', short:'Push B', ex:[
     ['1','Leg Press','3×8–12 · 2–3m'],
     ['2','Incline Dumbbell Press','3×8–12 · 2–3m'],
-    ['3','Cable Chest Fly','1×10–15 · 90s'],
-    ['4','Leg Extension','1×10–15 · 90s'],
-    ['5','Seated Dumbbell Shoulder Press','2×8–12 · 2m'],
-    ['6','Lateral Raise','1×12–20 · 60–90s'],
-    ['7','Overhead Triceps Extension','1×10–15 · 90s'],
-    ['8','Seated Calf Raise','2×12–20 · 90s']
+    ['3','Seated Dumbbell Shoulder Press','2×8–12 · 2m'],
+    ['4','Lateral Raise','1×12–20 · 60–90s'],
+    ['5','Overhead Triceps Extension','1×10–15 · 90s'],
+    ['6','Seated Calf Raise','2×12–20 · 90s']
   ], note:'Legs lead this session. Keep all presses controlled and leave two good reps in reserve; more fatigue is not the goal.'},
   pullA: {type:'lo', name:'Pull A', tag:'Back + Hamstrings + Glutes + Biceps', freq:'Pull', short:'Pull A', ex:[
     ['1','Romanian Deadlift','2×6–10 · 2–3m'],
     ['2','Lat Pulldown','2×8–12 · 2m'],
     ['3','Chest-Supported Row','2×8–12 · 2m'],
     ['4','Seated Leg Curl','2×10–15 · 90s'],
-    ['5','Reverse Pec Deck','2×12–20 · 90s'],
-    ['6','Dumbbell Curl','2×10–15 · 90s'],
-    ['7','Cable Crunch','3×10–15 · 90s']
+    ['5','Dumbbell Curl','2×10–15 · 90s'],
+    ['6','Cable Crunch','3×10–15 · 90s']
   ], note:'Hinge from the hips with a controlled range. Chest support keeps rows from adding unnecessary lower-back fatigue. Learn the hinge with light loads first. Cable crunch: curl the ribs toward the pelvis without pulling with the arms; keep two clean reps in reserve. Add a small amount of weight once all three sets reach 15 controlled reps.'},
   pullB: {type:'lo', name:'Pull B', tag:'Back + Hamstrings + Glutes + Biceps', freq:'Pull', short:'Pull B', ex:[
     ['1','Lat Pulldown or Assisted Pull-up','2×8–12 · 2m'],
     ['2','Seated Cable Row','2×8–12 · 2m'],
     ['3','Lying or Seated Leg Curl','3×10–15 · 90s'],
     ['4','Romanian Deadlift (light)','1×10–12 · 2m'],
-    ['5','Reverse Pec Deck','2×12–20 · 90s'],
-    ['6','Hammer Curl','2×10–15 · 90s'],
-    ['7','Hanging Knee Raise or Reverse Crunch','3×8–15 · 90s']
+    ['5','Hammer Curl','2×10–15 · 90s'],
+    ['6','Hanging Knee Raise or Reverse Crunch','3×8–15 · 90s']
   ], note:'A lighter hinge day. Keep the same pulldown or assisted pull-up choice from week to week. Do a fresh light hinge warm-up before its working set. For abs, curl the pelvis toward the ribs without swinging. Choose reverse crunches if grip limits hanging raises. Keep the choice consistent; reach 15 controlled reps per set before increasing difficulty, with two reps in reserve.'},
   rest: {type:'rest', name:'Full Rest', tag:'Recover', freq:'Rest', short:'Full rest', ex:[],
     note:'No workout required. Easy walking or 5–10 minutes of gentle mobility is optional. Eat normally, keep protein consistent and prioritize sleep.'}
@@ -221,15 +215,18 @@ function selectWeek(){
   const weeks=Math.round((Date.UTC(week.getFullYear(),week.getMonth(),week.getDate())-Date.UTC(2026,8,21))/604800000);
   const rotation=((weeks%2)+2)%2;
   PLAN=ROTATION[rotation].map((id,i)=>({...WORKOUTS[id],cardio:CARDIO[i],key:['mon','tue','wed','thu','fri','sat','sun'][i],dow:(i+1)%7,abbr:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][i]}));
-  checkKey='checks:pushpull-v2:'+dateKey(week);
+  checkKey='checks:pushpull-v3:'+dateKey(week);
   let saved=load(checkKey,null);
   if(saved===null){
-    const previous=load('checks:pushpull-v1:'+dateKey(week),{});
+    const v2=load('checks:pushpull-v2:'+dateKey(week),null);
+    const previous=v2===null?load('checks:pushpull-v1:'+dateKey(week),{}):v2;
+    const retained={pushA:[0,1,4,5,6],pushB:[0,1,4,5,6,7],pullA:[0,1,2,3,5,6],pullB:[0,1,2,3,5,6],rest:[]};
     saved={};
     PLAN.forEach((d,i)=>{
+      const id=ROTATION[rotation][i];
       if(Array.isArray(previous?.[d.key])){
-        // Old ab checks do not certify the increased or replaced prescription.
-        saved[d.key]=previous[d.key].filter(n=>Number.isInteger(n) && n>=0 && n<d.ex.length && !(ROTATION[rotation][i].startsWith('pull') && n===6));
+        // Map retained exercises; v1 ab checks predate the new prescription.
+        saved[d.key]=retained[id].flatMap((old,n)=>previous[d.key].includes(old) && !(v2===null && id.startsWith('pull') && old===6)?[n]:[]);
       }
     });
     save(checkKey,saved);
