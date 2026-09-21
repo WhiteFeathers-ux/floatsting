@@ -89,8 +89,8 @@
   .day-panel.box .dot{background:var(--ink)}
   .day-panel.rest .dot{background:var(--sage)}
   .dp-title{min-width:0}
-  .dp-name{font-family:'Anton','Impact','Arial Narrow',sans-serif;font-size:21px;text-transform:uppercase;letter-spacing:.02em;line-height:1}
-  .dp-tag{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#6b5b50;margin-top:3px}
+  .dp-name{display:block;font-family:'Anton','Impact','Arial Narrow',sans-serif;font-size:21px;text-transform:uppercase;letter-spacing:.02em;line-height:1}
+  .dp-tag{display:block;font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#6b5b50;margin-top:6px}
   .freq{margin-left:auto;font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bone);background:var(--oxblood);padding:4px 9px;border-radius:2px;flex:none}
   .day-panel.lo .freq{background:var(--gold);color:var(--ink)}
   .day-panel.full .freq{background:var(--oxblood-deep)}
@@ -121,6 +121,7 @@
   ul.ex .cue{font-weight:500;font-size:12.5px;color:#6b5b50;line-height:1.3;margin-top:1px}
   ul.ex .pr{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:12.5px;font-weight:700;color:var(--oxblood-deep);white-space:nowrap;text-align:right;flex:none}
   .day-panel.rest ul.ex .pr{color:var(--sage)}
+  .dp-foot[hidden]{display:none}
   .dp-foot{display:flex;align-items:center;gap:12px;margin-top:12px}
   .progbar{flex:1;height:6px;border-radius:99px;background:var(--bone-dim);overflow:hidden}
   .progbar i{display:block;height:100%;width:0;background:var(--oxblood);border-radius:99px;transition:width .35s ease}
@@ -129,6 +130,7 @@
   .progtxt{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:11px;color:#6b5b50;white-space:nowrap}
   .reset-day{font-family:'Space Mono',ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#8a7d70;background:transparent;border:1px solid var(--bone-line);border-radius:3px;padding:4px 8px;cursor:pointer;white-space:nowrap}
   .reset-day:hover{color:var(--oxblood);border-color:var(--oxblood)}
+  #previewWeek{margin-bottom:16px}
   .dp-note{margin-top:12px;font-size:13.5px;color:var(--ink-soft);background:var(--bone);border:1px solid var(--bone-line);border-radius:4px;padding:10px 12px}
   .dp-note b{color:var(--oxblood)}
 
@@ -245,12 +247,12 @@
   <div class="wrap">
     <div class="eyebrow">Float &amp; Sting · The Strong-and-Lean Build</div>
     <h1>Strong<span class="amp">&amp;</span>Lean</h1>
-    <p class="sub">Three focused lifting days, two boxing days, two real rest days. Heavy compounds build the <b>strong</b>; rope, footwork &amp; recomp eating keep you <b>lean</b>. Everything that matters gets hit twice — and your Ali footwork stays right where you want it.</p>
+    <p class="sub"><b>Lifting comes first.</b> Five push / pull sessions with legs included, two swims, two easy runs and two full rest days. Build strength while moving gradually from <b>153 to 160 lb</b>.</p>
     <div class="chips">
-      <span class="chip">3 Lift Days</span>
-      <span class="chip">2 Boxing Days</span>
-      <span class="chip">2 Rest + Yoga</span>
-      <span class="chip">Legs · Chest · Back ×2</span>
+      <span class="chip">5 Lift Days</span>
+      <span class="chip">Swim + Run</span>
+      <span class="chip">2 Rest Days</span>
+      <span class="chip">Build Muscle</span>
     </div>
   </div>
 </header>
@@ -260,123 +262,75 @@
   <!-- MAP -->
   <section class="sec">
     <div class="sec-head"><div class="snum">01</div><div><div class="stag">The Overview</div><h2>The Map</h2></div></div>
-    <p class="lead">Legs lead the week so they've recovered before footwork. Full-body Friday is the second touch for everything. Two rest days — both with a relaxing yoga flow. <b>Tap any day</b> to jump to it.</p>
+    <p class="lead">Lift Monday, Tuesday, Wednesday, Friday and Saturday. <b>Rest Thursday and Sunday.</b> Swim Monday and Friday; run Tuesday and Saturday. Wednesday can include a third swim <b>or</b> run if recovery is good. Week A has three push days and two pull days; Week B reverses that. <b>Tap any day</b> to open its workout.</p>
+    <p class="lead" id="weekLabel"></p>
+    <button class="reset-day" id="previewWeek">Preview next week</button>
     <div class="map" id="map"></div>
     <div class="legend">
-      <span><i class="sw lo"></i>Lower</span>
-      <span><i class="sw up"></i>Upper</span>
-      <span><i class="sw full"></i>Full body</span>
-      <span><i class="sw box"></i>Boxing &amp; footwork</span>
-      <span><i class="sw rest"></i>Rest &amp; yoga</span>
+      <span><i class="sw up"></i>Push · chest, shoulders, triceps, quads</span>
+      <span><i class="sw lo"></i>Pull · back, biceps, hamstrings, glutes</span>
+      <span><i class="sw rest"></i>Full rest</span>
     </div>
   </section>
 
   <!-- DAYS -->
   <section class="sec">
     <div class="sec-head"><div class="snum">02</div><div><div class="stag">Day by Day</div><h2>The Work</h2></div></div>
-    <p class="lead">Keep the <b>first compound of Mon &amp; Tue genuinely heavy</b> — that's your strength driver. Everything after builds shape and stays leaner in the rep range. Progression: 1–2 reps shy of failure on compounds, add weight at the top of the range; isolation 0–1 shy. <b>Tap an exercise</b> to check it off — it saves on this device.</p>
+    <p class="lead">Use a weight that leaves <b>about two good reps in reserve</b>. The prescription is sets × reps, then rest between sets. Warm-up sets are extra. Allow roughly 55–75 minutes for lifting, plus the listed cardio. <b>Tap an exercise</b> after all its sets; lifting checks save for this calendar week on this device. Weights, reps and cardio completion are not logged here.</p>
     <div class="days" id="days"></div>
   </section>
 
-  <!-- FOOTWORK -->
+  <!-- PROGRESSION -->
   <section class="sec">
-    <div class="sec-head"><div class="snum">03</div><div><div class="stag">Ali Footwork</div><h2>The Feet</h2></div></div>
-    <p class="lead">Slow technique on Wednesday, speed on Saturday. Five principles behind the movement.</p>
+    <div class="sec-head"><div class="snum">03</div><div><div class="stag">Make It Work</div><h2>Build Week by Week</h2></div></div>
+    <p class="lead">Built for an experienced lifter with full-gym access and muscle gain as the priority. Height alone does not determine the best split or working weights. Adjust the starting volume to recovery as swimming and running are added.</p>
     <ul class="principles">
-      <li><span class="n">01</span><span><b>Stay on the balls of your feet.</b> Light, springy, never flat-footed.</span></li>
-      <li><span class="n">02</span><span><b>Circle laterally, both ways.</b> Glide side to side, not just forward and back.</span></li>
-      <li><span class="n">03</span><span><b>In and out.</b> Dart in to throw, dart straight back out of range.</span></li>
-      <li><span class="n">04</span><span><b>Never cross your feet.</b> Step and drag to keep your base.</span></li>
-      <li><span class="n">05</span><span><b>The Ali shuffle.</b> Quick foot-switch — flashy, but a great speed builder.</span></li>
+      <li><span class="n">01</span><span><b>Warm up.</b> Start with 5–10 minutes of easy movement, then 2–4 progressively heavier warm-up sets before the first big lift. Use additional warm-ups when moving to a different muscle group.</span></li>
+      <li><span class="n">02</span><span><b>Start within capacity.</b> The listed sets are the target, not extra work on top of the old routine. If five lifting days plus cardio is a jump in workload, use two sets wherever three are listed for the first two weeks, with three reps in reserve.</span></li>
+      <li><span class="n">03</span><span><b>Earn the next weight.</b> When every set reaches the top of its rep range with two reps left and clean form, add the smallest available load next time. Return toward the lower end of the range. Track loads and reps in a notebook.</span></li>
+      <li><span class="n">04</span><span><b>Keep the big lifts controlled.</b> Use a comfortable full range of motion. No max testing or forced reps. Keep the same exercise choices for 6–8 weeks so progress is comparable.</span></li>
+      <li><span class="n">05</span><span><b>Recover, then progress.</b> If performance drops across several sessions or soreness persists into the next workout, take a lighter week: roughly half the sets and easier loads. Skip missed sessions rather than stacking them onto rest days.</span></li>
     </ul>
-    <div class="diagrams">
+    <div class="drills"><b>Why this structure</b>Push includes knee-dominant leg work; pull includes hip hinges and leg curls. The rotation averages about 10 direct weekly sets each for chest, back, quads and hamstrings, with smaller amounts of direct arm and shoulder work plus compound lifts. The exact split is a coaching choice, not a proven best routine for everyone. <a href="https://pubmed.ncbi.nlm.nih.gov/41843416/" target="_blank" rel="noopener">ACSM resistance-training position stand (2026)</a>.</div>
+  </section>
 
-      <div class="diagram">
-        <svg viewBox="0 0 220 175" role="img" aria-label="Boxing stance, lead foot forward facing the opponent">
-          <defs><marker id="ah1" markerWidth="7" markerHeight="7" refX="3.6" refY="3.2" orient="auto-start-reverse"><path class="ahf" d="M0,0 L7,3.2 L0,6.4 Z"/></marker></defs>
-          <g transform="translate(110,30)"><circle class="tgt-ring" r="13"/><circle class="tgt-dot" r="4"/></g>
-          <path class="fk" style="opacity:.55;stroke-dasharray:3 5" d="M110,114 L110,50" marker-end="url(#ah1)"/>
-          <g transform="translate(92,116)"><g transform="rotate(-10)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/></g><text class="ft-lbl" x="0" y="5" text-anchor="middle">L</text></g>
-          <g transform="translate(126,148)"><g transform="rotate(28)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/></g><text class="ft-lbl" x="0" y="5" text-anchor="middle">R</text></g>
-        </svg>
-        <div class="dlabel">Stance</div><div class="dnote">facing your man</div>
-      </div>
-
-      <div class="diagram">
-        <svg viewBox="0 0 220 175" role="img" aria-label="Circle around the opponent in both directions">
-          <defs><marker id="ah2" markerWidth="7" markerHeight="7" refX="3.6" refY="3.2" orient="auto-start-reverse"><path class="ahf" d="M0,0 L7,3.2 L0,6.4 Z"/></marker></defs>
-          <circle class="orbit" cx="110" cy="92" r="58"/>
-          <g transform="translate(110,92)"><circle class="tgt-ring" r="13"/><circle class="tgt-dot" r="4"/></g>
-          <path class="fk" d="M62,60 A58,58 0 0 1 158,60" marker-start="url(#ah2)" marker-end="url(#ah2)"/>
-          <g class="orbiter"><circle class="tgt-dot" cx="110" cy="34" r="5"/></g>
-          <g transform="translate(99,146)"><g transform="rotate(4)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/></g><text class="ft-lbl" x="0" y="5" text-anchor="middle">L</text></g>
-          <g transform="translate(123,154)"><g transform="rotate(4)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/></g><text class="ft-lbl" x="0" y="5" text-anchor="middle">R</text></g>
-        </svg>
-        <div class="dlabel">Circle Out</div><div class="dnote">orbit, both ways</div>
-      </div>
-
-      <div class="diagram">
-        <svg viewBox="0 0 220 175" role="img" aria-label="Dart in to strike then dart back out of range">
-          <defs><marker id="ah3" markerWidth="7" markerHeight="7" refX="3.6" refY="3.2" orient="auto-start-reverse"><path class="ahf" d="M0,0 L7,3.2 L0,6.4 Z"/></marker></defs>
-          <g transform="translate(110,28)"><circle class="tgt-ring" r="13"/><circle class="tgt-dot" r="4"/></g>
-          <g class="spark" transform="translate(110,48)"><path d="M0,-8 L0,8 M-8,0 L8,0 M-5,-5 L5,5 M5,-5 L-5,5"/></g>
-          <g transform="translate(103,78)"><rect class="ghost-ft" x="-11" y="-20" width="22" height="40" rx="9"/></g>
-          <g transform="translate(119,82)"><rect class="ghost-ft" x="-11" y="-20" width="22" height="40" rx="9"/></g>
-          <g transform="translate(103,134)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/><text class="ft-lbl" x="0" y="5" text-anchor="middle">L</text></g>
-          <g transform="translate(119,142)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/><text class="ft-lbl" x="0" y="5" text-anchor="middle">R</text></g>
-          <path class="fk" d="M150,138 L150,66" marker-end="url(#ah3)"/><text class="glbl" x="158" y="106">IN</text>
-          <path class="fk" d="M70,68 L70,140" marker-end="url(#ah3)"/><text class="glbl" x="40" y="106">OUT</text>
-        </svg>
-        <div class="dlabel">In &amp; Out</div><div class="dnote">strike, then reset</div>
-      </div>
-
-      <div class="diagram">
-        <svg viewBox="0 0 220 175" role="img" aria-label="Quickly switch which foot is forward">
-          <defs><marker id="ah4" markerWidth="7" markerHeight="7" refX="3.6" refY="3.2" orient="auto-start-reverse"><path class="ahf" d="M0,0 L7,3.2 L0,6.4 Z"/></marker></defs>
-          <text class="glbl" x="78" y="40" text-anchor="middle">1</text>
-          <text class="glbl" x="142" y="40" text-anchor="middle">2</text>
-          <g class="sh-a">
-            <g transform="translate(78,72)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/><text class="ft-lbl" x="0" y="5" text-anchor="middle">L</text></g>
-            <g transform="translate(78,124)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/><text class="ft-lbl" x="0" y="5" text-anchor="middle">R</text></g>
-          </g>
-          <g class="sh-b">
-            <g transform="translate(142,72)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/><text class="ft-lbl" x="0" y="5" text-anchor="middle">R</text></g>
-            <g transform="translate(142,124)"><rect class="ft" x="-11" y="-20" width="22" height="40" rx="9"/><circle class="ft-toe" cx="0" cy="-14" r="3"/><text class="ft-lbl" x="0" y="5" text-anchor="middle">L</text></g>
-          </g>
-          <path class="fk" d="M100,98 L120,98" marker-start="url(#ah4)" marker-end="url(#ah4)"/>
-        </svg>
-        <div class="dlabel">The Shuffle</div><div class="dnote">switch, fast</div>
-      </div>
-
-    </div>
-    <div class="drills">
-      <b>Drills that build it</b>
-      Jump rope (side-to-side &amp; alternating-foot) · shadowbox while constantly circling · lateral cone shuffles · calf raises &amp; ankle hops for the spring · circle a bag while jabbing. Build the shuffle slow, then fast.
-    </div>
+  <!-- CARDIO -->
+  <section class="sec">
+    <div class="sec-head"><div class="snum">04</div><div><div class="stag">Support the Lifts</div><h2>Swim &amp; Run</h2></div></div>
+    <p class="lead"><b>Two swims and two runs are the base.</b> Start at the low end of the durations. Add a third swim or run on Wednesday only after two steady weeks with good recovery and stable lifting performance.</p>
+    <ul class="principles">
+      <li><span class="n">01</span><span><b>Monday + Friday: beginner swim, 10–15 minutes total.</b> This includes rest, not continuous swimming. In a supervised pool, practise relaxed breathing and short, comfortable lengths, resting 30–60 seconds or longer at the wall. A beginner lesson is a good first session. Finish before technique deteriorates. No breath-hold drills or hard intervals.</span></li>
+      <li><span class="n">02</span><span><b>Tuesday + Saturday: easy run, 15–25 minutes.</b> A 7–8 minute mile shows current speed, but does not establish an easy training pace. Use a flat route and slow enough to speak in full sentences, about 3–4 out of 10 effort. If currently running only one mile per outing, start with 10–15 minutes and walk as needed. Walk 3–5 minutes before and after.</span></li>
+      <li><span class="n">03</span><span><b>Wednesday: optional third session.</b> Choose a 10–15 minute beginner swim or 10–15 minute easy run, not both. This gives 2–3 sessions of each sport per week while keeping two complete rest days.</span></li>
+      <li><span class="n">04</span><span><b>Lift first when sessions are together.</b> When practical, separate lifting and cardio by at least three hours. This is a useful fatigue-management choice, not a requirement for muscle growth. Avoid swimming when too fatigued to maintain comfortable technique.</span></li>
+      <li><span class="n">05</span><span><b>Progress one thing at a time.</b> For swimming, first make short lengths comfortable with rest; then build toward 15–20 minutes total. For running, add a few minutes to one session before adding frequency or speed. If leg or shoulder fatigue affects the next lift, shorten cardio and drop the optional session first. No sprints or hard swim intervals in this starting block.</span></li>
+    </ul>
+    <div class="drills"><b>Research behind the balance</b>A 43-study review found no average loss of muscle growth or maximal strength from combining aerobic and strength work, although explosive-strength gains were more affected in the same session. Most evidence covers running and cycling; this swim schedule is a practical adaptation, not a directly tested protocol. Sources: <a href="https://pubmed.ncbi.nlm.nih.gov/34757594/" target="_blank" rel="noopener">Schumann et al. (2022)</a> and <a href="https://pubmed.ncbi.nlm.nih.gov/28917030/" target="_blank" rel="noopener">exercise-order meta-analysis</a>.</div>
   </section>
 
   <!-- RECOVER & FUEL -->
   <section class="sec">
-    <div class="sec-head"><div class="snum">04</div><div><div class="stag">Eat For The Goal</div><h2>Strong &amp; Lean Fueling</h2></div></div>
-    <p class="lead">Strong-and-lean is a recomp, not a bulk. You're feeding strength and recovery without burying your definition.</p>
+    <div class="sec-head"><div class="snum">05</div><div><div class="stag">Eat For The Goal</div><h2>Strong &amp; Lean Fueling</h2></div></div>
+    <p class="lead">Aim for gradual weight gain while lifts improve. Reaching 160 lb does not guarantee a particular appearance or seven pounds of muscle.</p>
     <div class="panel">
-      <h3>The Levers</h3>
+      <h3>Fuel the Build</h3>
       <ul>
-        <li><b>Eat around maintenance, or a slight surplus.</b> No need to force-feed. This is the lane where you add strength and stay lean at the same time.</li>
-        <li><b>Protein is the anchor: ~110–155 g/day</b> (about 0.7–1.0 g per lb). High protein protects muscle in a recomp and drives strength recovery.</li>
-        <li><b>Carbs around training.</b> Fuel the heavy compounds and the rope work — they make you perform and look fuller without much fat cost.</li>
-        <li><b>Boxing now works <i>for</i> you.</b> Since you're not chasing a big surplus, the rope and footwork calories aren't fighting your goal — they're what keeps you lean.</li>
-        <li><b>Sleep is non-negotiable.</b> Strength gains live in recovery. Two rest days plus good sleep is why the heavy lifts keep climbing.</li>
-        <li><b>Watch the calves.</b> Rope + calf raises stack up. If the Achilles or shins complain, drop dedicated calf sets first.</li>
-        <li><b>Deload every 6–8 weeks.</b> Halve the lifting volume for a week and keep footwork to technique only.</li>
+        <li><b>Start with a small surplus.</b> Add roughly 150–250 calories to the intake that keeps body weight stable with this activity level. New swims and runs may raise that baseline, so adjust from weight trends rather than a watch's calorie estimate.</li>
+        <li><b>Protein: 120–145 g daily.</b> A practical target near 1.6–2.0 g/kg around the goal weight. Spread it across 3–4 meals, using foods such as eggs, dairy, fish, meat, tofu or beans.</li>
+        <li><b>Watch the trend.</b> Weigh under similar morning conditions several times a week and compare weekly averages. A conservative starting target is about 0.25–0.5 lb per week. If the average is flat for 2–3 weeks, add about 100 calories daily; reduce slightly if gaining faster or waist size rises quickly.</li>
+        <li><b>Eat for performance.</b> Include carbohydrates, fruit, vegetables and dietary fats. Keep protein consistent on rest days. No supplement is required for this plan.</li>
+        <li><b>Protect the two rest days.</b> Easy walking or gentle mobility is optional. No scheduled lifting, swimming or running on Thursday and Sunday.</li>
+        <li><b>Think in months.</b> At the suggested pace, a seven-pound scale increase may take roughly 14–28 weeks. Water and glycogen can move the scale sooner; muscle gain varies.</li>
       </ul>
     </div>
+    <p class="lead">Research supports adequate protein and cautions against aggressive surpluses. The calorie adjustments and slower gain target above are practical starting choices, not guaranteed outcomes. Sources: <a href="https://link.springer.com/article/10.1186/s12970-017-0177-8" target="_blank" rel="noopener">ISSN protein position stand</a> and <a href="https://pubmed.ncbi.nlm.nih.gov/37914977/" target="_blank" rel="noopener">Helms et al., energy-surplus trial (2023)</a>.</p>
   </section>
+
 
   <!-- TIMER -->
   <section class="sec">
     <div class="sec-head"><div class="snum">⏱</div><div><div class="stag">Use It Now</div><h2>The Bell</h2></div></div>
-    <p class="lead">3 minutes work, 1 minute rest by default. Run your shadowbox, bag and footwork rounds on it — it warns you at 10 seconds and counts down the last 3.</p>
+    <p class="lead">3 minutes work, 1 minute rest by default. Use this optional interval tool for timed work — it warns you at 10 seconds and counts down the last 3.</p>
     <div class="timer" id="timer">
       <div class="phase" id="phase">Ready</div>
       <div class="ring-wrap" id="ringwrap">
@@ -385,9 +339,9 @@
       </div>
       <div class="controls"><button class="btn primary" id="startBtn">Start</button><button class="btn" id="resetBtn">Reset</button></div>
       <div class="presets" id="presets">
-        <button class="preset" data-r="3" data-w="180" data-rest="60">Boxing 3×3</button>
-        <button class="preset" data-r="5" data-w="180" data-rest="60">Spar 5×3</button>
-        <button class="preset" data-r="12" data-w="180" data-rest="60">Pro 12×3</button>
+        <button class="preset" data-r="3" data-w="180" data-rest="60">3×3 min</button>
+        <button class="preset" data-r="5" data-w="180" data-rest="60">5×3 min</button>
+        <button class="preset" data-r="12" data-w="180" data-rest="60">12×3 min</button>
       </div>
       <div class="setrows">
         <div class="setrow"><span>Rounds</span><div class="stepper"><button id="rMinus" aria-label="fewer rounds">–</button><span class="val" id="roundCount">3</span><button id="rPlus" aria-label="more rounds">+</button></div></div>
@@ -408,8 +362,8 @@
       <li>Warm up before every session and stretch after.</li>
       <li>Progress gradually — overuse injuries come from doing too much too soon.</li>
       <li>Technique first, speed second, power last.</li>
-      <li>Yoga days are rest days. Move gently, breathe, and back off any pose that pinches.</li>
-      <li>If you spar, do it at a real gym with supervision and headgear.</li>
+      <li>Rest days are full rest. Easy walking and comfortable mobility are optional.</li>
+      <li>Stop an exercise that causes sharp or joint pain. Use a comfortable alternative and get guidance for persistent symptoms.</li>
       <li>This is general fitness guidance, not personal-training or medical advice. Check with a professional before starting if you have any health concerns.</li>
     </ul>
     <div class="seal">Float &amp; Sting · Strong &amp; Lean</div>
@@ -418,94 +372,90 @@
 
 <script>
 /* ---------- THE PLAN (single source of truth) ---------- */
-const PLAN = [
-  { key:'mon', dow:1, abbr:'Mon', type:'lo',   name:'Lower',        tag:'Heavy Legs + Calves',          freq:'Lift', short:'Lower (heavy)',
-    ex:[
-      ['1','Back Squat <b>(heavy)</b>','4×4–6 · 3–4m'],
-      ['2','Romanian Deadlift','3×6–8 · 2.5–3.5m'],
-      ['3','Bulgarian Split Squat','3×8–12/side · 2m'],
-      ['4','Lying / Seated Leg Curl','3×10–15 · 90s'],
-      ['5','Standing Calf Raise','3×8–12 · 90–120s']
-    ],
-    note:'Legs first in the week so they\u2019re recovered before Wednesday\u2019s footwork. <b>Squat is your strength centerpiece</b> — chase load here.' },
-
-  { key:'tue', dow:2, abbr:'Tue', type:'up',   name:'Upper',        tag:'Chest + Back + Shoulders + Arms', freq:'Lift', short:'Upper',
-    ex:[
-      ['1','Bench Press <b>(heavy)</b>','4×4–6 · 2.5–4m'],
-      ['2','Weighted Pull-ups <b>(heavy)</b>','4×5–8 · 2.5–3.5m'],
-      ['3','Incline DB Press','3×6–10 · 2–3m'],
-      ['4','Chest-Supported / Cable Row','3×8–12 · 2m'],
-      ['5','Lateral Raises','3×12–20 · 60s'],
-      ['6','EZ-Bar Curl','3×6–10 · 75s'],
-      ['7','Overhead Cable Triceps Ext','3×8–12 · 75s']
-    ],
-    note:'Bench and weighted pull-ups are your upper-body strength lifts — keep them heavy and well-rested. Optional easy mile after if you want extra conditioning.' },
-
-  { key:'wed', dow:3, abbr:'Wed', type:'box',  name:'Boxing Skill', tag:'Hands, Defense + Light Footwork', freq:'Box', short:'Boxing + footwork',
-    ex:[
-      ['1','Shadowbox — hands &amp; defense','3×3:00'],
-      ['2','Bag work — combinations','3–4×3:00'],
-      ['3','Footwork <b>technique</b> (slow, no jumping)','10 min'],
-      ['4','Neck (flexion / extension)','2×12–25']
-    ],
-    note:'Skill-focused and low on the legs — it sits between leg day and full-body day on purpose. Stance, step-drag, slow circling, slow Ali shuffle.' },
-
-  { key:'thu', dow:4, abbr:'Thu', type:'rest', name:'Recover',      tag:'Mobility Yoga Flow',             freq:'Yoga', short:'Yoga · mobility',
-    yoga:[
-      ['1','Cat\u2013Cow','8 rounds','Sync breath to spine and wake the back up.'],
-      ['2','Downward Dog','5 breaths','Lengthen the calves and hamstrings after the rope.'],
-      ['3','Low Lunge','5 breaths/side','Open the hip flexors your stance shortens.'],
-      ['4','Thread the Needle','5 breaths/side','Release the upper back and shoulders.'],
-      ['5','Pigeon Pose','6 breaths/side','Decompress the glutes from heavy leg day.'],
-      ['6','Supine Spinal Twist','6 breaths/side','Unwind the spine and settle the lower back.']
-    ],
-    note:'Still a rest day — this is <b>gentle mobility, not training</b>. A mid-week reset so Friday\u2019s full-body session is fresh and Saturday\u2019s footwork is sharp. ~12–15 minutes, easy breathing throughout.' },
-
-  { key:'fri', dow:5, abbr:'Fri', type:'full', name:'Full Body',    tag:'2nd Touch — Everything',         freq:'Lift', short:'Full body',
-    ex:[
-      ['1','Front Squat or Leg Press','3×8–12 · 3m'],
-      ['2','Overhead Press or Incline Press','3×6–10 · 2.5m'],
-      ['3','Lat Pulldown or Cable Row','3×8–12 · 2m'],
-      ['4','Hip Thrust or RDL','3×8–12 · 2.5m'],
-      ['5','Lateral Raise + Curl/Pushdown (superset)','2–3×12–15 · 60s'],
-      ['6','Seated Calf Raise','2–3×12–20 · 75s']
-    ],
-    note:'Moderate, slightly higher reps than Mon/Tue — this is the second weekly hit that takes chest, back and legs to 2×. Pump work, not a max-out.' },
-
-  { key:'sat', dow:6, abbr:'Sat', type:'box',  name:'The Dance',    tag:'Ali Footwork + Conditioning + Abs', freq:'Box', short:'Footwork + conditioning',
-    ex:[
-      ['1','Jump Rope (side-to-side, alt feet)','4–5×3:00'],
-      ['2','Footwork drills (cones, circle bag, in/out)','15–20 min'],
-      ['3','Bag rounds — movement + combos','2–3×3:00'],
-      ['4','Abs — knee raises / cable crunch / plank','2–3 rounds']
-    ],
-    note:'Your main Ali session and your conditioning in one. The rope work <b>is</b> your cardio — lean comes from here, not from grinding miles.' },
-
-  { key:'sun', dow:0, abbr:'Sun', type:'rest', name:'Full Rest',    tag:'Restorative Yoga Flow',          freq:'Yoga', short:'Yoga · restore',
-    yoga:[
-      ['1','Child\u2019s Pose','8 breaths','Land, slow the breath, release the back and hips.'],
-      ['2','Reclined Bound Angle','8 breaths','Let the hips open with zero effort.'],
-      ['3','Seated Forward Fold','6 breaths','Soften the hamstrings and lower back.'],
-      ['4','Supine Spinal Twist','6 breaths/side','Gentle decompression, both ways.'],
-      ['5','Legs Up The Wall','3–5 min','Drain the legs and calm the system — your best recovery pose.'],
-      ['6','Savasana','5 min','Total stillness. This is where the week\u2019s work locks in.']
-    ],
-    note:'A true full-rest day with a <b>restorative flow to downshift</b>. Two full rest days a week are what let you train hard on the other five and keep the strength climbing.' },
+const WORKOUTS = {
+  pushA: {type:'up', name:'Push A', tag:'Chest + Quads + Shoulders + Triceps', freq:'Push', short:'Push A', ex:[
+    ['1','Bench Press','3×6–10 · 2–3m'],
+    ['2','Back Squat or Hack Squat','3×6–10 · 2–3m'],
+    ['3','Cable Chest Fly','1×10–15 · 90s'],
+    ['4','Leg Extension','1×10–15 · 90s'],
+    ['5','Lateral Raise','2×12–20 · 60–90s'],
+    ['6','Cable Triceps Pushdown','2×10–15 · 90s'],
+    ['7','Standing Calf Raise','2×10–15 · 90s']
+  ], note:'Chest press and knee-dominant leg work lead. Use a chest-press machine if benching is unfamiliar, and keep the squat variation consistent.'},
+  pushB: {type:'up', name:'Push B', tag:'Quads + Chest + Shoulders + Triceps', freq:'Push', short:'Push B', ex:[
+    ['1','Leg Press','3×8–12 · 2–3m'],
+    ['2','Incline Dumbbell Press','3×8–12 · 2–3m'],
+    ['3','Cable Chest Fly','1×10–15 · 90s'],
+    ['4','Leg Extension','1×10–15 · 90s'],
+    ['5','Seated Dumbbell Shoulder Press','2×8–12 · 2m'],
+    ['6','Lateral Raise','1×12–20 · 60–90s'],
+    ['7','Overhead Triceps Extension','1×10–15 · 90s'],
+    ['8','Seated Calf Raise','2×12–20 · 90s']
+  ], note:'Legs lead this session. Keep all presses controlled and leave two good reps in reserve; more fatigue is not the goal.'},
+  pullA: {type:'lo', name:'Pull A', tag:'Back + Hamstrings + Glutes + Biceps', freq:'Pull', short:'Pull A', ex:[
+    ['1','Romanian Deadlift','2×6–10 · 2–3m'],
+    ['2','Lat Pulldown','2×8–12 · 2m'],
+    ['3','Chest-Supported Row','2×8–12 · 2m'],
+    ['4','Seated Leg Curl','2×10–15 · 90s'],
+    ['5','Reverse Pec Deck','2×12–20 · 90s'],
+    ['6','Dumbbell Curl','2×10–15 · 90s'],
+    ['7','Cable Crunch','2×10–15 · 90s']
+  ], note:'Hinge from the hips with a controlled range. Chest support keeps rows from adding unnecessary lower-back fatigue. Learn the hinge with light loads first.'},
+  pullB: {type:'lo', name:'Pull B', tag:'Back + Hamstrings + Glutes + Biceps', freq:'Pull', short:'Pull B', ex:[
+    ['1','Lat Pulldown or Assisted Pull-up','2×8–12 · 2m'],
+    ['2','Seated Cable Row','2×8–12 · 2m'],
+    ['3','Lying or Seated Leg Curl','3×10–15 · 90s'],
+    ['4','Romanian Deadlift (light)','1×10–12 · 2m'],
+    ['5','Reverse Pec Deck','2×12–20 · 90s'],
+    ['6','Hammer Curl','2×10–15 · 90s'],
+    ['7','Dead Bug','2×8–12/side · 60s']
+  ], note:'A lighter hinge day. Keep the same pulldown or assisted pull-up choice from week to week. Do a fresh light hinge warm-up before its working set.'},
+  rest: {type:'rest', name:'Full Rest', tag:'Recover', freq:'Rest', short:'Full rest', ex:[],
+    note:'No workout required. Easy walking or 5–10 minutes of gentle mobility is optional. Eat normally, keep protein consistent and prioritize sleep.'}
+};
+const ROTATION = [
+  ['pushA','pullA','pushB','rest','pullB','pushA','rest'],
+  ['pullA','pushB','pullB','rest','pushA','pullB','rest']
 ];
-
-/* ---------- storage helpers ---------- */
+const CARDIO = [
+  {short:'Swim', note:'<b>Later in the day: beginner swim 10–15 min total, including rests.</b> Supervised pool, short comfortable lengths, 30–60 seconds or longer at the wall. A lesson can replace this session. Keep shoulders fresh.'},
+  {short:'Run', note:'<b>After lifting or later: easy run 15–25 min.</b> Full-sentence pace, not a timed mile. Start at 10–15 min if a mile is the usual distance. Add 3–5 min walking before and after.'},
+  {short:'Optional cardio', note:'<b>Optional: third swim OR run.</b> Only if recovering well: swim 10–15 min including rests or run 10–15 min, easy. Skip this in the first two weeks of the combined routine.'},
+  null,
+  {short:'Swim', note:'<b>Later in the day: beginner swim 10–15 min total, including rests.</b> Repeat comfortable short lengths in a supervised pool. Rest freely. Skip it if too fatigued for controlled breathing and technique.'},
+  {short:'Run', note:'<b>After lifting or later: run 15–25 min.</b> Easy conversational pace, no hills or sprints. Use run/walk if needed. Tomorrow is full rest.'},
+  null
+];
 const LS='floatsting:';
 function load(k,def){try{const v=localStorage.getItem(LS+k);return v?JSON.parse(v):def;}catch(e){return def;}}
 function save(k,v){try{localStorage.setItem(LS+k,JSON.stringify(v));}catch(e){}}
+function weekStart(date){
+  const d=new Date(date.getFullYear(),date.getMonth(),date.getDate(),12);
+  d.setDate(d.getDate()-(d.getDay()+6)%7); return d;
+}
+function dateKey(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+const currentWeek=weekStart(new Date());
+let preview=false, PLAN=[], checks={}, checkKey='';
+function selectWeek(){
+  const week=new Date(currentWeek); if(preview)week.setDate(week.getDate()+7);
+  const weeks=Math.round((Date.UTC(week.getFullYear(),week.getMonth(),week.getDate())-Date.UTC(2026,8,21))/604800000);
+  const rotation=((weeks%2)+2)%2;
+  PLAN=ROTATION[rotation].map((id,i)=>({...WORKOUTS[id],cardio:CARDIO[i],key:['mon','tue','wed','thu','fri','sat','sun'][i],dow:(i+1)%7,abbr:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][i]}));
+  checkKey='checks:pushpull-v1:'+dateKey(week);
+  const saved=load(checkKey,{});
+  checks=saved && typeof saved==='object' && !Array.isArray(saved)?saved:{};
+  document.getElementById('weekLabel').textContent=(preview?'Next week':'This week')+' · Week '+(rotation?'B':'A')+' · Monday '+week.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
+  document.getElementById('previewWeek').textContent=preview?'Back to this week':'Preview next week';
+}
+selectWeek();
 
 /* ---------- render plan ---------- */
-const checks = load('checks',{});           // {mon:[0,2], ...}
-const todayDow = new Date().getDay();
+let todayDow = new Date().getDay();
 const mapEl = document.getElementById('map');
 const daysEl = document.getElementById('days');
 
 function itemCount(d){ return (d.ex||d.yoga||[]).length; }
-function dayChecks(key){ return checks[key]||[]; }
+function dayChecks(key){ const arr=checks[key]; const d=PLAN.find(p=>p.key===key); return Array.isArray(arr)?[...new Set(arr.filter(i=>Number.isInteger(i)&&i>=0&&i<itemCount(d)))]:[]; }
 
 function rowHTML(d,i){
   const done = dayChecks(d.key).includes(i) ? ' done':'';
@@ -525,7 +475,7 @@ function rowHTML(d,i){
 }
 
 function panelHTML(d){
-  const isToday = d.dow===todayDow;
+  const isToday = !preview && d.dow===todayDow;
   const rows = (d.ex||d.yoga).map((_,i)=>rowHTML(d,i)).join('');
   return `<article class="day-panel ${d.type}${isToday?' today':''}" id="day-${d.key}">
     <button class="dp-head" aria-expanded="false" aria-controls="body-${d.key}">
@@ -536,21 +486,22 @@ function panelHTML(d){
     </button>
     <div class="dp-wrap"><div class="dp-inner"><div class="dp-body" id="body-${d.key}">
       <ul class="ex">${rows}</ul>
-      <div class="dp-foot">
+      <div class="dp-foot"${itemCount(d)?'':' hidden'}>
         <span class="progbar"><i data-prog="${d.key}"></i></span>
         <span class="progtxt" data-progtxt="${d.key}"></span>
         <button class="reset-day" data-reset="${d.key}">Reset day</button>
       </div>
       <div class="dp-note">${d.note}</div>
+      ${d.cardio?`<div class="dp-note">${d.cardio.note}</div>`:''}
     </div></div></div>
   </article>`;
 }
 
 function mapHTML(d){
-  const isToday = d.dow===todayDow;
+  const isToday = !preview && d.dow===todayDow;
   return `<button class="mcell ${d.type}${isToday?' today':''}" data-target="day-${d.key}">
     ${isToday?'<span class="todaytag">Today</span>':''}
-    <span class="md">${d.abbr}</span><span class="mf">${d.short}</span>
+    <span class="md">${d.abbr}</span><span class="mf">${d.short}</span>${d.cardio?`<span class="mf">${d.cardio.short}</span>`:''}
   </button>`;
 }
 
@@ -570,10 +521,10 @@ PLAN.forEach(d=>updateProgress(d.key));
 
 function toggleRow(li){
   const key=li.dataset.key, i=+li.dataset.i;
-  const arr = checks[key] ? checks[key].slice() : [];
+  const arr = dayChecks(key).slice();
   const at = arr.indexOf(i);
   if(at>=0) arr.splice(at,1); else arr.push(i);
-  checks[key]=arr; save('checks',checks);
+  checks[key]=arr; save(checkKey,checks);
   li.classList.toggle('done');
   li.setAttribute('aria-pressed', li.classList.contains('done')?'true':'false');
   updateProgress(key);
@@ -584,7 +535,7 @@ daysEl.addEventListener('click',e=>{
   if(row){toggleRow(row);return;}
   const reset=e.target.closest('[data-reset]');
   if(reset){
-    const key=reset.dataset.reset; checks[key]=[]; save('checks',checks);
+    const key=reset.dataset.reset; checks[key]=[]; save(checkKey,checks);
     document.querySelectorAll(`#day-${key} .exrow`).forEach(li=>{li.classList.remove('done');li.setAttribute('aria-pressed','false');});
     updateProgress(key); return;
   }
@@ -608,6 +559,24 @@ function togglePanel(panel){ setOpen(panel,!panel.classList.contains('open')); }
   const today = PLAN.find(p=>p.dow===todayDow);
   if(today){ setOpen(document.getElementById('day-'+today.key),true); }
 })();
+
+document.getElementById('previewWeek').addEventListener('click',()=>{
+  preview=!preview; refreshPlan();
+});
+function refreshPlan(){
+  selectWeek(); mapEl.innerHTML=PLAN.map(mapHTML).join(''); daysEl.innerHTML=PLAN.map(panelHTML).join('');
+  PLAN.forEach(d=>updateProgress(d.key));
+  const day=PLAN.find(p=>p.dow===(preview?1:todayDow));
+  if(day)setOpen(document.getElementById('day-'+day.key),true);
+}
+function refreshDate(){
+  const now=new Date(), monday=weekStart(now);
+  if(todayDow!==now.getDay()||dateKey(monday)!==dateKey(currentWeek)){
+    currentWeek.setTime(monday.getTime()); todayDow=now.getDay(); refreshPlan();
+  }
+}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refreshDate();});
+setInterval(refreshDate,30000);
 
 /* ---------- map -> jump to day ---------- */
 mapEl.addEventListener('click',e=>{
@@ -693,7 +662,7 @@ mapEl.addEventListener('click',e=>{
   }
   function step(){
     remaining--;
-    if(remaining<0){ transition(); return; }
+    if(remaining<=0){ transition(); return; }
     if(phase==='work'){ if(remaining===10) warnBeep(); else if(remaining>=1&&remaining<=3) tickBeep(); }
     render();
   }

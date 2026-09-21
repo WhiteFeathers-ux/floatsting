@@ -1,7 +1,7 @@
 {
-  "name": "Float & Sting — Strong & Lean",
+  "name": "Float & Sting \u2014 Strong & Lean",
   "short_name": "Float & Sting",
-  "description": "Your strong-and-lean training plan with Ali footwork and a round timer.",
+  "description": "Five-day push/pull lifting plan with two rest days, swimming, running and muscle-gain guidance.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
@@ -9,8 +9,23 @@
   "background_color": "#ECE3CE",
   "theme_color": "#7A2B22",
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
