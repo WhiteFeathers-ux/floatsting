@@ -66,6 +66,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       <li><span class="n">04</span><span><b>Keep the big lifts controlled.</b> Use a comfortable full range of motion. No max testing or forced reps. Keep the same exercise choices for 6–8 weeks so progress is comparable.</span></li>
       <li><span class="n">05</span><span><b>Recover, then progress.</b> If performance drops across several sessions or soreness persists into the next workout, take a lighter week: roughly half the sets and easier loads. Skip missed sessions rather than stacking them onto rest days.</span></li>
     </ul>
+    <p class="lead"><b>Session workload:</b> push days have 14 working sets across 7–8 exercises; pull days have 15 across 7 exercises, including abs. Warm-ups and cardio are additional. The 6–9 direct ab sets per week replace existing ab training, rather than being added on top. This is a starting prescription to adjust to performance and recovery, not a requirement to do more every session.</p>
     <div class="drills"><b>Why this structure</b>Push includes knee-dominant leg work; pull includes hip hinges and leg curls. The rotation averages about 10 direct weekly sets each for chest, back, quads and hamstrings, with smaller amounts of direct arm and shoulder work plus compound lifts. The exact split is a coaching choice, not a proven best routine for everyone. <a href="https://pubmed.ncbi.nlm.nih.gov/41843416/" target="_blank" rel="noopener">ACSM resistance-training position stand (2026)</a>.</div>
     </div></details>
   </section>
@@ -178,8 +179,8 @@ const WORKOUTS = {
     ['4','Seated Leg Curl','2×10–15 · 90s'],
     ['5','Reverse Pec Deck','2×12–20 · 90s'],
     ['6','Dumbbell Curl','2×10–15 · 90s'],
-    ['7','Cable Crunch','2×10–15 · 90s']
-  ], note:'Hinge from the hips with a controlled range. Chest support keeps rows from adding unnecessary lower-back fatigue. Learn the hinge with light loads first.'},
+    ['7','Cable Crunch','3×10–15 · 90s']
+  ], note:'Hinge from the hips with a controlled range. Chest support keeps rows from adding unnecessary lower-back fatigue. Learn the hinge with light loads first. Cable crunch: curl the ribs toward the pelvis without pulling with the arms; keep two clean reps in reserve. Add a small amount of weight once all three sets reach 15 controlled reps.'},
   pullB: {type:'lo', name:'Pull B', tag:'Back + Hamstrings + Glutes + Biceps', freq:'Pull', short:'Pull B', ex:[
     ['1','Lat Pulldown or Assisted Pull-up','2×8–12 · 2m'],
     ['2','Seated Cable Row','2×8–12 · 2m'],
@@ -187,8 +188,8 @@ const WORKOUTS = {
     ['4','Romanian Deadlift (light)','1×10–12 · 2m'],
     ['5','Reverse Pec Deck','2×12–20 · 90s'],
     ['6','Hammer Curl','2×10–15 · 90s'],
-    ['7','Dead Bug','2×8–12/side · 60s']
-  ], note:'A lighter hinge day. Keep the same pulldown or assisted pull-up choice from week to week. Do a fresh light hinge warm-up before its working set.'},
+    ['7','Hanging Knee Raise or Reverse Crunch','3×8–15 · 90s']
+  ], note:'A lighter hinge day. Keep the same pulldown or assisted pull-up choice from week to week. Do a fresh light hinge warm-up before its working set. For abs, curl the pelvis toward the ribs without swinging. Choose reverse crunches if grip limits hanging raises. Keep the choice consistent; reach 15 controlled reps per set before increasing difficulty, with two reps in reserve.'},
   rest: {type:'rest', name:'Full Rest', tag:'Recover', freq:'Rest', short:'Full rest', ex:[],
     note:'No workout required. Easy walking or 5–10 minutes of gentle mobility is optional. Eat normally, keep protein consistent and prioritize sleep.'}
 };
@@ -220,8 +221,19 @@ function selectWeek(){
   const weeks=Math.round((Date.UTC(week.getFullYear(),week.getMonth(),week.getDate())-Date.UTC(2026,8,21))/604800000);
   const rotation=((weeks%2)+2)%2;
   PLAN=ROTATION[rotation].map((id,i)=>({...WORKOUTS[id],cardio:CARDIO[i],key:['mon','tue','wed','thu','fri','sat','sun'][i],dow:(i+1)%7,abbr:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][i]}));
-  checkKey='checks:pushpull-v1:'+dateKey(week);
-  const saved=load(checkKey,{});
+  checkKey='checks:pushpull-v2:'+dateKey(week);
+  let saved=load(checkKey,null);
+  if(saved===null){
+    const previous=load('checks:pushpull-v1:'+dateKey(week),{});
+    saved={};
+    PLAN.forEach((d,i)=>{
+      if(Array.isArray(previous?.[d.key])){
+        // Old ab checks do not certify the increased or replaced prescription.
+        saved[d.key]=previous[d.key].filter(n=>Number.isInteger(n) && n>=0 && n<d.ex.length && !(ROTATION[rotation][i].startsWith('pull') && n===6));
+      }
+    });
+    save(checkKey,saved);
+  }
   checks=saved && typeof saved==='object' && !Array.isArray(saved)?saved:{};
   document.getElementById('weekLabel').textContent=(preview?'Next week':'This week')+' · Week '+(rotation?'B':'A')+' · Monday '+week.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
   document.getElementById('previewWeek').textContent=preview?'Back to this week':'Preview next week';
