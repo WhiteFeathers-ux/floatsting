@@ -1,7 +1,9 @@
-const CACHE = 'floatsting-v4-pushpull';
+const CACHE = 'floatsting-v5-neutral';
 const ASSETS = [
   './',
   './index.html',
+  './app.css',
+  './icon.svg',
   './manifest.json',
   './icon-180.png',
   './icon-192.png',

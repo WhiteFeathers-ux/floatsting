@@ -1,0 +1,279 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-21T08:04:37.827381+00:00",
+  "title": "Design System: Float & Sting",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0.004 140)",
+          "oklch(26% 0.004 140)",
+          "oklch(38% 0.004 140)",
+          "oklch(49% 0.004 140)",
+          "oklch(61% 0.004 140)",
+          "oklch(72% 0.004 140)",
+          "oklch(84% 0.004 140)",
+          "oklch(95% 0.004 140)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "tonalRamp": [
+          "oklch(15% 0.004 140)",
+          "oklch(26% 0.004 140)",
+          "oklch(38% 0.004 140)",
+          "oklch(49% 0.004 140)",
+          "oklch(61% 0.004 140)",
+          "oklch(72% 0.004 140)",
+          "oklch(84% 0.004 140)",
+          "oklch(95% 0.004 140)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15% 0.004 140)",
+          "oklch(26% 0.004 140)",
+          "oklch(38% 0.004 140)",
+          "oklch(49% 0.004 140)",
+          "oklch(61% 0.004 140)",
+          "oklch(72% 0.004 140)",
+          "oklch(84% 0.004 140)",
+          "oklch(95% 0.004 140)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "tonalRamp": [
+          "oklch(15% 0.004 140)",
+          "oklch(26% 0.004 140)",
+          "oklch(38% 0.004 140)",
+          "oklch(49% 0.004 140)",
+          "oklch(61% 0.004 140)",
+          "oklch(72% 0.004 140)",
+          "oklch(84% 0.004 140)",
+          "oklch(95% 0.004 140)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "tonalRamp": [
+          "oklch(15% 0.004 140)",
+          "oklch(26% 0.004 140)",
+          "oklch(38% 0.004 140)",
+          "oklch(49% 0.004 140)",
+          "oklch(61% 0.004 140)",
+          "oklch(72% 0.004 140)",
+          "oklch(84% 0.004 140)",
+          "oklch(95% 0.004 140)"
+        ]
+      },
+      "soft": {
+        "role": "neutral",
+        "displayName": "Soft",
+        "tonalRamp": [
+          "oklch(15% 0.004 140)",
+          "oklch(26% 0.004 140)",
+          "oklch(38% 0.004 140)",
+          "oklch(49% 0.004 140)",
+          "oklch(61% 0.004 140)",
+          "oklch(72% 0.004 140)",
+          "oklch(84% 0.004 140)",
+          "oklch(95% 0.004 140)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Graphite accent",
+        "tonalRamp": [
+          "oklch(15% 0.004 140)",
+          "oklch(26% 0.004 140)",
+          "oklch(38% 0.004 140)",
+          "oklch(49% 0.004 140)",
+          "oklch(61% 0.004 140)",
+          "oklch(72% 0.004 140)",
+          "oklch(84% 0.004 140)",
+          "oklch(95% 0.004 140)"
+        ]
+      },
+      "on-accent": {
+        "role": "neutral",
+        "displayName": "On accent",
+        "tonalRamp": [
+          "oklch(15% 0.004 140)",
+          "oklch(26% 0.004 140)",
+          "oklch(38% 0.004 140)",
+          "oklch(49% 0.004 140)",
+          "oklch(61% 0.004 140)",
+          "oklch(72% 0.004 140)",
+          "oklch(84% 0.004 140)",
+          "oklch(95% 0.004 140)"
+        ]
+      },
+      "success": {
+        "role": "secondary",
+        "displayName": "Success",
+        "tonalRamp": [
+          "oklch(15% 0.015 140)",
+          "oklch(26% 0.015 140)",
+          "oklch(38% 0.015 140)",
+          "oklch(49% 0.015 140)",
+          "oklch(61% 0.015 140)",
+          "oklch(72% 0.015 140)",
+          "oklch(84% 0.015 140)",
+          "oklch(95% 0.015 140)"
+        ]
+      },
+      "timer-control": {
+        "role": "primary",
+        "displayName": "Pale timer control",
+        "tonalRamp": [
+          "oklch(15% 0.015 140)",
+          "oklch(26% 0.015 140)",
+          "oklch(38% 0.015 140)",
+          "oklch(49% 0.015 140)",
+          "oklch(61% 0.015 140)",
+          "oklch(72% 0.015 140)",
+          "oklch(84% 0.015 140)",
+          "oklch(95% 0.015 140)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Page heading",
+        "purpose": "Compact page introduction; responsive sizes documented in DESIGN.md."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "disclosure",
+        "value": ".18s ease",
+        "purpose": "Session expansion and chevron rotation."
+      },
+      {
+        "name": "exercise-hover",
+        "value": ".15s ease",
+        "purpose": "Checklist row background."
+      },
+      {
+        "name": "timer-ring",
+        "value": ".3s linear",
+        "purpose": "Timer ring progress."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "narrow-max",
+        "value": "480px"
+      },
+      {
+        "name": "wide-min",
+        "value": "760px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Secondary action",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Secondary action from the shipped session sheet.",
+      "html": "<button class=\"ds-text-button\">Open today</button>",
+      "css": ":host{font-family:var(--font);color:var(--ink)}button,input{font:inherit}.ds-text-button{border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:13px;font-weight:600;border-radius:8px;padding:10px 13px;min-height:44px;white-space:nowrap}.ds-text-button:hover{background:var(--soft);border-color:#b7bcb3}.ds-text-button:active{background:#e1e5dc}:focus-visible{outline:3px solid #56725c;outline-offset:4px}"
+    },
+    {
+      "name": "Timer primary action",
+      "kind": "button",
+      "refersTo": "button-timer-primary",
+      "description": "Timer primary action from the shipped session sheet.",
+      "html": "<button class=\"ds-btn ds-primary\">Start</button>",
+      "css": ":host{font-family:var(--font);color:var(--ink)}button,input{font:inherit}.ds-btn{min-height:48px;min-width:112px;border:1px solid #75806f;border-radius:9px;background:transparent;color:#fff;font-size:14px;font-weight:600;padding:10px 22px}.ds-btn.ds-primary{background:#e6ede2;color:var(--ink);border-color:#e6ede2}.ds-btn:hover{background:#41483e;color:#fff}.ds-btn:active{background:#56614f}:focus-visible{outline:3px solid #56725c;outline-offset:4px}"
+    },
+    {
+      "name": "Timer secondary action",
+      "kind": "button",
+      "refersTo": "button-timer-secondary",
+      "description": "Timer secondary action from the shipped session sheet.",
+      "html": "<div style=\"background:var(--ink);padding:16px\"><button class=\"ds-btn\">Reset</button></div>",
+      "css": ":host{font-family:var(--font);color:var(--ink)}button,input{font:inherit}.ds-btn{min-height:48px;min-width:112px;border:1px solid #75806f;border-radius:9px;background:transparent;color:#fff;font-size:14px;font-weight:600;padding:10px 22px}.ds-btn:hover{background:#41483e;color:#fff}.ds-btn:active{background:#56614f}:focus-visible{outline:3px solid #56725c;outline-offset:4px}"
+    },
+    {
+      "name": "Timer preset",
+      "kind": "chip",
+      "refersTo": "timer-preset",
+      "description": "Timer preset from the shipped session sheet.",
+      "html": "<div style=\"background:var(--ink);padding:16px\"><button class=\"ds-preset ds-active\">3 \u00d7 3 min</button> <button class=\"ds-preset\">6 \u00d7 2 min</button></div>",
+      "css": ":host{font-family:var(--font);color:var(--ink)}button,input{font:inherit}.ds-preset{border:1px solid #626e5c;color:#dae2d5;background:transparent;min-height:44px;border-radius:8px;padding:8px 12px;font-size:12px}.ds-preset.ds-active{background:#e6ede2;border-color:#e6ede2;color:var(--ink)}.ds-preset:hover{border-color:#fff}:focus-visible{outline:3px solid #56725c;outline-offset:4px}"
+    },
+    {
+      "name": "Workout panel",
+      "kind": "card",
+      "refersTo": "workout-panel",
+      "description": "Workout panel from the shipped session sheet.",
+      "html": "<section class=\"ds-day-panel\"><button class=\"ds-dp-head\"><span class=\"ds-dp-title\"><span class=\"ds-dp-name\">Mon \u00b7 Push A</span><span class=\"ds-dp-tag\">Chest + Quads + Shoulders + Triceps</span></span></button></section>",
+      "css": ":host{font-family:var(--font);color:var(--ink)}button,input{font:inherit}.ds-day-panel{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);overflow:hidden}.ds-dp-head{display:flex;align-items:center;gap:12px;width:100%;padding:20px;border:0;background:transparent;color:var(--ink);text-align:left;min-height:82px}.ds-dp-head:hover{background:#fafbf8}.ds-dp-title{min-width:0;flex:1}.ds-dp-name{display:block;font-size:18px;font-weight:700;letter-spacing:-.025em;line-height:1.4}.ds-dp-tag{display:block;font-size:12px;color:var(--muted);margin-top:3px;font-weight:400;line-height:1.5}:focus-visible{outline:3px solid #56725c;outline-offset:4px}"
+    },
+    {
+      "name": "Bottom navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Bottom navigation from the shipped session sheet.",
+      "html": "<nav class=\"ds-app-nav\"><a href=\"#week\" aria-current=\"location\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"4\" y=\"5\" width=\"16\" height=\"16\" rx=\"2\"/><path d=\"M16 3v4M8 3v4M4 11h16\"/></svg>Week</a><a href=\"#workouts\">Train</a><a href=\"#guide\">Guide</a><a href=\"#timer-section\">Timer</a></nav>",
+      "css": ":host{font-family:var(--font);color:var(--ink)}button,input{font:inherit}.ds-app-nav a{flex:1;max-width:140px;min-height:48px;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;color:var(--muted);font-size:12px;font-weight:500;border-radius:8px}.ds-app-nav svg{width:19px;height:19px}.ds-app-nav a:hover,.ds-app-nav a[aria-current]{background:var(--soft);color:var(--ink)}:focus-visible{outline:3px solid #56725c;outline-offset:4px}.ds-app-nav{display:flex;background:var(--surface);border-top:1px solid var(--line);padding:8px;gap:4px}"
+    },
+    {
+      "name": "Sound checkbox",
+      "kind": "input",
+      "refersTo": "sound-checkbox",
+      "description": "Sound checkbox from the shipped session sheet.",
+      "html": "<label class=\"ds-sound-toggle\" style=\"background:var(--ink);padding:0 12px\"><input type=\"checkbox\" checked> Sound</label>",
+      "css": ":host{font-family:var(--font);color:var(--ink)}button,input{font:inherit}.ds-sound-toggle{display:inline-flex;align-items:center;gap:8px;font-size:13px;min-height:44px;margin-top:20px;color:#dae2d5}.ds-sound-toggle input{width:18px;height:18px;accent-color:#d4e1cd}:focus-visible{outline:3px solid #56725c;outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Neutral Session Sheet",
+    "overview": "A quiet, practical training interface built from pale paper, white panels, graphite controls and restrained rules. Hanken Grotesk keeps the brand, prescriptions and controls in one readable voice. The F/S monogram is the identity asset; the boxing-glove mark and red-and-gold boxing-club appearance were explicitly rejected.\n\nDensity serves use during a workout. Compact headings, aligned prescriptions and visible completion states carry the hierarchy. Longer explanations unfold on demand. The timer is the strongest tonal block, giving an active tool its own visual boundary without decorative imagery.",
+    "keyCharacteristics": [
+      "Neutral surfaces and graphite emphasis.",
+      "One type family, sentence-case labels and tabular numbers.",
+      "Bordered session panels with generous touch targets.",
+      "Flat depth and short, state-driven motion."
+    ],
+    "rules": [
+      {
+        "name": "The Functional Emphasis Rule",
+        "body": "Reserve dark fills for current state, completion and the timer; ordinary session panels remain white.",
+        "section": "colors"
+      },
+      {
+        "name": "The Aligned Numbers Rule",
+        "body": "Use tabular numerals for prescriptions, progress counts, timer values and stepper values, keeping changing quantities steady.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Surface Rule",
+        "body": "Establish hierarchy with surface tone, borders and spacing before adding depth effects.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** reuse the neutral palette and F/S monogram.",
+      "**Do** preserve text labels alongside completion, current-day and navigation state.",
+      "**Do** keep prescriptions right-aligned and changing quantities in tabular numerals.",
+      "**Do** retain visible keyboard focus, reduced-motion behavior and touch-sized controls."
+    ],
+    "donts": [
+      "**Don't** restore the boxing-glove mark or red-and-gold identity.",
+      "**Don't** add decorative shadows, image treatments or oversized display typography to routine workout controls.",
+      "**Don't** imply logged progress for activities the app does not track."
+    ]
+  }
+}

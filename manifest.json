@@ -1,13 +1,13 @@
 {
-  "name": "Float & Sting \u2014 Strong & Lean",
+  "name": "Float & Sting",
   "short_name": "Float & Sting",
   "description": "Five-day push/pull lifting plan with two rest days, swimming, running and muscle-gain guidance.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#ECE3CE",
-  "theme_color": "#7A2B22",
+  "background_color": "#f6f7f4",
+  "theme_color": "#f6f7f4",
   "icons": [
     {
       "src": "icon-192.png",
