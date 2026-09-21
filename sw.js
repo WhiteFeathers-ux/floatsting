@@ -1,8 +1,9 @@
-const CACHE = 'floatsting-v7-compact';
+const CACHE = 'floatsting-v8-pulse';
 const ASSETS = [
   './',
   './index.html',
   './app.css',
+  './app.js',
   './icon.svg',
   './manifest.json',
   './icon-180.png',

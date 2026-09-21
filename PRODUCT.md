@@ -16,15 +16,15 @@ Make a researched, lifting-first routine easy to follow: five workout days and t
 
 ## Capabilities and Constraints
 
-Static HTML/CSS/JavaScript PWA on GitHub Pages, deployed from main. Seven-day schedule, rotating push/pull weeks, device-local weekly exercise completion, interval timer, offline caching. No account, weight/rep logging or cloud sync. Preserve tested schedule, exercise prescriptions, source citations and existing completion data. Cardio is prescribed but not logged.
+Static HTML/CSS/JavaScript PWA on GitHub Pages, deployed from main. Seven-day schedule, rotating push/pull weeks, device-local weekly exercise completion, interval timer, offline caching. No account, weight/rep logging or cloud sync. Preserve tested schedule, exercise prescriptions, source citations and existing completion data. Cardio is prescribed but not logged. Lifting including warm-ups and abs targets 45–60 minutes; cardio is separate. Abs occur on pull days only.
 
 ## Brand Commitments
 
-Name remains Float & Sting. Black explicitly rejected the boxing-glove logo and red-and-gold boxing-club appearance, and requested a clean, neutral theme. Claude normally owns design; Black authorized this design update. Claude CLI was signed out during this session, so Codex is implementing it.
+Name remains Float & Sting. Black approved Claude's Pulse icon (pool teal), ruby accent, neutral surfaces and four views: Today, Week, Guide and Timer. Claude owns the visual design; Codex integrates state, timer, offline support and deployment. Preserve the approved compact layouts and shared detail sheet.
 
 ## Evidence on Hand
 
-Current app source and icons; researched ACSM resistance-training guidance, ISSN protein guidance, concurrent-training reviews, and an energy-surplus trial are linked in index.html. Existing Playwright verification covers the weekly plan, completion persistence, calendar rollover, timer boundaries, mobile overflow and offline reload.
+Current app source and icons; researched ACSM resistance-training guidance, ISSN protein guidance, concurrent-training reviews, and an energy-surplus trial are linked in app.js. Existing Playwright verification covers the weekly plan, completion persistence, calendar rollover, timer boundaries, mobile overflow and offline reload.
 
 ## Product Principles
 
