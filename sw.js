@@ -1,4 +1,4 @@
-const CACHE = 'floatsting-v9-swim-build';
+const CACHE = 'floatsting-v10-swim-core';
 const ASSETS = [
   './',
   './index.html',

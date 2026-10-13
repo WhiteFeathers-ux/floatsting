@@ -22,6 +22,8 @@ The F/S icon is original vector artwork in `icon.svg`, rendered to the PNG sizes
 
 ## Current plan
 
-Start with two sets wherever three are displayed for the first two weeks. Full weekly targets are chest/quads/hamstrings 10 sets each and back 11. No runs are scheduled. Lifting targets 45–60 minutes, occasionally 60–65 with warm-ups; swimming is separate. The new `swim-build-v4` checks start empty without modifying legacy records.
+Start with two sets wherever three are displayed for the first two weeks. Full weekly targets are chest/quads/hamstrings 10 sets each and back 11. No runs are scheduled. Lifting targets 45–60 minutes, occasionally 60–65 with warm-ups; swimming is separate. The new `swim-core-v5` checks retain unchanged exercises from the brief v4 release; changed exercises restart unchecked. Earlier push/pull records remain stored.
 
 [U.S. Masters Swimming practice guidance](https://www.usms.org/fitness-and-training/guides/swimming-101/adult-swim-training) supports swim-session structure; it is coaching guidance. The concurrent-training evidence primarily concerns running/cycling, not this exact swim program.
+
+Dry-land work now prioritizes swimming support and core strength while retaining hypertrophy compounds. Core: Monday rollouts, Tuesday/Friday weighted cable crunches, Friday Pallof presses, Saturday suitcase carries. Some arm isolation is replaced by core and light shoulder external rotation. The app links swimmer strength/core studies and explicitly notes their predominantly competitive/youth populations.

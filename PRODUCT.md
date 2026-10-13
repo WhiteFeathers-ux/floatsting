@@ -16,7 +16,7 @@ Make a researched, lifting-first routine easy to follow: five lifting days and t
 
 ## Capabilities and Constraints
 
-Static HTML/CSS/JavaScript PWA on GitHub Pages, deployed from main. Seven-day schedule, a fixed weekly lifting/swimming plan, device-local weekly exercise completion, interval timer, offline caching. No account, weight/rep logging or cloud sync. Preserve tested schedule, exercise prescriptions, source citations and existing completion data. Cardio is prescribed but not logged. Lifting including warm-ups and abs targets 45–60 minutes, occasionally 60–65; swimming is separate. Abs occur on Lower A, Pull and Lower B.
+Static HTML/CSS/JavaScript PWA on GitHub Pages, deployed from main. Seven-day schedule, a fixed weekly lifting/swimming plan, device-local weekly exercise completion, interval timer, offline caching. No account, weight/rep logging or cloud sync. Preserve tested schedule, exercise prescriptions, source citations and existing completion data. Cardio is prescribed but not logged. Lifting including warm-ups and abs targets 45–60 minutes, occasionally 60–65; swimming is separate. Core work occurs on Upper, Lower A, Pull and Lower B, spanning loaded flexion, anti-extension, anti-rotation and carries.
 
 ## Brand Commitments
 
@@ -28,7 +28,7 @@ Current app source and icons; researched ACSM resistance-training guidance, ISSN
 
 ## Product Principles
 
-- Muscle growth and swim skill both matter; swimming starts with short repeats and generous rest.
+- Dry-land strength supports swimming and a strong core while preserving bodybuilding; swimming starts with short repeats and generous rest.
 - Show the current workout before extended guidance.
 - Maintain two complete rest days.
 - Distinguish recommendations, completed actions and unavailable tracking.
