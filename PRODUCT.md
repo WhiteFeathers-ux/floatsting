@@ -20,7 +20,7 @@ Static HTML/CSS/JavaScript PWA on GitHub Pages, deployed from main. Seven-day sc
 
 ## Brand Commitments
 
-Name remains Float & Sting. Black approved Claude's Pulse icon (pool teal), ruby accent, neutral surfaces and four views: Today, Week, Guide and Timer. Claude owns the visual design; Codex integrates state, timer, offline support and deployment. Preserve the approved compact layouts and shared detail sheet.
+Name remains Float & Sting. Black approved the illustrated anime direction on 2026-10-13: night plum ground, bone type, one vivid element color per fighter, crisp cel-shaded cast art. Seven fighters, one per kind of day: Gale (Upper, Black's likeness), Fang (Lower A), Ember (Push), Volt (Pull), Granite (Lower B), Still (Rest), Tide (Pool). The icon is the illustrated Tide. This replaces the Pulse icon, ruby accent and neutral paper surfaces. Four views stay: Today, Week, Guide and Timer, with the shared detail sheet and compact layouts. Claude owns the interface design; Codex owns the art assets, icons, state, timer, offline support and deployment.
 
 ## Evidence on Hand
 

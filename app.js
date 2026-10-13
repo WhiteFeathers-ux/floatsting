@@ -235,13 +235,13 @@ const GUIDE = [
     "id": "week",
     "title": "The weekly plan",
     "summary": "Five lifts, two swims, two rest days",
-    "html": "<p class=\"lead\">Dry-land strength that supports swimming, while keeping muscle growth and progressive core work. The same schedule repeats every week. Runs are replaced by two pool sessions.</p><ul><li><b>Monday.</b> Upper: chest, back, delts and anti-extension core.</li><li><b>Tuesday.</b> Lower A + Swim A. Separate sessions when practical.</li><li><b>Wednesday.</b> Push: chest, delts and triceps.</li><li><b>Thursday.</b> Full rest.</li><li><b>Friday.</b> Pull: back, rear delts, biceps, loaded abs and anti-rotation core.</li><li><b>Saturday.</b> Lower B + Swim B. Separate sessions when practical.</li><li><b>Sunday.</b> Full rest.</li></ul>"
+    "html": "<p class=\"lead\">Dry-land strength that supports swimming, while keeping muscle growth and progressive core work. The default schedule below repeats each week. Use Move session to swap days for the selected week; lift and swim checks stay with each session. Paired swims move with their lower-body session. Runs are replaced by two pool sessions.</p><ul><li><b>Monday.</b> Upper: chest, back, delts and anti-extension core.</li><li><b>Tuesday.</b> Lower A + Swim A. Separate sessions when practical.</li><li><b>Wednesday.</b> Push: chest, delts and triceps.</li><li><b>Thursday.</b> Full rest.</li><li><b>Friday.</b> Pull: back, rear delts, biceps, loaded abs and anti-rotation core.</li><li><b>Saturday.</b> Lower B + Swim B. Separate sessions when practical.</li><li><b>Sunday.</b> Full rest.</li></ul>"
   },
   {
     "id": "sets",
     "title": "Sets, effort & progress",
     "summary": "Transition, rep targets and saved checks",
-    "html": "<p class=\"lead\">The displayed sets are the full target. For the first two weeks after starting this plan, use 2 sets wherever 3 are listed while adapting to swimming.</p><ul><li><b>Effort.</b> Finish most sets with about 2 clean reps left. On stable isolation exercises, the final set may finish with 1–2 reps left. No forced reps or compound failure required. No soreness or fatigue is not evidence that training failed.</li><li><b>Rest.</b> Use 2–3 minutes for demanding compounds and 60–90 seconds for isolation work, or longer if needed to repeat good reps. Warm-up sets are additional.</li><li><b>Add weight.</b> Record weight, reps for every set and estimated reps left in a notebook. Once every set reaches the top of the range with the intended effort and form, increase by the smallest available load. Keep exercises consistent for 6–8 weeks.</li><li><b>Saved checks.</b> Tap after all prescribed sets are done. Checks save by week on this device. The revised routine starts unchecked; previous-plan records remain stored. This app does not log weights, reps or swim completion.</li></ul>"
+    "html": "<p class=\"lead\">The displayed sets are the full target. For the first two weeks after starting this plan, use 2 sets wherever 3 are listed while adapting to swimming.</p><ul><li><b>Effort.</b> Finish most sets with about 2 clean reps left. On stable isolation exercises, the final set may finish with 1–2 reps left. No forced reps or compound failure required. No soreness or fatigue is not evidence that training failed.</li><li><b>Rest.</b> Use 2–3 minutes for demanding compounds and 60–90 seconds for isolation work, or longer if needed to repeat good reps. Warm-up sets are additional.</li><li><b>Add weight.</b> Record weight, reps for every set and estimated reps left in a notebook. Once every set reaches the top of the range with the intended effort and form, increase by the smallest available load. Keep exercises consistent for 6–8 weeks.</li><li><b>Saved checks.</b> Tap after all prescribed sets are done. Checks save by week on this device. The revised routine starts unchecked; previous-plan records remain stored. Swims have a separate completion check in the swim sheet. Moving a session keeps its checks. This app does not log weights or reps.</li></ul>"
   },
   {
     "id": "progress",
@@ -253,31 +253,45 @@ const GUIDE = [
     "id": "core",
     "title": "Strong core for swimming",
     "summary": "Loaded abs, bracing and trunk control",
-    "html": "<p class=\"lead\">Core is a main dry-land training goal. Strengthen the trunk while arms and legs move, without trying to eliminate the normal rotation of freestyle. Lifting can support swimming; breathing and stroke technique still require pool practice.</p><ul><li><b>Monday: resist arching.</b> Kneeling ab-wheel rollout, 2 × 6–10. Brace, keep ribs over pelvis and stop before the lower back extends. Use a short range or stability ball first. Progress range, then reps; advanced loading is optional.</li><li><b>Tuesday and Friday: loaded abs.</b> Cable crunch, 3 × 10–15 each day. Curl ribs toward pelvis with controlled motion. When every set reaches 15 with 1–2 clean reps left, add the smallest load.</li><li><b>Friday: resist twisting.</b> Pallof press, 2 × 10–12 per side. Pause 2 seconds with arms extended, hips and ribs facing forward. Add resistance only while the trunk stays still.</li><li><b>Saturday: resist leaning.</b> Suitcase carry, 3 × 20–30 seconds per side. Walk slowly, shoulders level, breathing normally. Add load after all sets reach 30 seconds without leaning. Use side planks if grip is the limiting factor.</li><li><b>Progress, do not just endure.</b> Log cable weight/reps, rollout range/reps, Pallof resistance and carry load/time. Finish before technique breaks down. First two weeks: 2 sets wherever 3 are listed. Keep core work after main lifts so bracing is fresh for heavy compounds.</li></ul><p class=\"lead\">A <a href=\"https://pubmed.ncbi.nlm.nih.gov/35683586/\" target=\"_blank\" rel=\"noopener\">small randomized trial in 18 young male swimmers</a> found improved 50-m freestyle performance after core training alongside swimming. A <a href=\"https://pubmed.ncbi.nlm.nih.gov/41219810/\" target=\"_blank\" rel=\"noopener\">2025 systematic review in youth swimmers</a> also examined this question. These populations differ from an adult beginner. The four exercises and exact doses here are coaching choices; there is no guarantee of a particular speed gain. Broader <a href=\"https://pubmed.ncbi.nlm.nih.gov/39129754/\" target=\"_blank\" rel=\"noopener\">swimmer resistance-training research</a> supports strength work, but dry-land training does not replace skill practice.</p>"
+    "html": "<p class=\"lead\">Core is a main dry-land training goal. Strengthen the trunk while arms and legs move, without trying to eliminate the normal rotation of freestyle. Lifting can support swimming; breathing and stroke technique still require pool practice.</p><ul><li><b>Upper: resist arching.</b> Kneeling ab-wheel rollout, 2 × 6–10. Brace, keep ribs over pelvis and stop before the lower back extends. Use a short range or stability ball first. Progress range, then reps; advanced loading is optional.</li><li><b>Lower A and Pull: loaded abs.</b> Cable crunch, 3 × 10–15 each day. Curl ribs toward pelvis with controlled motion. When every set reaches 15 with 1–2 clean reps left, add the smallest load.</li><li><b>Pull: resist twisting.</b> Pallof press, 2 × 10–12 per side. Pause 2 seconds with arms extended, hips and ribs facing forward. Add resistance only while the trunk stays still.</li><li><b>Lower B: resist leaning.</b> Suitcase carry, 3 × 20–30 seconds per side. Walk slowly, shoulders level, breathing normally. Add load after all sets reach 30 seconds without leaning. Use side planks if grip is the limiting factor.</li><li><b>Progress, do not just endure.</b> Log cable weight/reps, rollout range/reps, Pallof resistance and carry load/time. Finish before technique breaks down. First two weeks: 2 sets wherever 3 are listed. Keep core work after main lifts so bracing is fresh for heavy compounds.</li></ul><p class=\"lead\">A <a href=\"https://pubmed.ncbi.nlm.nih.gov/35683586/\" target=\"_blank\" rel=\"noopener\">small randomized trial in 18 young male swimmers</a> found improved 50-m freestyle performance after core training alongside swimming. A <a href=\"https://pubmed.ncbi.nlm.nih.gov/41219810/\" target=\"_blank\" rel=\"noopener\">2025 systematic review in youth swimmers</a> also examined this question. These populations differ from an adult beginner. The four exercises and exact doses here are coaching choices; there is no guarantee of a particular speed gain. Broader <a href=\"https://pubmed.ncbi.nlm.nih.gov/39129754/\" target=\"_blank\" rel=\"noopener\">swimmer resistance-training research</a> supports strength work, but dry-land training does not replace skill practice.</p>"
   },
   {
     "id": "cardio",
     "title": "Swimming progression",
     "summary": "Two one-hour practice windows",
-    "html": "<p class=\"lead\">Tuesday Swim A and Saturday Swim B each reserve 60 minutes, including instruction, rests and notes. Open the Swim row on that day for the complete session. A beginner lesson can replace either practice.</p><ul><li><b>Start at current ability.</b> Use comfortable 25s and generous rest in a supervised pool. Full starting outlines total 400 metres/yards; half repeats total 200. Use the lower amount if needed. Finish early when technique or breathing control declines.</li><li><b>Build skill first.</b> Book instruction for breathing and body position. Two comfortable sessions come before adding 50 total distance or combining two 25s into a 50. Keep the other variables unchanged. Distance increases are a practical starting rule, not a scientific guarantee.</li><li><b>Phelps-inspired structure.</b> Warm-up, technique work, a purposeful main set and cooldown borrow the structure of competitive practice. This is not Michael Phelps's actual workload, and two beginner sessions do not replicate elite training. Butterfly, paddles and hard race sets wait for appropriate technique and coaching.</li><li><b>Combine with lifting.</b> Pair swimming with lower-body days to avoid a same-day upper-body lift. Ideally separate sessions by at least 3 hours, with a meal and fluids between. This is fatigue management, not a proven muscle-growth requirement. If back-to-back, lift first only if still alert and controlled for swimming; otherwise shorten or reschedule the pool work.</li><li><b>Protect shoulders.</b> Swimming adds work for shoulders and back. No fatigue on the old plan does not guarantee recovery from the new one. Begin with easy swimming; Saturday moderate lengths are optional only after the first two weeks and stable technique.</li></ul><p class=\"lead\">The <a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC8891239/\" target=\"_blank\" rel=\"noopener\">43-study concurrent-training meta-analysis</a> found no average reduction in whole-muscle growth or maximal strength, but explosive strength could be affected. Most evidence was running/cycling, so this exact swimming/bodybuilding combination is an extrapolation. <a href=\"https://www.usms.org/fitness-and-training/guides/swimming-101/adult-swim-training\" target=\"_blank\" rel=\"noopener\">U.S. Masters Swimming</a> informs practice structure and terminology; it is coaching guidance, not a clinical trial.</p>"
+    "html": "<p class=\"lead\">Swim A with Lower A and Swim B with Lower B each reserve 60 minutes, including instruction, rests and notes. Open the Swim row on that day for the complete session. A beginner lesson can replace either practice.</p><ul><li><b>Start at current ability.</b> Use comfortable 25s and generous rest in a supervised pool. Full starting outlines total 400 metres/yards; half repeats total 200. Use the lower amount if needed. Finish early when technique or breathing control declines.</li><li><b>Build skill first.</b> Book instruction for breathing and body position. Two comfortable sessions come before adding 50 total distance or combining two 25s into a 50. Keep the other variables unchanged. Distance increases are a practical starting rule, not a scientific guarantee.</li><li><b>Phelps-inspired structure.</b> Warm-up, technique work, a purposeful main set and cooldown borrow the structure of competitive practice. This is not Michael Phelps's actual workload, and two beginner sessions do not replicate elite training. Butterfly, paddles and hard race sets wait for appropriate technique and coaching.</li><li><b>Combine with lifting.</b> Pair swimming with lower-body days to avoid a same-day upper-body lift. Ideally separate sessions by at least 3 hours, with a meal and fluids between. This is fatigue management, not a proven muscle-growth requirement. If back-to-back, lift first only if still alert and controlled for swimming; otherwise shorten or reschedule the pool work.</li><li><b>Protect shoulders.</b> Swimming adds work for shoulders and back. No fatigue on the old plan does not guarantee recovery from the new one. Begin with easy swimming; Swim B moderate lengths are optional only after the first two weeks and stable technique.</li></ul><p class=\"lead\">The <a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC8891239/\" target=\"_blank\" rel=\"noopener\">43-study concurrent-training meta-analysis</a> found no average reduction in whole-muscle growth or maximal strength, but explosive strength could be affected. Most evidence was running/cycling, so this exact swimming/bodybuilding combination is an extrapolation. <a href=\"https://www.usms.org/fitness-and-training/guides/swimming-101/adult-swim-training\" target=\"_blank\" rel=\"noopener\">U.S. Masters Swimming</a> informs practice structure and terminology; it is coaching guidance, not a clinical trial.</p>"
   },
   {
     "id": "fuel",
     "title": "Nutrition & the 160 lb goal",
     "summary": "Surplus, protein, watching the trend",
-    "html": "<div class=\"guide-content\">\n    <p class=\"lead\">Aim for gradual weight gain while lifts improve. Reaching 160 lb does not guarantee a particular appearance or seven pounds of muscle.</p>\n    <div class=\"panel\">\n      <h3>Fuel the Build</h3>\n      <ul>\n        <li><b>Start with a small surplus.</b> Add roughly 150–250 calories to the intake that keeps body weight stable with this activity level. Longer swim practices may raise that baseline, so adjust from weight trends rather than a watch's calorie estimate.</li>\n        <li><b>Protein: 120–145 g daily.</b> A practical target near 1.6–2.0 g/kg around the goal weight. Spread it across 3–4 meals, using foods such as eggs, dairy, fish, meat, tofu or beans.</li>\n        <li><b>Watch the trend.</b> Weigh under similar morning conditions several times a week and compare weekly averages. A conservative starting target is about 0.25–0.5 lb per week. If the average is flat for 2–3 weeks, add about 100 calories daily; reduce slightly if gaining faster or waist size rises quickly.</li>\n        <li><b>Eat for performance.</b> Include carbohydrates, fruit, vegetables and dietary fats. Keep protein consistent on rest days. No supplement is required for this plan.</li>\n        <li><b>Protect the two rest days.</b> Easy walking or gentle mobility is optional. No scheduled lifting or swimming on Thursday and Sunday.</li>\n        <li><b>Think in months.</b> At the suggested pace, a seven-pound scale increase may take roughly 14–28 weeks. Water and glycogen can move the scale sooner; muscle gain varies.</li>\n      </ul>\n    </div>\n    <p class=\"lead\">Research supports adequate protein and cautions against aggressive surpluses. The calorie adjustments and slower gain target above are practical starting choices, not guaranteed outcomes. Sources: <a href=\"https://link.springer.com/article/10.1186/s12970-017-0177-8\" target=\"_blank\" rel=\"noopener\">ISSN protein position stand</a> and <a href=\"https://pubmed.ncbi.nlm.nih.gov/37914977/\" target=\"_blank\" rel=\"noopener\">Helms et al., energy-surplus trial (2023)</a>.</p>\n    </div>"
+    "html": "<div class=\"guide-content\">\n    <p class=\"lead\">Aim for gradual weight gain while lifts improve. Reaching 160 lb does not guarantee a particular appearance or seven pounds of muscle.</p>\n    <div class=\"panel\">\n      <h3>Fuel the Build</h3>\n      <ul>\n        <li><b>Start with a small surplus.</b> Add roughly 150–250 calories to the intake that keeps body weight stable with this activity level. Longer swim practices may raise that baseline, so adjust from weight trends rather than a watch's calorie estimate.</li>\n        <li><b>Protein: 120–145 g daily.</b> A practical target near 1.6–2.0 g/kg around the goal weight. Spread it across 3–4 meals, using foods such as eggs, dairy, fish, meat, tofu or beans.</li>\n        <li><b>Watch the trend.</b> Weigh under similar morning conditions several times a week and compare weekly averages. A conservative starting target is about 0.25–0.5 lb per week. If the average is flat for 2–3 weeks, add about 100 calories daily; reduce slightly if gaining faster or waist size rises quickly.</li>\n        <li><b>Eat for performance.</b> Include carbohydrates, fruit, vegetables and dietary fats. Keep protein consistent on rest days. No supplement is required for this plan.</li>\n        <li><b>Protect the two rest days.</b> Easy walking or gentle mobility is optional. No scheduled lifting or swimming on the two rest days shown in Week (Thursday and Sunday by default).</li>\n        <li><b>Think in months.</b> At the suggested pace, a seven-pound scale increase may take roughly 14–28 weeks. Water and glycogen can move the scale sooner; muscle gain varies.</li>\n      </ul>\n    </div>\n    <p class=\"lead\">Research supports adequate protein and cautions against aggressive surpluses. The calorie adjustments and slower gain target above are practical starting choices, not guaranteed outcomes. Sources: <a href=\"https://link.springer.com/article/10.1186/s12970-017-0177-8\" target=\"_blank\" rel=\"noopener\">ISSN protein position stand</a> and <a href=\"https://pubmed.ncbi.nlm.nih.gov/37914977/\" target=\"_blank\" rel=\"noopener\">Helms et al., energy-surplus trial (2023)</a>.</p>\n    </div>"
   },
   {
     "id": "care",
     "title": "Pool & lifting safety",
     "summary": "Technique, breathing and supervision",
-    "html": "<p class=\"lead\">Swim in a lifeguarded pool and use an instructor while developing breathing and stroke skills.</p><ul><li><b>Breathe normally.</b> No breath-hold sets, hyperventilation or underwater-distance contests. Breathe as often as needed; no fixed every-third-or-fifth-stroke rule.</li><li><b>Stay in control.</b> Stop the set if breathing or technique becomes uncontrolled. Leave the pool if dizzy or unwell; do not push through to fill the hour.</li><li><b>Joint comfort.</b> Stop exercises that cause sharp or joint pain. Use a comfortable range and seek assessment for persistent symptoms.</li><li><b>Rest days.</b> Thursday and Sunday remain free of scheduled training. Easy walking or mobility is optional.</li></ul>"
+    "html": "<p class=\"lead\">Swim in a lifeguarded pool and use an instructor while developing breathing and stroke skills.</p><ul><li><b>Breathe normally.</b> No breath-hold sets, hyperventilation or underwater-distance contests. Breathe as often as needed; no fixed every-third-or-fifth-stroke rule.</li><li><b>Stay in control.</b> Stop the set if breathing or technique becomes uncontrolled. Leave the pool if dizzy or unwell; do not push through to fill the hour.</li><li><b>Joint comfort.</b> Stop exercises that cause sharp or joint pain. Use a comfortable range and seek assessment for persistent symptoms.</li><li><b>Rest days.</b> Thursday and Sunday are the default rest days. Moving sessions swaps days within that week and retains two full rest days. Easy walking or mobility is optional.</li></ul>"
   }
 ];
 const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 const LONG = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 const KEYS = ['mon','tue','wed','thu','fri','sat','sun'];
 const PRESETS = [[3,180,60],[5,180,60],[12,180,60]];
+/* Cast: one fighter per kind of day, Tide owns the pool. Presentation only. */
+const FIGHTERS = {
+  upper: { key: 'gale', name: 'Gale', kanji: '風', color: '#5ef2a0', label: 'Upper' },
+  lower: { key: 'fang', name: 'Fang', kanji: '牙', color: '#ff3b6b', label: 'Lower A' },
+  push: { key: 'ember', name: 'Ember', kanji: '炎', color: '#ff7a3d', label: 'Push' },
+  pull: { key: 'volt', name: 'Volt', kanji: '雷', color: '#ffe14a', label: 'Pull' },
+  legs: { key: 'granite', name: 'Granite', kanji: '岩', color: '#b48cff', label: 'Lower B' },
+  pool: { key: 'tide', name: 'Tide', kanji: '水', color: '#22d3ee', label: 'Pool' },
+  rest: { key: 'still', name: 'Still', kanji: '静', color: '#bcd6ff', label: 'Rest' }
+};
+const fighterOf = d => FIGHTERS[d.id] || FIGHTERS.rest;
+const isSwim = d => !!d.cardio && /swim/i.test(d.cardio.short) && !/optional/i.test(d.cardio.short);
+const art = f => '<img class="fs-art fs-art-' + f.key + '" src="art/' + f.key + '.webp" alt="" decoding="async" onerror="this.remove()">';
+const av = (f, cls) => '<span class="fs-av' + (cls ? ' ' + cls : '') + '" style="--el:' + f.color + '" aria-hidden="true">' + art(f) + '</span>';
 
 const svg = (d, extra) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"' + (extra || '') + '>' + d + '</svg>';
 const ICON = {
@@ -313,7 +327,7 @@ function mount(root, opts) {
   let monday = weekStart(now);
   const S = {
     view: opts.view || 'today', day: opts.day == null ? null : opts.day, topic: opts.topic || null,
-    preview: !!opts.preview, checks: {}, storageError: !!opts.storageError, open: Object.assign({}, opts.open),
+    preview: !!opts.preview, checks: {}, orders: {}, storageError: !!opts.storageError, open: Object.assign({}, opts.open),
     sheet: opts.sheet || null, sheetFrom: null,
     timer: Object.assign({ rounds: 3, work: 180, rest: 60, sound: true, round: 1, phase: 'ready', remaining: null, running: false }, opts.timer)
   };
@@ -333,13 +347,29 @@ function mount(root, opts) {
   let tick = null;
 
   function weekOf(preview) { const w = new Date(monday); if (preview) w.setDate(w.getDate() + 7 * Number(preview)); return w; }
+  function weekOrder(preview) {
+    const k = dateKey(weekOf(preview));
+    if (!S.orders[k]) {
+      const saved = read('order:swim-core-v5:' + k, null);
+      S.orders[k] = Array.isArray(saved) && saved.length === 7 && new Set(saved).size === 7 && saved.every(i => Number.isInteger(i) && i >= 0 && i < 7) ? saved : [0,1,2,3,4,5,6];
+    }
+    return S.orders[k];
+  }
+  function swapSessions(preview, from, to) {
+    if (![from,to].every(i => Number.isInteger(i) && i >= 0 && i < 7)) return;
+    const order = weekOrder(preview).slice();
+    [order[from],order[to]] = [order[to],order[from]];
+    S.orders[dateKey(weekOf(preview))] = order;
+    write('order:swim-core-v5:' + dateKey(weekOf(preview)), order);
+  }
   function planFor(preview) {
     const week = weekOf(preview);
     const weeks = Math.round((Date.UTC(week.getFullYear(), week.getMonth(), week.getDate()) - Date.UTC(2026, 8, 21)) / 604800000);
     const rotation = ((weeks % ROTATION.length) + ROTATION.length) % ROTATION.length;
-    return ROTATION[rotation].map((id, i) => {
+    return weekOrder(preview).map((origin, i) => {
+      const id = ROTATION[rotation][origin];
       const date = new Date(week); date.setDate(date.getDate() + i);
-      return Object.assign({}, WORKOUTS[id], { id: id, cardio: CARDIO[i], key: KEYS[i], idx: i, date: date, rotation: rotation, preview: preview });
+      return Object.assign({}, WORKOUTS[id], { id: id, cardio: CARDIO[origin], key: KEYS[origin], origin: origin, idx: i, date: date, rotation: rotation, preview: preview });
     });
   }
   function weekChecks(preview) {
@@ -367,22 +397,26 @@ function mount(root, opts) {
     const wk=weekChecks(d.preview); wk[d.key]=arr;
     write('checks:swim-core-v5:'+dateKey(weekOf(d.preview)),wk);
   }
+  function swimDone(d) { return isSwim(d) && weekChecks(d.preview)[d.key + ':swim'] === true; }
 
   /* ---------- views ---------- */
   function dayHTML(d, back) {
-    const n = d.ex.length, dn = done(d), isRest = !n;
-    let h = '<div class="fs-col fs-md-detail">';
+    const n = d.ex.length, dn = done(d), isRest = !n, f = fighterOf(d);
+    let h = '<div class="fs-col fs-md-detail" style="--el:' + f.color + '">';
     const stamp = ', ' + shortDate(d.date) + (d.preview ? ' · Next week' : '');
-    if (back) h += '<div class="fs-backrow"><button class="fs-back" data-act="back">' + ICON.back + back + '</button><span class="fs-eyebrow">' + DAYS[d.idx] + stamp + '</span></div>';
-    h += '<header class="fs-head">' + (back ? '' : '<p class="fs-eyebrow">' + LONG[d.idx] + stamp + '</p>') +
-      '<h1 class="fs-h1">' + d.name + '</h1><p class="fs-sub">' + (isRest ? 'No lifting, swimming or running today' : d.tag.replace(/ \+ /g, ', ')) + '</p></header>';
+    if (back) h += '<div class="fs-backrow"><button class="fs-back" data-act="back">' + ICON.back + back + '</button></div>';
+    h += '<header class="fs-head fs-hero"><div class="fs-hero-text">' +
+      '<h1 class="fs-h1">' + d.name + '</h1><p class="fs-sub">' + (isRest ? 'No lifting, swimming or running today' : d.tag.replace(/ \+ /g, ', ')) + '</p>' +
+      '<p class="fs-eyebrow fs-meta">' + LONG[d.idx] + stamp + '</p></div>' +
+      '<div class="fs-hero-art" aria-hidden="true"><span class="fs-kanji">' + f.kanji + '</span>' + art(f) + '<span class="fs-hero-name">' + f.name + '</span></div></header>';
     if (S.storageError) h += '<p class="fs-notice" role="status">Progress could not be saved on this device. Keep this page open to retain these checks for now.</p>';
     if (isRest) {
+      h += '<button class="fs-move" data-act="move" data-idx="' + d.idx + '">Move rest day</button>';
       const plan = planFor(d.preview);
       let nx = plan.slice(d.idx + 1).find(p => p.ex.length), when;
       if (nx) when = LONG[nx.idx]; else { nx = planFor(Number(d.preview) + 1).find(p => p.ex.length); when = 'Next ' + LONG[nx.idx]; }
-      h += '<div class="fs-rest"><p>' + d.note + '</p></div>' +
-        '<p class="fs-next"><span>Next session</span><b>' + when + ' · ' + nx.name + (nx.cardio ? ', ' + nx.cardio.short.toLowerCase() : '') + '</b></p>';
+      h += '<div class="fs-rest"><div class="fs-rest-art" aria-hidden="true"><span class="fs-kanji">' + f.kanji + '</span>' + art(f) + '</div><p>' + d.note + '</p></div>' +
+        '<p class="fs-next">' + av(fighterOf(nx)) + '<span>Next session</span><b>' + when + ' · ' + nx.name + (nx.cardio ? ', ' + nx.cardio.short.toLowerCase() : '') + '</b></p>';
       return h + '</div>';
     }
     const full = dn.length === n;
@@ -398,26 +432,27 @@ function mount(root, opts) {
     h += '<div class="fs-links">';
     if (d.cardio) {
       const c = splitCardio(d.cardio.note), sw = /swim/i.test(d.cardio.short) && !/optional/i.test(d.cardio.short);
-      h += '<button class="fs-link" data-act="sheet" data-sheet="cardio" data-idx="' + d.idx + '">' + (sw ? ICON.swim : ICON.run) +
+      h += '<button class="fs-link' + (sw ? ' is-pool" style="--el:' + FIGHTERS.pool.color : '') + '" data-act="sheet" data-sheet="cardio" data-idx="' + d.idx + '">' + (sw ? av(FIGHTERS.pool) : ICON.run) +
         '<span class="fs-sumtext"><b>' + d.cardio.short + '</b><small>' + c[0].replace(/^[^:]*:\s*/, '') + '</small></span>' + ICON.chev + '</button>';
     }
-    h += '<button class="fs-link" data-act="sheet" data-sheet="note" data-idx="' + d.idx + '">' + ICON.note +
-      '<span class="fs-sumtext"><b>Session notes</b></span>' + ICON.chev + '</button></div>';
+    h += '<div class="fs-noteactions"><button class="fs-link" data-act="sheet" data-sheet="note" data-idx="' + d.idx + '">' + ICON.note +
+      '<span class="fs-sumtext"><b>Session notes</b></span></button><button class="fs-move" data-act="move" data-idx="' + d.idx + '">Move session</button></div></div>';
     return h + '</div>';
   }
 
   function weekListHTML() {
     const plan = planFor(S.preview), a = plan[0].date, b = plan[6].date;
     const sel = S.day == null ? (S.preview ? 0 : todayIdx) : S.day;
-    return '<div class="fs-col fs-md-list"><header class="fs-weekhead"><div class="fs-head"><p class="fs-eyebrow">' + shortDate(a) + ' to ' + shortDate(b) + '</p>' +
-      '<h1 class="fs-h1">' + (S.preview ? 'Next week' : 'This week') + '</h1></div>' +
+    return '<div class="fs-col fs-md-list"><header class="fs-weekhead"><div class="fs-head"><h1 class="fs-h1">' + (S.preview ? 'Next week' : 'This week') + '</h1>' +
+      '<p class="fs-eyebrow fs-meta">' + shortDate(a) + ' to ' + shortDate(b) + '</p></div>' +
       '<div class="fs-seg" role="group" aria-label="Week"><button data-act="seg" data-preview="0" aria-pressed="' + !S.preview + '">This week</button><button data-act="seg" data-preview="1" aria-pressed="' + S.preview + '">Next week</button></div></header>' +
+      '<p class="fs-tally"><span><b>' + plan.filter(d => d.ex.length).length + '</b> lifts</span><span class="is-pool"><b>' + plan.filter(isSwim).length + '</b> swims</span><span class="is-rest"><b>' + plan.filter(d => !d.ex.length).length + '</b> rest days</span></p>' +
       '<ul class="fs-week">' + plan.map(d => {
         const n = d.ex.length, dn = done(d).length, isToday = !S.preview && d.idx === todayIdx;
-        const side = !n ? '' : dn === n ? '<span class="fs-wside is-done">' + ICON.check + 'Done</span>' : dn ? '<span class="fs-wside">' + dn + ' of ' + n + '</span>' : '';
-        return '<li><button class="fs-wrow' + (isToday ? ' is-today' : '') + (n ? '' : ' is-rest') + '" data-act="openday" data-idx="' + d.idx + '"' + (d.idx === sel ? ' aria-current="true"' : '') + '>' +
-          '<span class="fs-date"><small>' + DAYS[d.idx] + '</small><b>' + d.date.getDate() + '</b></span>' +
-          '<span class="fs-wmain"><b>' + d.name + '</b><small>' + (isToday ? 'Today' + (d.cardio ? ' · ' : '') : '') + (d.cardio ? d.cardio.short : (n || isToday ? '' : 'Recover')) + '</small></span>' + side + ICON.chev + '</button></li>';
+        const side = !n ? '<span class="fs-wside is-resttag">Rest</span>' : dn === n ? '<span class="fs-wside is-done">' + ICON.check + 'Done</span>' : dn ? '<span class="fs-wside">' + dn + ' of ' + n + '</span>' : '';
+        return '<li><button class="fs-wrow' + (isToday ? ' is-today' : '') + (n ? '' : ' is-rest') + '" style="--el:' + fighterOf(d).color + '" data-act="openday" data-idx="' + d.idx + '"' + (d.idx === sel ? ' aria-current="true"' : '') + '>' +
+          '<span class="fs-date"><small>' + DAYS[d.idx] + '</small><b>' + d.date.getDate() + '</b></span>' + av(fighterOf(d)) +
+          '<span class="fs-wmain"><b>' + d.name + '</b><small>' + (isToday ? 'Today' + (d.cardio ? ' · ' : '') : '') + (d.cardio ? d.cardio.short + (swimDone(d) ? ' ✓' : '') : (n || isToday ? '' : 'Recover')) + '</small></span>' + (isSwim(d) ? av(FIGHTERS.pool, 'is-mini') : '') + side + ICON.chev + '</button></li>';
       }).join('') + '</ul></div>';
   }
 
@@ -453,6 +488,7 @@ function mount(root, opts) {
   function guideHTML() {
     const cur = GUIDE.find(g => g.id === S.topic) || GUIDE[0];
     return '<div class="fs-md' + (S.topic ? ' has-detail' : '') + '"><div class="fs-col fs-md-list"><header class="fs-head"><h1 class="fs-h1">Guide</h1><p class="fs-sub">How the plan works and why</p></header>' +
+      '<ul class="fs-cast" aria-label="The seven forms">' + ['upper', 'lower', 'push', 'pull', 'legs', 'pool', 'rest'].map(k => '<li style="--el:' + FIGHTERS[k].color + '">' + av(FIGHTERS[k]) + '<b>' + FIGHTERS[k].name + '</b><small>' + FIGHTERS[k].label + '</small></li>').join('') + '</ul>' +
       '<ul class="fs-topics">' + GUIDE.map(g => '<li><button class="fs-trow" data-act="opentopic" data-topic="' + g.id + '"' + (g.id === cur.id ? ' aria-current="true"' : '') + '><span><b>' + g.title + '</b><small>' + g.summary + '</small></span>' + ICON.chev + '</button></li>').join('') + '</ul></div>' +
       '<div class="fs-col fs-md-detail fs-read"><button class="fs-back" data-act="back">' + ICON.back + 'Guide</button><h1 class="fs-h2">' + cur.title + '</h1>' + topicHTML(cur) + '</div></div>';
   }
@@ -463,9 +499,18 @@ function mount(root, opts) {
     const btn = t.running ? 'Pause' : (t.phase === 'work' || t.phase === 'rest') ? 'Resume' : 'Start';
     const active = t.phase === 'work' || t.phase === 'rest';
     const openAdj = !!S.open.adjust;
-    return '<div class="fs-timer' + (openAdj ? ' is-adjust' : '') + '" data-phase="' + t.phase + '"><p class="fs-phase" data-t="phase">' + label + '</p>' +
-      '<div class="fs-ring"><svg viewBox="0 0 224 224"><circle class="bg" cx="112" cy="112" r="' + R + '"/><circle class="fg" data-t="ring" cx="112" cy="112" r="' + R + '" stroke-dasharray="' + C + '" stroke-dashoffset="' + (C * (1 - Math.max(t.remaining, 0) / total)) + '"/></svg>' +
-      '<div class="fs-clock"><b data-t="time">' + fmt(Math.max(t.remaining, 0)) + '</b><span data-t="round">Round ' + t.round + ' of ' + t.rounds + '</span></div></div>' +
+    const d = planFor(false)[todayIdx], f = fighterOf(d);
+    let ticks = '';
+    for (let i = 0; i < 60; i++) ticks += '<line class="tk' + (i % 5 ? '' : ' is-major') + '" x1="112" y1="' + (i % 5 ? 17 : 16) + '" x2="112" y2="' + (i % 5 ? 21 : 25) + '" transform="rotate(' + i * 6 + ' 112 112)"/>';
+    let pips = '';
+    if (t.rounds <= 12) {
+      for (let i = 1; i <= t.rounds; i++) pips += '<i' + (t.phase === 'done' || i < t.round ? ' class="is-done"' : (i === t.round && active ? ' class="is-on"' : '')) + '></i>';
+      pips = '<div class="fs-pips" aria-hidden="true">' + pips + '</div>';
+    }
+    return '<div class="fs-timer' + (openAdj ? ' is-adjust' : '') + '" data-phase="' + t.phase + '" style="--el:' + f.color + '"><span class="fs-timer-kanji" aria-hidden="true">' + f.kanji + '</span>' +
+      '<div class="fs-timer-top">' + av(f) + '<span><b>' + f.name + '</b><small>' + d.name + '</small></span><i class="fs-seal" aria-hidden="true">' + f.kanji + '</i></div>' +
+      '<div class="fs-ring"><svg viewBox="0 0 224 224">' + ticks + '<circle class="bg" cx="112" cy="112" r="' + R + '"/><circle class="fg" data-t="ring" cx="112" cy="112" r="' + R + '" stroke-dasharray="' + C + '" stroke-dashoffset="' + (C * (1 - Math.max(t.remaining, 0) / total)) + '"/></svg>' +
+      '<div class="fs-clock"><p class="fs-phase" data-t="phase">' + label + '</p><b data-t="time">' + fmt(Math.max(t.remaining, 0)) + '</b><span data-t="round">Round ' + t.round + ' of ' + t.rounds + '</span></div></div>' + pips +
       '<div class="fs-ctl"><button class="fs-btn' + (t.running ? '' : ' is-primary') + '" data-act="toggletimer">' + btn + '</button><button class="fs-btn" data-act="resettimer">Reset</button></div>' +
       (active ? '' : '<div class="fs-presets">' + PRESETS.map(p => '<button data-act="preset" data-p="' + p.join(',') + '" aria-pressed="' + (p[0] === t.rounds && p[1] === t.work && p[2] === t.rest) + '">' + p[0] + ' × 3 min</button>').join('') + '</div>') +
       '<details class="fs-adjust" data-open="adjust"' + (openAdj ? ' open' : '') + '><summary>Adjust<small>' + t.rounds + ' × ' + fmt(t.work) + ' · rest ' + fmt(t.rest) + '</small></summary><div class="fs-adjust-body">' +
@@ -477,17 +522,26 @@ function mount(root, opts) {
 
   function sheetHTML() {
     if (!S.sheet) return '';
-    let eyebrow, title, body;
-    if (S.sheet.kind === 'guide') {
+    let eyebrow, title, body, pool = false;
+    if (S.sheet.kind === 'move') {
+      const plan = planFor(S.sheet.preview), d = plan[S.sheet.idx];
+      eyebrow = shortDate(plan[0].date) + ' to ' + shortDate(plan[6].date); title = 'Move ' + d.name;
+      body = '<p class="fs-sheet-lead">Swap with another day. Saved lift and swim checks move with the session.</p>' +
+        (!S.sheet.preview && d.idx !== todayIdx ? '<button class="fs-btn is-primary" data-act="swap" data-to="' + todayIdx + '">Train today · swap with ' + plan[todayIdx].name + '</button>' : '') +
+        '<div class="fs-move-list">' + plan.filter(p => p.idx !== d.idx).map(p => '<button class="fs-link" data-act="swap" data-to="' + p.idx + '">' + av(fighterOf(p)) + '<span class="fs-sumtext"><b>' + LONG[p.idx] + '</b><small>' + p.name + (p.cardio ? ' + ' + p.cardio.short : '') + '</small></span>' + ICON.chev + '</button>').join('') + '</div>' +
+        '<p class="fs-hint">This week only. Paired swims move too; five lifts, two swims and two full rest days stay in the plan.</p>';
+    } else if (S.sheet.kind === 'guide') {
       const g = GUIDE.find(x => x.id === S.sheet.topic), it = topicItems(g.html)[S.sheet.gi];
       eyebrow = g.title; title = it.title; body = '<div class="fs-topic"><p>' + it.html + '</p></div>';
     } else {
       const d = planFor(S.sheet.preview)[S.sheet.idx], isCardio = S.sheet.kind === 'cardio', c = isCardio ? splitCardio(d.cardio.note) : null;
-      eyebrow = LONG[d.idx] + ' · ' + d.name; title = isCardio ? d.cardio.short : 'Session notes';
+      eyebrow = LONG[d.idx] + ' · ' + d.name; title = isCardio ? d.cardio.short : 'Session notes'; pool = isCardio && isSwim(d);
       body = isCardio ? '<p class="fs-sheet-lead">' + c[0] + '.</p><p>' + c[1] + '</p>' : '<p>' + d.note + '</p>';
+      if (pool) body += '<button class="fs-btn is-primary" data-act="checkswim" aria-pressed="' + swimDone(d) + '">' + (swimDone(d) ? 'Swim complete ✓ · Undo' : 'Mark swim complete') + '</button>';
     }
     return '<div class="fs-sheetwrap" data-act="closesheet"><div class="fs-sheet" role="dialog" aria-modal="true" aria-label="' + title.replace(/"/g, '') + '">' +
-      '<p class="fs-eyebrow">' + eyebrow + '</p><h2 class="fs-h2">' + title + '</h2>' + body + '<button class="fs-sheet-close" data-act="closesheet" data-close>Done</button></div></div>';
+      (pool ? '<div class="fs-sheet-art" style="--el:' + FIGHTERS.pool.color + '" aria-hidden="true"><span class="fs-kanji">' + FIGHTERS.pool.kanji + '</span>' + art(FIGHTERS.pool) + '</div>' : '') +
+      '<h2 class="fs-h2">' + title + '</h2><p class="fs-eyebrow fs-meta">' + eyebrow + '</p>' + body + '<button class="fs-sheet-close" data-act="closesheet" data-close>Done</button></div></div>';
   }
 
   function navTimerLabel() {
@@ -496,12 +550,22 @@ function mount(root, opts) {
     return tm.running ? '<span data-t="time">' + fmt(tm.remaining) + '</span>' : '<span>Paused ' + fmt(tm.remaining) + '</span>';
   }
 
+  function stageHTML(d) {
+    const f = fighterOf(d);
+    return '<aside class="fs-stage" style="--el:' + f.color + '" aria-hidden="true"><span class="fs-kanji">' + f.kanji + '</span>' + art(f) +
+      (isSwim(d) ? '<span class="fs-stage-pool">' + av(FIGHTERS.pool) + '<b>' + d.cardio.short + '</b></span>' : '') +
+      '<p><b>' + f.name + '</b><small>' + d.name + '</small></p></aside>';
+  }
+  function shownDay() {
+    if (S.view !== 'week') return planFor(false)[todayIdx];
+    return planFor(S.preview)[S.day == null ? (S.preview ? 0 : todayIdx) : S.day];
+  }
   function mainHTML() {
     if (S.view === 'guide') return guideHTML();
     if (S.view === 'timer') return timerHTML();
-    if (S.view === 'today') return '<div class="fs-md has-detail">' + weekListHTML() + dayHTML(planFor(false)[todayIdx], '') + '</div>';
-    const idx = S.day == null ? (S.preview ? 0 : todayIdx) : S.day;
-    return '<div class="fs-md' + (S.day == null ? '' : ' has-detail') + '">' + weekListHTML() + dayHTML(planFor(S.preview)[idx], 'Week') + '</div>';
+    const d = shownDay();
+    if (S.view === 'today') return '<div class="fs-md has-detail">' + weekListHTML() + dayHTML(d, '') + stageHTML(d) + '</div>';
+    return '<div class="fs-md' + (S.day == null ? '' : ' has-detail') + '">' + weekListHTML() + dayHTML(d, 'Week') + stageHTML(d) + '</div>';
   }
 
   /* ---------- paint ---------- */
@@ -509,10 +573,19 @@ function mount(root, opts) {
     [['today', 'Today'], ['week', 'Week'], ['guide', 'Guide'], ['timer', 'Timer']].map(v => '<button data-act="nav" data-view="' + v[0] + '">' + ICON[v[0]] + '<span data-navlabel>' + v[1] + '</span></button>').join('') + '</nav></div>';
   const elMain = root.querySelector('[data-main]'), elTimerTab = root.querySelector('.fs-nav [data-view="timer"]'), elSheet = root.querySelector('[data-sheethost]');
   let lastScreen = '';
+  const reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  if (opts.intro !== false && !reduceMotion) {
+    const f0 = fighterOf(planFor(false)[todayIdx]), intro = document.createElement('div');
+    intro.className = 'fs-intro'; intro.setAttribute('aria-hidden', 'true'); intro.style.setProperty('--el', f0.color);
+    intro.innerHTML = '<i></i><b>' + f0.kanji + '</b><strong>Float &amp; Sting</strong>';
+    root.firstElementChild.appendChild(intro);
+    intro.addEventListener('animationend', ev => { if (ev.target === intro) intro.remove(); });
+    setTimeout(() => intro.remove(), 2400);
+  }
 
   function keyOf(el) {
     if (!el || !el.dataset || !el.dataset.act) return null;
-    return '[data-act="' + el.dataset.act + '"]' + ['idx', 'i', 'view', 'topic', 'preview', 'k', 'd', 'p', 'gi', 'sheet'].map(k => el.dataset[k] != null ? '[data-' + k + '="' + el.dataset[k] + '"]' : '').join('');
+    return '[data-act="' + el.dataset.act + '"]' + ['idx', 'i', 'view', 'topic', 'preview', 'k', 'd', 'p', 'gi', 'sheet', 'to'].map(k => el.dataset[k] != null ? '[data-' + k + '="' + el.dataset[k] + '"]' : '').join('');
   }
   function render() {
     const screen = S.view + '|' + S.day + '|' + S.topic + '|' + S.preview;
@@ -520,6 +593,7 @@ function mount(root, opts) {
     elMain.innerHTML = mainHTML();
     elMain.classList.toggle('fs-night', S.view === 'timer');
     root.firstElementChild.dataset.view = S.view;
+    root.firstElementChild.style.setProperty('--el', fighterOf(shownDay()).color);
     elTimerTab.querySelector('[data-navlabel], span').outerHTML = navTimerLabel().replace('<span', '<span data-navlabel');
     elSheet.innerHTML = sheetHTML();
     elMain.inert=!!S.sheet; root.querySelector('.fs-nav').inert=!!S.sheet;
@@ -528,6 +602,54 @@ function mount(root, opts) {
     elMain.scrollTop = screen === lastScreen ? st : 0; lastScreen = screen;
     if (S.sheet && opts.autofocus !== false) { const cl = elSheet.querySelector('[data-close]'); if (cl) cl.focus({ preventScroll: true }); }
     else if (fk) { const f = root.querySelector(fk); if (f) f.focus({ preventScroll: true }); }
+  }
+  /* ---------- check-off effects: finite, pointer only, drawn over the row, never block input ---------- */
+  const FORMS = {
+    upper: { w: 3, main: ['M0 14 Q50 -4 100 9'], trail: ['M10 17 Q55 4 96 13', 'M4 8 Q40 0 80 4'] },
+    lower: { w: 4, main: ['M32 -2 L20 22', 'M54 -2 L42 22', 'M76 -2 L64 22'], trail: ['M0 13 L100 8', 'M10 5 L90 3'] },
+    push: { w: 3.5, main: ['M0 12 C15 2 22 18 36 9 S58 2 70 10 S90 14 100 6'], trail: ['M0 15 C15 5 22 21 36 12 S58 5 70 13 S90 17 100 9', 'M0 9 C15 -1 22 15 36 6 S58 -1 70 7 S90 11 100 3'] },
+    pull: { w: 3, main: ['M0 12 L22 6 L30 14 L52 5 L60 13 L82 6 L100 10'], trail: ['M30 14 L41 20', 'M60 13 L73 19'] },
+    legs: { w: 5, main: ['M0 11 L100 9'], trail: ['M38 10 L44 2 L51 5', 'M62 10 L68 18 L77 15'] }
+  };
+  const EASE = 'cubic-bezier(.6,0,.2,1)';
+  const fxPath = (d, k, n, w, color) => '<path data-k="' + k + '" data-n="' + n + '" d="' + d + '" stroke="' + color + '" stroke-width="' + w + '" vector-effect="non-scaling-stroke" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1"/>';
+  const fxSvg = inner => '<svg viewBox="0 0 100 20" preserveAspectRatio="none" fill="none" stroke-linejoin="miter">' + inner + '</svg>';
+  function drawStroke(p, dur, delay, hold) {
+    return p.animate([{ strokeDashoffset: 1, opacity: 1 }, { strokeDashoffset: 0, opacity: 1, offset: hold }, { strokeDashoffset: 0, opacity: 0 }], { duration: dur, delay: delay, easing: EASE, fill: 'both' });
+  }
+  function playCheck(row, id) {
+    const form = FORMS[id];
+    if (!form || reduceMotion || !row || !row.animate) return;
+    const color = FIGHTERS[id].color, fx = document.createElement('span');
+    fx.className = 'fs-fx'; fx.setAttribute('aria-hidden', 'true'); fx.style.setProperty('--el', color);
+    fx.innerHTML = fxSvg(form.main.map((d, n) => fxPath(d, 'm', n, form.w, color)).join('') + form.trail.map((d, n) => fxPath(d, 't', n, 1.5, n ? color : '#efe9dc')).join('')) +
+      '<i class="fs-fx-ring"></i>' + [0, 1, 2, 3, 4].map(n => '<i class="fs-fx-spark" data-n="' + n + '"></i>').join('');
+    row.appendChild(fx);
+    fx.querySelectorAll('path').forEach(p => {
+      const main = p.dataset.k === 'm', n = +p.dataset.n;
+      drawStroke(p, main ? 420 : 380, main ? n * 45 : 70 + n * 60, main ? .58 : .5);
+    });
+    fx.querySelector('.fs-fx-ring').animate([{ transform: 'scale(.6)', opacity: 1 }, { transform: 'scale(1.9)', opacity: 0 }], { duration: 300, easing: 'ease-out', fill: 'both' });
+    fx.querySelectorAll('.fs-fx-spark').forEach(s => {
+      const n = +s.dataset.n, ang = -1.1 + n * .55, r = 26 + (n % 2) * 12;
+      s.animate([{ transform: 'translate(0,0) rotate(45deg) scale(1)', opacity: 1 }, { transform: 'translate(' + Math.round(Math.cos(ang) * r) + 'px,' + Math.round(Math.sin(ang) * r) + 'px) rotate(45deg) scale(.2)', opacity: 0 }], { duration: 320, delay: 40, easing: 'ease-out', fill: 'both' });
+    });
+    const box = row.querySelector('.fs-box');
+    if (box) box.animate([{ transform: 'scale(.7)' }, { transform: 'scale(1.2)', offset: .55 }, { transform: 'scale(1)' }], { duration: 220, easing: 'cubic-bezier(.2,1.4,.4,1)' });
+    setTimeout(() => fx.remove(), 760);
+  }
+  function playFinish(hero, id) {
+    if (reduceMotion || !hero || !hero.animate) return;
+    const f = FIGHTERS[id] || FIGHTERS.rest, old = hero.querySelector('.fs-finish'), el = document.createElement('div');
+    if (old) old.remove();
+    el.className = 'fs-finish'; el.setAttribute('aria-hidden', 'true'); el.style.setProperty('--el', f.color);
+    el.innerHTML = fxSvg(fxPath('M-4 17 L104 3', 'm', 0, 5, f.color) + fxPath('M-4 3 L104 17', 'm', 1, 3, '#efe9dc')) + '<b class="fs-kanji">' + f.kanji + '</b><strong>Session complete</strong>';
+    hero.appendChild(el);
+    el.animate([{ opacity: 0 }, { opacity: 1, offset: .07 }, { opacity: 1, offset: .82 }, { opacity: 0 }], { duration: 1700, fill: 'both' });
+    el.querySelectorAll('path').forEach((p, n) => drawStroke(p, 560, 60 + n * 110, .46));
+    el.querySelector('b').animate([{ transform: 'scale(2.4)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }], { duration: 300, delay: 200, easing: 'cubic-bezier(.2,1.3,.3,1)', fill: 'both' });
+    el.querySelector('strong').animate([{ transform: 'translateY(8px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 220, delay: 400, easing: 'ease-out', fill: 'both' });
+    setTimeout(() => el.remove(), 1760);
   }
   function paintTimer() {
     const t = S.timer, total = t.phase === 'rest' ? t.rest : t.work, C = 2 * Math.PI * 104;
@@ -581,7 +703,17 @@ function mount(root, opts) {
     const el = ev.target.closest('[data-act]'); if (!el || !root.contains(el)) return;
     const a = el.dataset.act, t = S.timer;
     if (a === 'closesheet' && el.classList.contains('fs-sheetwrap') && ev.target !== el) return;
-    if (a === 'sheet') { S.sheet = { kind: el.dataset.sheet, idx: +el.dataset.idx, topic: el.dataset.topic, gi: +el.dataset.gi, preview: S.view === 'today' ? false : S.preview }; S.sheetFrom = keyOf(el); }
+    if (a === 'move') { S.sheet = { kind: 'move', idx: +el.dataset.idx, preview: S.view === 'today' ? false : S.preview }; S.sheetFrom = keyOf(el); }
+    else if (a === 'swap' && S.sheet?.kind === 'move') {
+      const preview = S.sheet.preview, to = +el.dataset.to;
+      swapSessions(preview, S.sheet.idx, to); S.sheet = null; S.preview = preview; S.day = to;
+      S.view = !preview && to === todayIdx ? 'today' : 'week';
+    }
+    else if (a === 'checkswim' && S.sheet?.kind === 'cardio') {
+      const d = planFor(S.sheet.preview)[S.sheet.idx], wk = weekChecks(d.preview);
+      wk[d.key + ':swim'] = !swimDone(d); write('checks:swim-core-v5:' + dateKey(weekOf(d.preview)), wk);
+    }
+    else if (a === 'sheet') { S.sheet = { kind: el.dataset.sheet, idx: +el.dataset.idx, topic: el.dataset.topic, gi: +el.dataset.gi, preview: S.view === 'today' ? false : S.preview }; S.sheetFrom = keyOf(el); }
     else if (a === 'closesheet') { S.sheet = null; }
     else if (a === 'nav') { S.sheet = null; if (S.view === el.dataset.view) { S.day = null; S.topic = null; } S.view = el.dataset.view; if (S.view === 'today') { S.preview = false; S.day = null; } }
     else if (a === 'check') { const d = planFor(S.view === 'today' ? false : S.preview)[+el.dataset.idx], arr = done(d).slice(), i = +el.dataset.i, at = arr.indexOf(i); if (at >= 0) arr.splice(at, 1); else arr.push(i); setDone(d, arr); }
@@ -602,6 +734,15 @@ function mount(root, opts) {
     else if (a === 'sound') t.sound = !t.sound;
     if(['preset','step','sound'].includes(a))savePrefs();
     render();
+    if (a === 'check' && ev.detail > 0) {
+      /* detail is 0 for keyboard activation: state still changes, the moving effect is skipped */
+      const row = root.querySelector(keyOf(el));
+      if (row && row.getAttribute('aria-pressed') === 'true') {
+        const d = planFor(S.view === 'today' ? false : S.preview)[+el.dataset.idx];
+        playCheck(row, d.id);
+        if (done(d).length === d.ex.length) playFinish(root.querySelector('.fs-hero'), d.id);
+      }
+    }
     if (a === 'closesheet' && S.sheetFrom) { const f = root.querySelector(S.sheetFrom); if (f) f.focus({ preventScroll: true }); }
   });
   root.addEventListener('keydown', ev => {
@@ -622,7 +763,7 @@ function mount(root, opts) {
   setInterval(refreshDate,30000);
   render();
   if (S.timer.running) run();
-  return { state: S, render: render };
+  return { state: S, render: render, fx: { check: playCheck, finish: playFinish } };
 }
 
 global.FloatSting = { mount: mount };

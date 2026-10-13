@@ -1,13 +1,13 @@
 {
   "name": "Float & Sting",
   "short_name": "Float & Sting",
-  "description": "Five-day push/pull lifting plan with two rest days, swimming, running and muscle-gain guidance.",
+  "description": "Five lifting days, two beginner swim sessions, two rest days, and progressive core training.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f4f5f1",
-  "theme_color": "#f4f5f1",
+  "background_color": "#0c0a12",
+  "theme_color": "#0c0a12",
   "icons": [
     {
       "src": "icon-192.png",
@@ -22,7 +22,7 @@
       "purpose": "any"
     },
     {
-      "src": "icon-512.png",
+      "src": "icon-512-maskable.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
