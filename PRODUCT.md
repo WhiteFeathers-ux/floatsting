@@ -12,11 +12,11 @@ Black uses this personal workout app. Black is an experienced lifter with full-g
 
 ## Product Purpose
 
-Make a researched, lifting-first routine easy to follow: five workout days and two full rest days, push/pull lifting with legs included, two to three swims and two to three runs per week.
+Make a researched, lifting-first routine easy to follow: five lifting days and two full rest days, upper/lower/push/pull/legs, and two one-hour beginner pool practice windows including instruction and rests. Runs are replaced.
 
 ## Capabilities and Constraints
 
-Static HTML/CSS/JavaScript PWA on GitHub Pages, deployed from main. Seven-day schedule, rotating push/pull weeks, device-local weekly exercise completion, interval timer, offline caching. No account, weight/rep logging or cloud sync. Preserve tested schedule, exercise prescriptions, source citations and existing completion data. Cardio is prescribed but not logged. Lifting including warm-ups and abs targets 45–60 minutes; cardio is separate. Abs occur on pull days only.
+Static HTML/CSS/JavaScript PWA on GitHub Pages, deployed from main. Seven-day schedule, a fixed weekly lifting/swimming plan, device-local weekly exercise completion, interval timer, offline caching. No account, weight/rep logging or cloud sync. Preserve tested schedule, exercise prescriptions, source citations and existing completion data. Cardio is prescribed but not logged. Lifting including warm-ups and abs targets 45–60 minutes, occasionally 60–65; swimming is separate. Abs occur on Lower A, Pull and Lower B.
 
 ## Brand Commitments
 
@@ -28,7 +28,7 @@ Current app source and icons; researched ACSM resistance-training guidance, ISSN
 
 ## Product Principles
 
-- Lifting has priority; swimming starts conservatively.
+- Muscle growth and swim skill both matter; swimming starts with short repeats and generous rest.
 - Show the current workout before extended guidance.
 - Maintain two complete rest days.
 - Distinguish recommendations, completed actions and unavailable tracking.

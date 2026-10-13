@@ -1,4 +1,4 @@
-const CACHE = 'floatsting-v8-pulse';
+const CACHE = 'floatsting-v9-swim-build';
 const ASSETS = [
   './',
   './index.html',

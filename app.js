@@ -2,56 +2,272 @@
 'use strict';
 
 const WORKOUTS = {
-  pushA: {type:'up', name:'Push A', tag:'Chest + Quads + Shoulders + Triceps', freq:'Push', short:'Push A', ex:[
-    ['1','Bench Press','3×6–10 · 2–3m'],
-    ['2','Back Squat or Hack Squat','3×6–10 · 2–3m'],
-    ['3','Lateral Raise','2×12–20 · 60–90s'],
-    ['4','Cable Triceps Pushdown','2×10–15 · 90s'],
-    ['5','Standing Calf Raise','2×10–15 · 90s']
-  ], note:'Chest press and knee-dominant leg work lead. Use a chest-press machine if benching is unfamiliar, and keep the squat variation consistent.'},
-  pushB: {type:'up', name:'Push B', tag:'Quads + Chest + Shoulders + Triceps', freq:'Push', short:'Push B', ex:[
-    ['1','Leg Press','3×8–12 · 2–3m'],
-    ['2','Incline Dumbbell Press','3×8–12 · 2–3m'],
-    ['3','Seated Dumbbell Shoulder Press','2×8–12 · 2m'],
-    ['4','Lateral Raise','1×12–20 · 60–90s'],
-    ['5','Overhead Triceps Extension','1×10–15 · 90s'],
-    ['6','Seated Calf Raise','2×12–20 · 90s']
-  ], note:'Legs lead this session. Keep all presses controlled and leave two good reps in reserve; more fatigue is not the goal.'},
-  pullA: {type:'lo', name:'Pull A', tag:'Back + Hamstrings + Glutes + Biceps', freq:'Pull', short:'Pull A', ex:[
-    ['1','Romanian Deadlift','2×6–10 · 2–3m'],
-    ['2','Lat Pulldown','2×8–12 · 2m'],
-    ['3','Chest-Supported Row','2×8–12 · 2m'],
-    ['4','Seated Leg Curl','2×10–15 · 90s'],
-    ['5','Dumbbell Curl','2×10–15 · 90s'],
-    ['6','Cable Crunch','3×10–15 · 90s']
-  ], note:'Hinge from the hips with a controlled range. Chest support keeps rows from adding unnecessary lower-back fatigue. Learn the hinge with light loads first. Cable crunch: curl the ribs toward the pelvis without pulling with the arms; keep two clean reps in reserve. Add a small amount of weight once all three sets reach 15 controlled reps.'},
-  pullB: {type:'lo', name:'Pull B', tag:'Back + Hamstrings + Glutes + Biceps', freq:'Pull', short:'Pull B', ex:[
-    ['1','Lat Pulldown or Assisted Pull-up','2×8–12 · 2m'],
-    ['2','Seated Cable Row','2×8–12 · 2m'],
-    ['3','Lying or Seated Leg Curl','3×10–15 · 90s'],
-    ['4','Romanian Deadlift (light)','1×10–12 · 2m'],
-    ['5','Hammer Curl','2×10–15 · 90s'],
-    ['6','Hanging Knee Raise or Reverse Crunch','3×8–15 · 90s']
-  ], note:'A lighter hinge day. Keep the same pulldown or assisted pull-up choice from week to week. Do a fresh light hinge warm-up before its working set. For abs, curl the pelvis toward the ribs without swinging. Choose reverse crunches if grip limits hanging raises. Keep the choice consistent; reach 15 controlled reps per set before increasing difficulty, with two reps in reserve.'},
-  rest: {type:'rest', name:'Full Rest', tag:'Recover', freq:'Rest', short:'Full rest', ex:[],
-    note:'No workout required. Easy walking or 5–10 minutes of gentle mobility is optional. Eat normally, keep protein consistent and prioritize sleep.'}
+  "upper": {
+    "type": "up",
+    "name": "Upper",
+    "tag": "Chest + Back + Delts + Biceps",
+    "freq": "Upper",
+    "short": "Upper",
+    "ex": [
+      [
+        "1",
+        "Bench Press",
+        "3×6–10 · 2–3m"
+      ],
+      [
+        "2",
+        "Chest-Supported Row",
+        "3×8–12 · 2m"
+      ],
+      [
+        "3",
+        "Incline Dumbbell Press",
+        "2×8–12 · 2m"
+      ],
+      [
+        "4",
+        "Lat Pulldown",
+        "2×8–12 · 2m"
+      ],
+      [
+        "5",
+        "Lateral Raise",
+        "2×12–20 · 60–90s"
+      ],
+      [
+        "6",
+        "Dumbbell Curl",
+        "2×10–15 · 90s"
+      ]
+    ],
+    "note": "14 working sets. Alternate press and pull exercises, completing all sets of one exercise before moving on. Keep the same equipment choices for 6–8 weeks. First two weeks of this plan: do 2 sets wherever 3 are listed. Then use the listed sets only if lifting performance and swimming technique remain stable. Aim for 45–60 minutes; allow up to 65 with warm-ups and equipment waits. Do not shorten compound rest just to finish."
+  },
+  "lower": {
+    "type": "lo",
+    "name": "Lower A",
+    "tag": "Quads + Hamstrings + Calves + Abs",
+    "freq": "Lower A",
+    "short": "Lower A",
+    "ex": [
+      [
+        "1",
+        "Hack Squat",
+        "3×6–10 · 2–3m"
+      ],
+      [
+        "2",
+        "Romanian Deadlift",
+        "3×8–10 · 2–3m"
+      ],
+      [
+        "3",
+        "Seated Leg Curl",
+        "2×10–15 · 90s"
+      ],
+      [
+        "4",
+        "Leg Extension",
+        "2×10–15 · 90s"
+      ],
+      [
+        "5",
+        "Standing Calf Raise",
+        "3×10–15 · 90s"
+      ],
+      [
+        "6",
+        "Cable Crunch",
+        "3×10–15 · 90s"
+      ]
+    ],
+    "note": "16 working sets. Back squat is an alternative if a hack squat is unavailable; keep the choice consistent. Warm up separately for the hinge. Curl ribs toward pelvis during crunches. Swim A is a separate pool block, ideally at least 3 hours apart. First two weeks of this plan: do 2 sets wherever 3 are listed. Then use the listed sets only if lifting performance and swimming technique remain stable. Aim for 45–60 minutes; allow up to 65 with warm-ups and equipment waits. Do not shorten compound rest just to finish."
+  },
+  "push": {
+    "type": "up",
+    "name": "Push",
+    "tag": "Chest + Delts + Triceps",
+    "freq": "Push",
+    "short": "Push",
+    "ex": [
+      [
+        "1",
+        "Incline Dumbbell Press",
+        "3×8–12 · 2m"
+      ],
+      [
+        "2",
+        "Cable Chest Fly",
+        "2×10–15 · 90s"
+      ],
+      [
+        "3",
+        "Seated Shoulder Press",
+        "2×8–12 · 2m"
+      ],
+      [
+        "4",
+        "Lateral Raise",
+        "3×12–20 · 60–90s"
+      ],
+      [
+        "5",
+        "Overhead Triceps Extension",
+        "2×10–15 · 90s"
+      ],
+      [
+        "6",
+        "Cable Triceps Pushdown",
+        "2×10–15 · 90s"
+      ]
+    ],
+    "note": "14 working sets. Use a comfortable shoulder range. Keep compounds about two clean reps from failure. Swimming is additional shoulder work, not a replacement for chest or back sets. First two weeks of this plan: do 2 sets wherever 3 are listed. Then use the listed sets only if lifting performance and swimming technique remain stable. Aim for 45–60 minutes; allow up to 65 with warm-ups and equipment waits. Do not shorten compound rest just to finish."
+  },
+  "pull": {
+    "type": "lo",
+    "name": "Pull",
+    "tag": "Back + Rear Delts + Biceps + Abs",
+    "freq": "Pull",
+    "short": "Pull",
+    "ex": [
+      [
+        "1",
+        "Lat Pulldown",
+        "3×8–12 · 2m"
+      ],
+      [
+        "2",
+        "Chest-Supported Row",
+        "3×8–12 · 2m"
+      ],
+      [
+        "3",
+        "Reverse Pec Deck",
+        "2×12–20 · 90s"
+      ],
+      [
+        "4",
+        "Dumbbell Curl",
+        "3×10–15 · 90s"
+      ],
+      [
+        "5",
+        "Hammer Curl",
+        "2×10–15 · 90s"
+      ],
+      [
+        "6",
+        "Cable Crunch",
+        "3×10–15 · 90s"
+      ]
+    ],
+    "note": "16 working sets. Chest support limits lower-back fatigue before Saturday legs. Avoid forced reps. If shoulder or lat fatigue affects Saturday swimming, keep the pool session easy and shorten it. First two weeks of this plan: do 2 sets wherever 3 are listed. Then use the listed sets only if lifting performance and swimming technique remain stable. Aim for 45–60 minutes; allow up to 65 with warm-ups and equipment waits. Do not shorten compound rest just to finish."
+  },
+  "legs": {
+    "type": "lo",
+    "name": "Lower B",
+    "tag": "Quads + Hamstrings + Calves + Abs",
+    "freq": "Lower B",
+    "short": "Lower B",
+    "ex": [
+      [
+        "1",
+        "Leg Press",
+        "3×8–12 · 2–3m"
+      ],
+      [
+        "2",
+        "Romanian Deadlift",
+        "2×8–12 · 2–3m"
+      ],
+      [
+        "3",
+        "Supported Split Squat",
+        "2×8–12/leg · 2m"
+      ],
+      [
+        "4",
+        "Seated Leg Curl",
+        "3×10–15 · 90s"
+      ],
+      [
+        "5",
+        "Seated Calf Raise",
+        "3×12–20 · 90s"
+      ],
+      [
+        "6",
+        "Reverse Crunch",
+        "3×10–15 · 90s"
+      ]
+    ],
+    "note": "16 working sets; split squats mean two sets per leg, counted as two sets for each leg. Use hand support for balance. Curl pelvis toward ribs without swinging on reverse crunches. Swim B is a separate pool block, ideally at least 3 hours apart. First two weeks of this plan: do 2 sets wherever 3 are listed. Then use the listed sets only if lifting performance and swimming technique remain stable. Aim for 45–60 minutes; allow up to 65 with warm-ups and equipment waits. Do not shorten compound rest just to finish."
+  },
+  "rest": {
+    "type": "rest",
+    "name": "Full Rest",
+    "tag": "Recover",
+    "freq": "Rest",
+    "short": "Full rest",
+    "ex": [],
+    "note": "No scheduled lifting or swimming. Easy walking or gentle mobility is optional. Keep meals, protein and sleep consistent."
+  }
 };
 const ROTATION = [
-  ['pushA','pullA','pushB','rest','pullB','pushA','rest'],
-  ['pullA','pushB','pullB','rest','pushA','pullB','rest']
+  ['upper','lower','push','rest','pull','legs','rest']
 ];
 const CARDIO = [
-  {short:'Swim', note:'<b>Later in the day: beginner swim 10–15 min total, including rests.</b> Supervised pool, short comfortable lengths, 30–60 seconds or longer at the wall. A lesson can replace this session. Keep shoulders fresh.'},
-  {short:'Run', note:'<b>After lifting or later: easy run 15–25 min.</b> Full-sentence pace, not a timed mile. Start at 10–15 min if a mile is the usual distance. Add 3–5 min walking before and after.'},
-  {short:'Optional cardio', note:'<b>Optional: third swim OR run.</b> Only if recovering well: swim 10–15 min including rests or run 10–15 min, easy. Skip this in the first two weeks of the combined routine.'},
   null,
-  {short:'Swim', note:'<b>Later in the day: beginner swim 10–15 min total, including rests.</b> Repeat comfortable short lengths in a supervised pool. Rest freely. Skip it if too fatigued for controlled breathing and technique.'},
-  {short:'Run', note:'<b>After lifting or later: run 15–25 min.</b> Easy conversational pace, no hills or sprints. Use run/walk if needed. Tomorrow is full rest.'},
+  {
+    "short": "Swim A",
+    "note": "<b>60-minute pool block: technique and easy endurance.</b>  Use a supervised 25-metre or 25-yard pool; each 25 below is one length in that pool. Choose a shorter teaching area with an instructor if a length is not yet comfortable. Rest 30–60 seconds after each length, longer until breathing is comfortable. The clock is a time budget, not a deadline. Stop a block when its repetitions or time budget are reached; spare time is for recovery or instructor feedback, not extra lengths.<br><br><b>0–5 min:</b> Check in, choose one technique cue with an instructor, and settle breathing at the wall.<br><b>5–15 min:</b> 4 × 25 easy freestyle.<br><b>15–30 min:</b> 4 × 25 easy technique swimming. Focus on relaxed exhalation into the water and a comfortable breath to the side; breathe whenever needed.<br><b>30–50 min:</b> 6 × 25 easy freestyle, effort 3–4/10. Keep every length controlled.<br><b>50–55 min:</b> 2 × 25 very easy.<br><b>55–60 min:</b> Recover and record total distance, longest comfortable repeat and one technique cue.<br><br><b>Starting dose:</b> The full outline is 400 metres/yards, including rests within the hour. For the first two visits, use half the repeats in every block if needed (200 total). A one-hour lesson can replace either session. End early if control fades; filling an hour is not the goal.<br><br><b>Progress only after two comfortable sessions:</b> Add 2 × 25 to the main set (50 total), or replace a pair of 25s with one 50 at the same total distance. Change one thing at a time; do not also reduce rest or increase speed. The hour remains the cap.<br><br><b>Pool safety:</b> No breath-holding, hyperventilation, underwater-distance challenges, paddles or butterfly sets in this beginner block. Stop for shoulder pain, dizziness or loss of breathing control. Use an instructor for skill development."
+  },
+  null,
+  null,
+  null,
+  {
+    "short": "Swim B",
+    "note": "<b>60-minute pool block: repeatable pace and technique.</b>  Use a supervised 25-metre or 25-yard pool; each 25 below is one length in that pool. Choose a shorter teaching area with an instructor if a length is not yet comfortable. Rest 30–60 seconds after each length, longer until breathing is comfortable. The clock is a time budget, not a deadline. Stop a block when its repetitions or time budget are reached; spare time is for recovery or instructor feedback, not extra lengths.<br><br><b>0–5 min:</b> Check shoulder comfort and review the technique cue.<br><b>5–15 min:</b> 4 × 25 easy freestyle.<br><b>15–30 min:</b> 4 × 25 relaxed freestyle with consistent breathing and smooth strokes.<br><b>30–50 min:</b> 2 rounds of 3 × 25 freestyle. All easy in the first two weeks. Later, if the whole session stays controlled, make the middle length of each round moderate (5/10), with the others easy. Rest 30–60 seconds after each length and 2 minutes between rounds. No sprints.<br><b>50–55 min:</b> 2 × 25 very easy.<br><b>55–60 min:</b> Recover and record distance, effort and whether the final length stayed as smooth as the first.<br><br><b>Starting dose:</b> The full outline is 400 metres/yards, including rests within the hour. For the first two visits, use half the repeats in every block if needed (200 total). A one-hour lesson can replace either session. End early if control fades; filling an hour is not the goal.<br><br><b>Progress only after two comfortable sessions:</b> Add 2 × 25 to the main set (50 total), or replace a pair of 25s with one 50 at the same total distance. Change one thing at a time; do not also reduce rest or increase speed. The hour remains the cap.<br><br><b>Pool safety:</b> No breath-holding, hyperventilation, underwater-distance challenges, paddles or butterfly sets in this beginner block. Stop for shoulder pain, dizziness or loss of breathing control. Use an instructor for skill development."
+  },
   null
 ];
-
-
-const GUIDE = [{"id": "week", "title": "How the week works", "summary": "Lift days, rest days, A and B weeks", "html": "<p class=\"lead\">Lift Monday, Tuesday, Wednesday, Friday and Saturday. <b>Rest Thursday and Sunday.</b> Swim Monday and Friday; run Tuesday and Saturday. Wednesday can include a third swim <b>or</b> run if recovery is good. Week A has three push days and two pull days; Week B reverses that. <b>Tap any day</b> to open its workout.</p>\n    <p class=\"lead\">Push: chest, shoulders, triceps and quads. Pull: back, biceps, hamstrings and glutes. The extra push/pull day alternates each week.</p>"}, {"id": "sets", "title": "Sets, reps &amp; saving progress", "summary": "Reading the numbers, what gets saved", "html": "<p class=\"lead\">Use a weight that leaves <b>about two good reps in reserve</b>. The prescription is sets × reps, then rest between sets. Warm-up sets are extra. Allow roughly 55–75 minutes for lifting, plus the listed cardio. <b>Tap an exercise</b> after all its sets; lifting checks save for this calendar week on this device. Weights, reps and cardio completion are not logged here.</p>"}, {"id": "progress", "title": "Progression & recovery", "summary": "Warm ups, adding weight, lighter weeks", "html": "<div class=\"guide-content\">\n    <p class=\"lead\">Built for an experienced lifter with full-gym access and muscle gain as the priority. Height alone does not determine the best split or working weights. Adjust the starting volume to recovery as swimming and running are added.</p>\n    <ul class=\"principles\">\n      <li><span class=\"n\">01</span><span><b>Warm up.</b> Start with 5–10 minutes of easy movement, then 2–4 progressively heavier warm-up sets before the first big lift. Use additional warm-ups when moving to a different muscle group.</span></li>\n      <li><span class=\"n\">02</span><span><b>Start within capacity.</b> The listed sets are the target, not extra work on top of the old routine. If five lifting days plus cardio is a jump in workload, use two sets wherever three are listed for the first two weeks, with three reps in reserve.</span></li>\n      <li><span class=\"n\">03</span><span><b>Earn the next weight.</b> When every set reaches the top of its rep range with two reps left and clean form, add the smallest available load next time. Return toward the lower end of the range. Track loads and reps in a notebook.</span></li>\n      <li><span class=\"n\">04</span><span><b>Keep the big lifts controlled.</b> Use a comfortable full range of motion. No max testing or forced reps. Keep the same exercise choices for 6–8 weeks so progress is comparable.</span></li>\n      <li><span class=\"n\">05</span><span><b>Recover, then progress.</b> If performance drops across several sessions or soreness persists into the next workout, take a lighter week: roughly half the sets and easier loads. Skip missed sessions rather than stacking them onto rest days.</span></li>\n    </ul>\n    <p class=\"lead\"><b>45–60 minutes for lifting and abs.</b> Includes warm-ups; swimming and running are separate. Push days have 12 working sets across 5–6 exercises; pull days have 13 across 6 exercises, including abs. Allow roughly 10–15 minutes for warm-ups and 30–45 for working sets, rests and equipment changes. Keep the listed rest periods. If equipment waits push the session toward 60 minutes, omit the calf exercise on push days or curls on pull days; keep the ab work. Do not make up omitted sets on rest days. The 6–9 direct ab sets per week replace existing ab training rather than adding to it.</p>\n    <div class=\"drills\"><b>Why this structure</b>Push includes knee-dominant leg work; pull includes hip hinges and leg curls. This shorter rotation averages 7.5 direct weekly sets each for chest and quads and 10 each for back and hamstrings, plus smaller amounts of arm and shoulder work. Secondary chest flies, leg extensions and reverse pec deck were removed to reduce equipment changes and fit the time budget. Lower volume can still build muscle; this is a practical time-versus-volume tradeoff, not a claim that 7.5 sets is optimal. The exact split is a coaching choice, not a proven best routine for everyone. <a href=\"https://pubmed.ncbi.nlm.nih.gov/41843416/\" target=\"_blank\" rel=\"noopener\">ACSM resistance-training position stand (2026)</a>.</div>\n    </div>"}, {"id": "cardio", "title": "Swimming & running", "summary": "Two swims, two runs, an optional third", "html": "<div class=\"guide-content\">\n    <p class=\"lead\"><b>Two swims and two runs are the base.</b> Start at the low end of the durations. Add a third swim or run on Wednesday only after two steady weeks with good recovery and stable lifting performance.</p>\n    <ul class=\"principles\">\n      <li><span class=\"n\">01</span><span><b>Monday + Friday: beginner swim, 10–15 minutes total.</b> This includes rest, not continuous swimming. In a supervised pool, practise relaxed breathing and short, comfortable lengths, resting 30–60 seconds or longer at the wall. A beginner lesson is a good first session. Finish before technique deteriorates. No breath-hold drills or hard intervals.</span></li>\n      <li><span class=\"n\">02</span><span><b>Tuesday + Saturday: easy run, 15–25 minutes.</b> A 7–8 minute mile shows current speed, but does not establish an easy training pace. Use a flat route and slow enough to speak in full sentences, about 3–4 out of 10 effort. If currently running only one mile per outing, start with 10–15 minutes and walk as needed. Walk 3–5 minutes before and after.</span></li>\n      <li><span class=\"n\">03</span><span><b>Wednesday: optional third session.</b> Choose a 10–15 minute beginner swim or 10–15 minute easy run, not both. This gives 2–3 sessions of each sport per week while keeping two complete rest days.</span></li>\n      <li><span class=\"n\">04</span><span><b>Lift first when sessions are together.</b> When practical, separate lifting and cardio by at least three hours. This is a useful fatigue-management choice, not a requirement for muscle growth. Avoid swimming when too fatigued to maintain comfortable technique.</span></li>\n      <li><span class=\"n\">05</span><span><b>Progress one thing at a time.</b> For swimming, first make short lengths comfortable with rest; then build toward 15–20 minutes total. For running, add a few minutes to one session before adding frequency or speed. If leg or shoulder fatigue affects the next lift, shorten cardio and drop the optional session first. No sprints or hard swim intervals in this starting block.</span></li>\n    </ul>\n    <div class=\"drills\"><b>Research behind the balance</b>A 43-study review found no average loss of muscle growth or maximal strength from combining aerobic and strength work, although explosive-strength gains were more affected in the same session. Most evidence covers running and cycling; this swim schedule is a practical adaptation, not a directly tested protocol. Sources: <a href=\"https://pubmed.ncbi.nlm.nih.gov/34757594/\" target=\"_blank\" rel=\"noopener\">Schumann et al. (2022)</a> and <a href=\"https://pubmed.ncbi.nlm.nih.gov/28917030/\" target=\"_blank\" rel=\"noopener\">exercise-order meta-analysis</a>.</div>\n    </div>"}, {"id": "fuel", "title": "Nutrition & the 160 lb goal", "summary": "Surplus, protein, watching the trend", "html": "<div class=\"guide-content\">\n    <p class=\"lead\">Aim for gradual weight gain while lifts improve. Reaching 160 lb does not guarantee a particular appearance or seven pounds of muscle.</p>\n    <div class=\"panel\">\n      <h3>Fuel the Build</h3>\n      <ul>\n        <li><b>Start with a small surplus.</b> Add roughly 150–250 calories to the intake that keeps body weight stable with this activity level. New swims and runs may raise that baseline, so adjust from weight trends rather than a watch's calorie estimate.</li>\n        <li><b>Protein: 120–145 g daily.</b> A practical target near 1.6–2.0 g/kg around the goal weight. Spread it across 3–4 meals, using foods such as eggs, dairy, fish, meat, tofu or beans.</li>\n        <li><b>Watch the trend.</b> Weigh under similar morning conditions several times a week and compare weekly averages. A conservative starting target is about 0.25–0.5 lb per week. If the average is flat for 2–3 weeks, add about 100 calories daily; reduce slightly if gaining faster or waist size rises quickly.</li>\n        <li><b>Eat for performance.</b> Include carbohydrates, fruit, vegetables and dietary fats. Keep protein consistent on rest days. No supplement is required for this plan.</li>\n        <li><b>Protect the two rest days.</b> Easy walking or gentle mobility is optional. No scheduled lifting, swimming or running on Thursday and Sunday.</li>\n        <li><b>Think in months.</b> At the suggested pace, a seven-pound scale increase may take roughly 14–28 weeks. Water and glycogen can move the scale sooner; muscle gain varies.</li>\n      </ul>\n    </div>\n    <p class=\"lead\">Research supports adequate protein and cautions against aggressive surpluses. The calorie adjustments and slower gain target above are practical starting choices, not guaranteed outcomes. Sources: <a href=\"https://link.springer.com/article/10.1186/s12970-017-0177-8\" target=\"_blank\" rel=\"noopener\">ISSN protein position stand</a> and <a href=\"https://pubmed.ncbi.nlm.nih.gov/37914977/\" target=\"_blank\" rel=\"noopener\">Helms et al., energy-surplus trial (2023)</a>.</p>\n    </div>"}, {"id": "care", "title": "Train with care", "summary": "Safety basics", "html": "<ul><li>Warm up before every session and stretch after.</li>\n      <li>Progress gradually. Avoid adding too much workload at once.</li>\n      <li>Technique first, speed second, power last.</li>\n      <li>Rest days are full rest. Easy walking and comfortable mobility are optional.</li>\n      <li>Stop an exercise that causes sharp or joint pain. Use a comfortable alternative and get guidance for persistent symptoms.</li>\n      <li>This is general fitness guidance, not personal-training or medical advice. Check with a professional before starting if you have any health concerns.</li></ul>"}];
+const GUIDE = [
+  {
+    "id": "week",
+    "title": "The weekly plan",
+    "summary": "Five lifts, two swims, two rest days",
+    "html": "<p class=\"lead\">Bodybuilding plus beginner swimming. The same schedule repeats every week. Runs are replaced by two pool sessions.</p><ul><li><b>Monday.</b> Upper: chest, back, delts and biceps.</li><li><b>Tuesday.</b> Lower A + Swim A. Separate sessions when practical.</li><li><b>Wednesday.</b> Push: chest, delts and triceps.</li><li><b>Thursday.</b> Full rest.</li><li><b>Friday.</b> Pull: back, rear delts, biceps and abs.</li><li><b>Saturday.</b> Lower B + Swim B. Separate sessions when practical.</li><li><b>Sunday.</b> Full rest.</li></ul>"
+  },
+  {
+    "id": "sets",
+    "title": "Sets, effort & progress",
+    "summary": "Transition, rep targets and saved checks",
+    "html": "<p class=\"lead\">The displayed sets are the full target. For the first two weeks after starting this plan, use 2 sets wherever 3 are listed while adapting to swimming.</p><ul><li><b>Effort.</b> Finish most sets with about 2 clean reps left. On stable isolation exercises, the final set may finish with 1–2 reps left. No forced reps or compound failure required. No soreness or fatigue is not evidence that training failed.</li><li><b>Rest.</b> Use 2–3 minutes for demanding compounds and 60–90 seconds for isolation work, or longer if needed to repeat good reps. Warm-up sets are additional.</li><li><b>Add weight.</b> Record weight, reps for every set and estimated reps left in a notebook. Once every set reaches the top of the range with the intended effort and form, increase by the smallest available load. Keep exercises consistent for 6–8 weeks.</li><li><b>Saved checks.</b> Tap after all prescribed sets are done. Checks save by week on this device. The revised routine starts unchecked; previous-plan records remain stored. This app does not log weights, reps or swim completion.</li></ul>"
+  },
+  {
+    "id": "progress",
+    "title": "Growth & recovery",
+    "summary": "Weekly volume and adjustment rules",
+    "html": "<p class=\"lead\">Full target: 10 direct weekly sets each for chest, quads and hamstrings; 11 for back, 5 lateral-delt, 2 rear-delt, 2 shoulder-press, 7 biceps, 4 triceps, 6 calves and 9 abs. Compound presses and pulls add indirect arm/shoulder work. Glutes work during squats, presses, split squats and hinges; swimming is not counted as lifting sets.</p><ul><li><b>Warm up.</b> Use 5–10 minutes of easy movement and progressively heavier warm-up sets for the first compound. Warm up again when switching to a different movement pattern.</li><li><b>Time budget.</b> Full sessions have 14–16 working sets across six exercises. Aim for 45–60 minutes including warm-ups and abs; some days may take 60–65. If time runs out, omit the final isolation exercise that day. Do not make it up on rest days.</li><li><b>Transition.</b> First two weeks: cap all 3-set exercises at 2. Then move toward the displayed volume if technique, sleep and performance are stable. Keep swimming easy while lifting volume rises.</li><li><b>Review after 4–6 weeks.</b> Look for more reps or load at similar effort, stable swimming technique and a gradual body-weight trend. If one muscle stalls despite consistent training, food and recovery, add only 1–2 weekly sets for it and reassess. Do not add volume simply because there is no soreness.</li><li><b>Reduce when needed.</b> If performance drops over several sessions, soreness persists or shoulders are irritated, reduce sets by about half for a week and shorten swims. Persistent joint pain needs assessment.</li></ul><p class=\"lead\">This split and these exact doses are coaching choices, not a tested optimal protocol. Progressive loading and adequate volume are supported by the <a href=\"https://pubmed.ncbi.nlm.nih.gov/41843416/\" target=\"_blank\" rel=\"noopener\">2026 ACSM scientific review</a>.</p>"
+  },
+  {
+    "id": "cardio",
+    "title": "Swimming progression",
+    "summary": "Two one-hour practice windows",
+    "html": "<p class=\"lead\">Tuesday Swim A and Saturday Swim B each reserve 60 minutes, including instruction, rests and notes. Open the Swim row on that day for the complete session. A beginner lesson can replace either practice.</p><ul><li><b>Start at current ability.</b> Use comfortable 25s and generous rest in a supervised pool. Full starting outlines total 400 metres/yards; half repeats total 200. Use the lower amount if needed. Finish early when technique or breathing control declines.</li><li><b>Build skill first.</b> Book instruction for breathing and body position. Two comfortable sessions come before adding 50 total distance or combining two 25s into a 50. Keep the other variables unchanged. Distance increases are a practical starting rule, not a scientific guarantee.</li><li><b>Phelps-inspired structure.</b> Warm-up, technique work, a purposeful main set and cooldown borrow the structure of competitive practice. This is not Michael Phelps's actual workload, and two beginner sessions do not replicate elite training. Butterfly, paddles and hard race sets wait for appropriate technique and coaching.</li><li><b>Combine with lifting.</b> Pair swimming with lower-body days to avoid a same-day upper-body lift. Ideally separate sessions by at least 3 hours, with a meal and fluids between. This is fatigue management, not a proven muscle-growth requirement. If back-to-back, lift first only if still alert and controlled for swimming; otherwise shorten or reschedule the pool work.</li><li><b>Protect shoulders.</b> Swimming adds work for shoulders and back. No fatigue on the old plan does not guarantee recovery from the new one. Begin with easy swimming; Saturday moderate lengths are optional only after the first two weeks and stable technique.</li></ul><p class=\"lead\">The <a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC8891239/\" target=\"_blank\" rel=\"noopener\">43-study concurrent-training meta-analysis</a> found no average reduction in whole-muscle growth or maximal strength, but explosive strength could be affected. Most evidence was running/cycling, so this exact swimming/bodybuilding combination is an extrapolation. <a href=\"https://www.usms.org/fitness-and-training/guides/swimming-101/adult-swim-training\" target=\"_blank\" rel=\"noopener\">U.S. Masters Swimming</a> informs practice structure and terminology; it is coaching guidance, not a clinical trial.</p>"
+  },
+  {
+    "id": "fuel",
+    "title": "Nutrition & the 160 lb goal",
+    "summary": "Surplus, protein, watching the trend",
+    "html": "<div class=\"guide-content\">\n    <p class=\"lead\">Aim for gradual weight gain while lifts improve. Reaching 160 lb does not guarantee a particular appearance or seven pounds of muscle.</p>\n    <div class=\"panel\">\n      <h3>Fuel the Build</h3>\n      <ul>\n        <li><b>Start with a small surplus.</b> Add roughly 150–250 calories to the intake that keeps body weight stable with this activity level. Longer swim practices may raise that baseline, so adjust from weight trends rather than a watch's calorie estimate.</li>\n        <li><b>Protein: 120–145 g daily.</b> A practical target near 1.6–2.0 g/kg around the goal weight. Spread it across 3–4 meals, using foods such as eggs, dairy, fish, meat, tofu or beans.</li>\n        <li><b>Watch the trend.</b> Weigh under similar morning conditions several times a week and compare weekly averages. A conservative starting target is about 0.25–0.5 lb per week. If the average is flat for 2–3 weeks, add about 100 calories daily; reduce slightly if gaining faster or waist size rises quickly.</li>\n        <li><b>Eat for performance.</b> Include carbohydrates, fruit, vegetables and dietary fats. Keep protein consistent on rest days. No supplement is required for this plan.</li>\n        <li><b>Protect the two rest days.</b> Easy walking or gentle mobility is optional. No scheduled lifting or swimming on Thursday and Sunday.</li>\n        <li><b>Think in months.</b> At the suggested pace, a seven-pound scale increase may take roughly 14–28 weeks. Water and glycogen can move the scale sooner; muscle gain varies.</li>\n      </ul>\n    </div>\n    <p class=\"lead\">Research supports adequate protein and cautions against aggressive surpluses. The calorie adjustments and slower gain target above are practical starting choices, not guaranteed outcomes. Sources: <a href=\"https://link.springer.com/article/10.1186/s12970-017-0177-8\" target=\"_blank\" rel=\"noopener\">ISSN protein position stand</a> and <a href=\"https://pubmed.ncbi.nlm.nih.gov/37914977/\" target=\"_blank\" rel=\"noopener\">Helms et al., energy-surplus trial (2023)</a>.</p>\n    </div>"
+  },
+  {
+    "id": "care",
+    "title": "Pool & lifting safety",
+    "summary": "Technique, breathing and supervision",
+    "html": "<p class=\"lead\">Swim in a lifeguarded pool and use an instructor while developing breathing and stroke skills.</p><ul><li><b>Breathe normally.</b> No breath-hold sets, hyperventilation or underwater-distance contests. Breathe as often as needed; no fixed every-third-or-fifth-stroke rule.</li><li><b>Stay in control.</b> Stop the set if breathing or technique becomes uncontrolled. Leave the pool if dizzy or unwell; do not push through to fill the hour.</li><li><b>Joint comfort.</b> Stop exercises that cause sharp or joint pain. Use a comfortable range and seek assessment for persistent symptoms.</li><li><b>Rest days.</b> Thursday and Sunday remain free of scheduled training. Easy walking or mobility is optional.</li></ul>"
+  }
+];
 const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 const LONG = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 const KEYS = ['mon','tue','wed','thu','fri','sat','sun'];
@@ -114,7 +330,7 @@ function mount(root, opts) {
   function planFor(preview) {
     const week = weekOf(preview);
     const weeks = Math.round((Date.UTC(week.getFullYear(), week.getMonth(), week.getDate()) - Date.UTC(2026, 8, 21)) / 604800000);
-    const rotation = ((weeks % 2) + 2) % 2;
+    const rotation = ((weeks % ROTATION.length) + ROTATION.length) % ROTATION.length;
     return ROTATION[rotation].map((id, i) => {
       const date = new Date(week); date.setDate(date.getDate() + i);
       return Object.assign({}, WORKOUTS[id], { id: id, cardio: CARDIO[i], key: KEYS[i], idx: i, date: date, rotation: rotation, preview: preview });
@@ -123,17 +339,7 @@ function mount(root, opts) {
   function weekChecks(preview) {
     const k=dateKey(weekOf(preview));
     if (!Object.prototype.hasOwnProperty.call(S.checks,k)) {
-      let saved=read('checks:pushpull-v3:'+k,null);
-      if (saved===null) {
-        const v2=read('checks:pushpull-v2:'+k,null);
-        const previous=v2===null?read('checks:pushpull-v1:'+k,{}):v2;
-        const retained={pushA:[0,1,4,5,6],pushB:[0,1,4,5,6,7],pullA:[0,1,2,3,5,6],pullB:[0,1,2,3,5,6],rest:[]};
-        saved={};
-        planFor(preview).forEach(d=>{
-          if (Array.isArray(previous?.[d.key])) saved[d.key]=retained[d.id].flatMap((old,n)=>previous[d.key].includes(old)&&!(v2===null&&d.id.startsWith('pull')&&old===6)?[n]:[]);
-        });
-        write('checks:pushpull-v3:'+k,saved);
-      }
+      const saved=read('checks:swim-build-v4:'+k,{});
       S.checks[k]=saved&&typeof saved==='object'&&!Array.isArray(saved)?saved:{};
     }
     return S.checks[k];
@@ -144,14 +350,14 @@ function mount(root, opts) {
   }
   function setDone(d,arr) {
     const wk=weekChecks(d.preview); wk[d.key]=arr;
-    write('checks:pushpull-v3:'+dateKey(weekOf(d.preview)),wk);
+    write('checks:swim-build-v4:'+dateKey(weekOf(d.preview)),wk);
   }
 
   /* ---------- views ---------- */
   function dayHTML(d, back) {
     const n = d.ex.length, dn = done(d), isRest = !n;
     let h = '<div class="fs-col fs-md-detail">';
-    const stamp = ', ' + shortDate(d.date) + ' · Week ' + (d.rotation ? 'B' : 'A') + (d.preview ? ' · Next week' : '');
+    const stamp = ', ' + shortDate(d.date) + (d.preview ? ' · Next week' : '');
     if (back) h += '<div class="fs-backrow"><button class="fs-back" data-act="back">' + ICON.back + back + '</button><span class="fs-eyebrow">' + DAYS[d.idx] + stamp + '</span></div>';
     h += '<header class="fs-head">' + (back ? '' : '<p class="fs-eyebrow">' + LONG[d.idx] + stamp + '</p>') +
       '<h1 class="fs-h1">' + d.name + '</h1><p class="fs-sub">' + (isRest ? 'No lifting, swimming or running today' : d.tag.replace(/ \+ /g, ', ')) + '</p></header>';
@@ -188,7 +394,7 @@ function mount(root, opts) {
   function weekListHTML() {
     const plan = planFor(S.preview), a = plan[0].date, b = plan[6].date;
     const sel = S.day == null ? (S.preview ? 0 : todayIdx) : S.day;
-    return '<div class="fs-col fs-md-list"><header class="fs-weekhead"><div class="fs-head"><p class="fs-eyebrow">Week ' + (plan[0].rotation ? 'B' : 'A') + ' · ' + shortDate(a) + ' to ' + shortDate(b) + '</p>' +
+    return '<div class="fs-col fs-md-list"><header class="fs-weekhead"><div class="fs-head"><p class="fs-eyebrow">' + shortDate(a) + ' to ' + shortDate(b) + '</p>' +
       '<h1 class="fs-h1">' + (S.preview ? 'Next week' : 'This week') + '</h1></div>' +
       '<div class="fs-seg" role="group" aria-label="Week"><button data-act="seg" data-preview="0" aria-pressed="' + !S.preview + '">This week</button><button data-act="seg" data-preview="1" aria-pressed="' + S.preview + '">Next week</button></div></header>' +
       '<ul class="fs-week">' + plan.map(d => {
