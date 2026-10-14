@@ -102,7 +102,7 @@ One document, four views, one visible at a time, swapped in place so the timer a
 
 ## Motion and focus
 
-Three finite moments, nothing loops. Opening: one slash, the day's kanji, the name, gone in 1.5 seconds. Check: the fighter's own strike crosses the row (wind arc, triple claw, flame edge, lightning, fractured strike) with two streaks, sparks and a pop on the box; the text never moves. Finish: a double slash, the kanji and Session complete over the hero for under two seconds when the last lift is checked. Effects fire for pointer taps only. Textures such as speed lines are static. State fills run 120 to 180ms, the ring 1s linear. Reduced motion turns all of it off and skips the opening. Focus-visible is a 3px element color outline, offset 2px.
+Character art has slow breathing or water-drift motion with a soft elemental pulse, independent of all text and controls. Guide offers Pause art, stored separately from workout progress. Hidden documents pause; reduced-motion disables decorative loops. Three finite feedback moments also remain. Opening: one slash, the day's kanji, the name, gone in 1.5 seconds. Check: the fighter's own strike crosses the row (wind arc, triple claw, flame edge, lightning, fractured strike) with two streaks, sparks and a pop on the box; the text never moves. Finish: a double slash, the kanji and Session complete over the hero for under two seconds when the last lift is checked. Effects fire for pointer taps only. Textures such as speed lines are static. State fills run 120 to 180ms, the ring 1s linear. Reduced motion turns all of it off and skips the opening. Focus-visible is a 3px element color outline, offset 2px.
 
 ## Do
 
@@ -114,7 +114,7 @@ Three finite moments, nothing loops. Opening: one slash, the day's kanji, the na
 ## Don't
 
 - Don't let art overlap text or controls.
-- Don't add looping particles or ambient animation.
+- Keep character motion subtle, pausable, and separate from workout controls.
 - Don't use generic vector characters or placeholder art.
 - Don't show invented statistics, streaks or history.
 - Don't use dashes in interface copy.

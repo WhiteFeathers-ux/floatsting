@@ -448,3 +448,22 @@ html,body{height:100%;margin:0;background:#0c0a12}
 .fs-art-volt{--zoom:235%;--fx:-62%;--fy:-26%;--px:62%;--py:16%}
 .fs-art-granite{--zoom:257%;--fx:-54%;--fy:-21%;--px:54%;--py:4%}
 .fs-art-still{--zoom:218%;--fx:-49.3%;--fy:-21%;--px:49%;--py:9%}
+
+.fs-hero-art>.fs-art-gale{height:140%;transform:translateY(-30%)}
+.fs-stage>.fs-art-gale{-webkit-mask-image:linear-gradient(#000 80%,transparent);mask-image:linear-gradient(#000 80%,transparent)}
+
+/* Decorative artwork moves independently of workout text and controls. */
+.fs-figure{transform-box:view-box;transform-origin:50% 78%;animation:fs-art-breathe 6s cubic-bezier(.77,0,.175,1) infinite;animation-delay:var(--art-phase,0s)}
+.fs-art-energy{transform-box:fill-box;transform-origin:center;animation:fs-energy-breathe 6s ease-in-out infinite;animation-delay:var(--art-phase,0s)}
+.fs-art-tide .fs-figure{animation-name:fs-water-drift;animation-duration:7s}
+.fs-art-granite .fs-figure{animation-name:fs-stone-breathe;animation-duration:8s}
+.fs-art-still .fs-figure{animation-duration:8s}
+.fs-art-volt .fs-art-energy{animation-duration:4s}
+.fs-guidehead{position:relative;padding-right:92px}
+.fs-art-toggle{position:absolute;right:0;top:0;min-height:44px;padding:0 10px!important;border:1px solid var(--line)!important;border-radius:10px;font-size:12px!important;color:var(--muted)!important}
+@keyframes fs-art-breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-6px) scale(1.014)}}
+@keyframes fs-water-drift{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(5px,-4px) rotate(.35deg)}}
+@keyframes fs-stone-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.012)}}
+@keyframes fs-energy-breathe{0%,100%{opacity:.035;transform:scale(.94)}50%{opacity:.13;transform:scale(1.04)}}
+.is-art-paused .fs-figure,.is-art-paused .fs-art-energy{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.fs-figure,.fs-art-energy{animation:none!important}}

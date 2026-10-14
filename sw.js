@@ -1,4 +1,4 @@
-const CACHE = 'floatsting-v14-ninja-poses';
+const CACHE = 'floatsting-v16-living-cast';
 const ASSETS = [
   './',
   './index.html',

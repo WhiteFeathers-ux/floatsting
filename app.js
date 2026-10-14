@@ -340,17 +340,21 @@ function mount(root, opts) {
     const cw = w / 2, ch = extra ? h : h / 2;
     const x = (pose % 2) * cw, y = extra ? 0 : Math.floor(pose / 2) * ch;
     const faces = {
-      gale: [[58,24],[66,31],[54,21],[50,22]],
-      fang: [[50,26],[48,19],[44,18],[53,25]],
+      gale: [[50,44],[43,46],[52,23],[46,39]],
+      fang: [[55,18],[47,23],[47,18],[50,21]],
       ember: [[51,18],[45,19],[48,16],[49,20]],
-      volt: [[65,30],[53,28],[67,21],[55,30]],
+      volt: [[52,18],[49,17],[50,17],[50,18]],
       still: [[53,21],[48,20],[49,20],[49,21]],
-      tide: [[55,28],[52,26],[53,23],[53,26]],
+      tide: [[55,32],[48,26],[55,24],[49,29]],
       granite: [[55,23],[55,22],[52,22],[53,23]]
     };
-    const face = extra ? [50,23] : faces[f.key][pose];
+    const face = extra ? (f.key === 'still' ? [[55,22],[57,24]] : [[61,27],[51,28]])[pose] : faces[f.key][pose];
     const src = global.FS_ART ? global.FS_ART[file] : 'art/' + file;
-    return '<svg class="fs-art fs-art-' + f.key + '" data-pose="' + f.key + '-' + (extra ? pose + 4 : pose) + '" style="--zoom:270%;--fx:-' + face[0] + '%;--fy:-' + face[1] + '%" width="' + cw + '" height="' + ch + '" viewBox="' + [x,y,cw,ch].join(' ') + '" preserveAspectRatio="xMidYMin slice" overflow="hidden" aria-hidden="true"><image href="' + src + '" width="' + w + '" height="' + h + '"/></svg>';
+    const phase = ['gale','fang','ember','volt','still','tide','granite'].indexOf(f.key) * .7 + pose * .4;
+    return '<svg class="fs-art fs-art-' + f.key + '" data-pose="' + f.key + '-' + (extra ? pose + 4 : pose) + '" style="--art-phase:-' + phase + 's;--zoom:270%;--fx:-' + face[0] + '%;--fy:-' + face[1] + '%" width="' + cw + '" height="' + ch + '" viewBox="0 0 ' + cw + ' ' + ch + '" preserveAspectRatio="xMidYMin slice" overflow="hidden" aria-hidden="true">' +
+      '<ellipse class="fs-art-energy" cx="' + cw*.5 + '" cy="' + ch*.55 + '" rx="' + cw*.35 + '" ry="' + ch*.3 + '" fill="' + f.color + '" opacity=".06"/>' +
+      '<g class="fs-figure"><svg width="' + cw + '" height="' + ch + '" viewBox="' + [x,y,cw,ch].join(' ') + '" overflow="hidden"><image href="' + src + '" width="' + w + '" height="' + h + '"/></svg></g></svg>';
+
   }
   const av = (f, cls, d, view) => '<span class="fs-av' + (cls ? ' ' + cls : '') + '" style="--el:' + f.color + '" aria-hidden="true">' + art(f, d, view) + '</span>';
 
@@ -362,6 +366,7 @@ function mount(root, opts) {
     try { localStorage.setItem('floatsting:'+key,JSON.stringify(value)); S.storageError=false; }
     catch(e) { S.storageError=true; }
   }
+  S.artMotion = read('character-motion', true) !== false;
   const prefs=read('prefs',{}) || {};
   const valid=(v,min,max,fallback)=>Number.isInteger(v)&&v>=min&&v<=max?v:fallback;
   Object.assign(S.timer,{rounds:valid(prefs.rounds,1,20,3),work:valid(prefs.work,30,300,180),rest:valid(prefs.rest,15,180,60),sound:typeof prefs.sound==='boolean'?prefs.sound:true});
@@ -510,7 +515,7 @@ function mount(root, opts) {
 
   function guideHTML() {
     const cur = GUIDE.find(g => g.id === S.topic) || GUIDE[0];
-    return '<div class="fs-md' + (S.topic ? ' has-detail' : '') + '"><div class="fs-col fs-md-list"><header class="fs-head"><h1 class="fs-h1">Guide</h1><p class="fs-sub">How the plan works and why</p></header>' +
+    return '<div class="fs-md' + (S.topic ? ' has-detail' : '') + '"><div class="fs-col fs-md-list"><header class="fs-head fs-guidehead"><h1 class="fs-h1">Guide</h1><button class="fs-art-toggle" data-act="artmotion" aria-pressed="' + S.artMotion + '">' + (S.artMotion ? 'Pause art' : 'Animate art') + '</button><p class="fs-sub">How the plan works and why</p></header>' +
       '<ul class="fs-cast" aria-label="The seven forms">' + ['upper', 'lower', 'push', 'pull', 'legs', 'pool', 'rest'].map(k => '<li style="--el:' + FIGHTERS[k].color + '">' + av(FIGHTERS[k]) + '<b>' + FIGHTERS[k].name + '</b><small>' + FIGHTERS[k].label + '</small></li>').join('') + '</ul>' +
       '<ul class="fs-topics">' + GUIDE.map(g => '<li><button class="fs-trow" data-act="opentopic" data-topic="' + g.id + '"' + (g.id === cur.id ? ' aria-current="true"' : '') + '><span><b>' + g.title + '</b><small>' + g.summary + '</small></span>' + ICON.chev + '</button></li>').join('') + '</ul></div>' +
       '<div class="fs-col fs-md-detail fs-read"><button class="fs-back" data-act="back">' + ICON.back + 'Guide</button><h1 class="fs-h2">' + cur.title + '</h1>' + topicHTML(cur) + '</div></div>';
@@ -611,6 +616,7 @@ function mount(root, opts) {
     return '[data-act="' + el.dataset.act + '"]' + ['idx', 'i', 'view', 'topic', 'preview', 'k', 'd', 'p', 'gi', 'sheet', 'to'].map(k => el.dataset[k] != null ? '[data-' + k + '="' + el.dataset[k] + '"]' : '').join('');
   }
   function render() {
+    root.classList.toggle('is-art-paused', !S.artMotion || document.hidden);
     const screen = S.view + '|' + S.day + '|' + S.topic + '|' + S.preview;
     const fk = root.contains(document.activeElement) ? keyOf(document.activeElement) : null, st = elMain.scrollTop;
     elMain.innerHTML = mainHTML();
@@ -726,7 +732,8 @@ function mount(root, opts) {
     const el = ev.target.closest('[data-act]'); if (!el || !root.contains(el)) return;
     const a = el.dataset.act, t = S.timer;
     if (a === 'closesheet' && el.classList.contains('fs-sheetwrap') && ev.target !== el) return;
-    if (a === 'move') { S.sheet = { kind: 'move', idx: +el.dataset.idx, preview: S.view === 'today' ? false : S.preview }; S.sheetFrom = keyOf(el); }
+    if (a === 'artmotion') { S.artMotion = !S.artMotion; write('character-motion', S.artMotion); }
+    else if (a === 'move') { S.sheet = { kind: 'move', idx: +el.dataset.idx, preview: S.view === 'today' ? false : S.preview }; S.sheetFrom = keyOf(el); }
     else if (a === 'swap' && S.sheet?.kind === 'move') {
       const preview = S.sheet.preview, to = +el.dataset.to;
       swapSessions(preview, S.sheet.idx, to); S.sheet = null; S.preview = preview; S.day = to;
@@ -781,7 +788,7 @@ function mount(root, opts) {
     const next=new Date(),w=weekStart(next),idx=(next.getDay()+6)%7;
     if(dateKey(w)!==dateKey(monday)||idx!==todayIdx){monday=w;todayIdx=idx;S.day=null;S.sheet=null;render();}
   }
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){refreshDate();step();acquireWake();}});
+  document.addEventListener('visibilitychange',()=>{root.classList.toggle('is-art-paused', !S.artMotion || document.hidden);if(document.visibilityState==='visible'){refreshDate();step();acquireWake();}});
   window.addEventListener('focus',refreshDate);
   setInterval(refreshDate,30000);
   render();
