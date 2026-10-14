@@ -337,18 +337,18 @@ function mount(root, opts) {
     const extra = alternate && pose < 2;
     const file = f.key + (extra ? (f.key === 'still' ? '-sunday' : '-pair') : '') + '-poses.webp';
     const w = extra ? 1536 : 1122, h = extra ? 1024 : 1402;
-    const cw = w / 2, ch = extra ? h : h / 2;
-    const x = (pose % 2) * cw, y = extra ? 0 : Math.floor(pose / 2) * ch;
+    const cw = w / 2, ch = extra ? h : f.key === 'tide' ? (pose < 2 ? 670 : 728) : h / 2;
+    const x = (pose % 2) * cw, y = extra ? 0 : f.key === 'tide' ? (pose < 2 ? 0 : 674) : Math.floor(pose / 2) * ch;
     const faces = {
       gale: [[50,44],[43,46],[52,23],[46,39]],
       fang: [[55,18],[47,23],[47,18],[50,21]],
-      ember: [[51,18],[45,19],[48,16],[49,20]],
-      volt: [[52,18],[49,17],[50,17],[50,18]],
-      still: [[53,21],[48,20],[49,20],[49,21]],
-      tide: [[55,32],[48,26],[55,24],[49,29]],
+      ember: [[47,33],[43,34],[49,24],[46,35]],
+      volt: [[50,27],[49,28],[50,17],[50,21]],
+      still: [[54,25],[43,26],[48,21],[48,24]],
+      tide: [[57,40],[46,39],[55,36],[51,45]],
       granite: [[55,23],[55,22],[52,22],[53,23]]
     };
-    const face = extra ? (f.key === 'still' ? [[55,22],[57,24]] : [[61,27],[51,28]])[pose] : faces[f.key][pose];
+    const face = extra ? (f.key === 'still' ? [[51,25],[56,28]] : [[57,34],[48,35]])[pose] : faces[f.key][pose];
     const src = global.FS_ART ? global.FS_ART[file] : 'art/' + file;
     const phase = ['gale','fang','ember','volt','still','tide','granite'].indexOf(f.key) * .7 + pose * .4;
     return '<svg class="fs-art fs-art-' + f.key + '" data-pose="' + f.key + '-' + (extra ? pose + 4 : pose) + '" style="--art-phase:-' + phase + 's;--zoom:270%;--fx:-' + face[0] + '%;--fy:-' + face[1] + '%" width="' + cw + '" height="' + ch + '" viewBox="0 0 ' + cw + ' ' + ch + '" preserveAspectRatio="xMidYMin slice" overflow="hidden" aria-hidden="true">' +
