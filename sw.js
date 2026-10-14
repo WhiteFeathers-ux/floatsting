@@ -1,4 +1,4 @@
-const CACHE = 'floatsting-v18-cast-everywhere';
+const CACHE = 'floatsting-v20-side-by-side';
 const ASSETS = [
   './',
   './index.html',

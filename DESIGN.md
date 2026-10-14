@@ -128,3 +128,12 @@ Character art has slow breathing or water-drift motion with a soft elemental pul
 - Guide: the cast row is a selector (`data-act="cast"`, `S.cast`, not saved). Each guide page borrows a fighter through `TOPIC_CAST`.
 - Phone widths (container under 900px): `.fs-hero` and `.fs-band` become a full-bleed stage with `flex:1`, so the fighter takes all spare height; art is sized in the stage's own container units and framed by the pose face center. Back links float over the stage. Desktop keeps the card bands and side stage.
 - The fighter steps in once (`fs-art-in`) when the tab or featured fighter changes; `.is-enter` is only set on those renders, so check taps and timer ticks do not replay it.
+
+## Phone layout of record: side by side (2026-10-13, Black's pick)
+
+- Rule: text never sits on the art. On phone widths the fighter stands full height on the right (`.fs-backdrop`, painted by `paintBackdrop()`), and all content is a solid column on the left (58%, 61% on short phones).
+- The hero and band keep their markup but show text only on phones; their art is hidden there and still used on desktop.
+- Exercise rows are a two line grid: name, then sets and rest. Week row art, the rest tag and the swim banner art are hidden on phones.
+- Swim days add `.fs-partner` (Tide medallion, bottom right, same action as the swim row, out of the tab order).
+- The name tag button at the top right opens the cast gallery sheet.
+- Rejected on the way here: small card bands ("barely see the characters"), art behind translucent lists ("harder to see"), faint backdrop behind solid lists ("bland").

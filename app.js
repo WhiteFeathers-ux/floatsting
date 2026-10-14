@@ -470,6 +470,8 @@ function mount(root, opts) {
     }
     h += '<div class="fs-noteactions"><button class="fs-link" data-act="sheet" data-sheet="note" data-idx="' + d.idx + '">' + ICON.note +
       '<span class="fs-sumtext"><b>Session notes</b></span></button><button class="fs-move" data-act="move" data-idx="' + d.idx + '">Move session</button></div></div>';
+    /* swim days: Tide stands with the day's fighter. Same action as the swim row, so it stays out of the tab order. */
+    if (isSwim(d)) h += '<button class="fs-partner" data-act="partner" data-idx="' + d.idx + '" tabindex="-1" aria-hidden="true">' + av(FIGHTERS.pool, '', d) + '<b>' + d.cardio.short + '</b></button>';
     return h + '</div>';
   }
 
@@ -480,7 +482,7 @@ function mount(root, opts) {
     return '<div class="fs-col fs-md-list"><header class="fs-weekhead"><div class="fs-head fs-band fs-weekhero" style="--el:' + hf.color + '"><div class="fs-hero-text"><h1 class="fs-h1">' + (S.preview ? 'Next week' : 'This week') + '</h1>' +
       '<p class="fs-sub">' + shortDate(a) + ' to ' + shortDate(b) + '</p><p class="fs-eyebrow fs-meta">' + (!S.preview && hd.idx === todayIdx ? 'Today' : DAYS[hd.idx]) + ' · ' + hd.name + '</p></div>' + heroArt(hf, art(hf, hd)) + '</div>' +
       '<div class="fs-seg" role="group" aria-label="Week"><button data-act="seg" data-preview="0" aria-pressed="' + !S.preview + '">This week</button><button data-act="seg" data-preview="1" aria-pressed="' + S.preview + '">Next week</button></div></header>' +
-      '<p class="fs-tally"><span><b>' + plan.filter(d => d.ex.length).length + '</b> lifts</span><span class="is-pool"><b>' + plan.filter(isSwim).length + '</b> swims</span><span class="is-rest"><b>' + plan.filter(d => !d.ex.length).length + '</b> rest days</span></p>' +
+      '<p class="fs-tally"><span><b>' + plan.filter(d => d.ex.length).length + '</b> lifts</span><span class="is-pool"><b>' + plan.filter(isSwim).length + '</b> swims</span><span class="is-rest"><b>' + plan.filter(d => !d.ex.length).length + '</b> rest<i> days</i></span></p>' +
       '<ul class="fs-week">' + plan.map(d => {
         const n = d.ex.length, dn = done(d).length, isToday = !S.preview && d.idx === todayIdx;
         const side = !n ? '<span class="fs-wside is-resttag">Rest</span>' : dn === n ? '<span class="fs-wside is-done">' + ICON.check + 'Done</span>' : dn ? '<span class="fs-wside">' + dn + ' of ' + n + '</span>' : '';
@@ -522,10 +524,10 @@ function mount(root, opts) {
   function guideHTML() {
     const cur = GUIDE.find(g => g.id === S.topic) || GUIDE[0];
     const tid = planFor(false)[todayIdx].id, ck = FIGHTERS[S.cast] ? S.cast : FIGHTERS[tid] ? tid : 'rest', cf = FIGHTERS[ck], tf = FIGHTERS[TOPIC_CAST[cur.id]] || cf;
-    return '<div class="fs-md' + (S.topic ? ' has-detail' : '') + '"><div class="fs-col fs-md-list"><header class="fs-head fs-band fs-guidehero" style="--el:' + cf.color + '"><div class="fs-hero-text"><h1 class="fs-h1">Guide</h1><p class="fs-sub">How the plan works and why</p><p class="fs-eyebrow fs-meta">' + cf.label + ' · ' + cf.title + '</p></div>' + heroArt(cf, art(cf)) +
-      '<button class="fs-art-toggle" data-act="artmotion" aria-pressed="' + S.artMotion + '">' + (S.artMotion ? 'Pause art' : 'Animate art') + '</button></header>' +
+    return '<div class="fs-md' + (S.topic ? ' has-detail' : '') + '"><div class="fs-col fs-md-list"><header class="fs-head fs-band fs-guidehero" style="--el:' + cf.color + '"><div class="fs-hero-text"><h1 class="fs-h1">Guide</h1><p class="fs-sub">How the plan works and why</p><p class="fs-eyebrow fs-meta">' + cf.label + ' · ' + cf.title + '</p></div>' + heroArt(cf, art(cf)) + '</header>' +
       '<ul class="fs-cast" aria-label="The seven forms">' + ['upper', 'lower', 'push', 'pull', 'legs', 'pool', 'rest'].map(k => '<li style="--el:' + FIGHTERS[k].color + '"><button class="fs-castbtn" data-act="cast" data-k="' + k + '" aria-pressed="' + (k === ck) + '" aria-label="' + FIGHTERS[k].name + ', ' + FIGHTERS[k].label + '">' + av(FIGHTERS[k]) + '<b>' + FIGHTERS[k].name + '</b><small>' + FIGHTERS[k].label + '</small></button></li>').join('') + '</ul>' +
-      '<ul class="fs-topics">' + GUIDE.map(g => '<li><button class="fs-trow" data-act="opentopic" data-topic="' + g.id + '"' + (g.id === cur.id ? ' aria-current="true"' : '') + '><span><b>' + g.title + '</b><small>' + g.summary + '</small></span>' + ICON.chev + '</button></li>').join('') + '</ul></div>' +
+      '<ul class="fs-topics">' + GUIDE.map(g => '<li><button class="fs-trow" data-act="opentopic" data-topic="' + g.id + '"' + (g.id === cur.id ? ' aria-current="true"' : '') + '><span><b>' + g.title + '</b><small>' + g.summary + '</small></span>' + ICON.chev + '</button></li>').join('') + '</ul>' +
+      '<button class="fs-art-toggle" data-act="artmotion" aria-pressed="' + S.artMotion + '">' + (S.artMotion ? 'Pause art' : 'Animate art') + '</button></div>' +
       '<div class="fs-col fs-md-detail fs-read"><button class="fs-back" data-act="back">' + ICON.back + 'Guide</button><header class="fs-head fs-band fs-topichero" style="--el:' + tf.color + '"><div class="fs-hero-text"><h1 class="fs-h2">' + cur.title + '</h1><p class="fs-sub">' + cur.summary + '</p></div>' + heroArt(tf, art(tf)) + '</header>' + topicHTML(cur) + '</div></div>';
   }
 
@@ -635,18 +637,18 @@ function mount(root, opts) {
     if (!el || !el.dataset || !el.dataset.act) return null;
     return '[data-act="' + el.dataset.act + '"]' + ['idx', 'i', 'view', 'topic', 'preview', 'k', 'd', 'p', 'gi', 'sheet', 'to'].map(k => el.dataset[k] != null ? '[data-' + k + '="' + el.dataset[k] + '"]' : '').join('');
   }
-  /* the page ground: the day's fighter in another pose, or Tide on a swim day. Repainted only when it changes. */
+  /* phones: the standing figure beside the workout column. The day's fighter in the tab's pose; Guide shows the featured or page fighter. Repainted only when it changes. */
   let lastBack = '';
   function paintBackdrop() {
     const d = shownDay(), own = fighterOf(d);
-    let f = own, view = { today: 'guide', week: 'timer', guide: 'today', timer: 'week' }[S.view];
+    let f = own; const view = S.view;
     if (S.view === 'guide') { const cur = GUIDE.find(g => g.id === S.topic); f = (cur && FIGHTERS[TOPIC_CAST[cur.id]]) || FIGHTERS[S.cast] || own; }
-    else if (isSwim(d)) { f = FIGHTERS.pool; view = S.view; }
     const key = f.key + '|' + view + '|' + d.origin;
     root.firstElementChild.style.setProperty('--el2', f.color);
     if (key === lastBack) return;
     lastBack = key;
     elBack.innerHTML = '<span class="fs-kanji">' + f.kanji + '</span>' + art(f, d, view);
+    elBack.classList.remove('is-in'); void elBack.offsetWidth; elBack.classList.add('is-in');
   }
   function render() {
     root.classList.toggle('is-art-paused', !S.artMotion || document.hidden);
@@ -700,7 +702,34 @@ function mount(root, opts) {
     });
     const box = row.querySelector('.fs-box');
     if (box) box.animate([{ transform: 'scale(.7)' }, { transform: 'scale(1.2)', offset: .55 }, { transform: 'scale(1)' }], { duration: 220, easing: 'cubic-bezier(.2,1.4,.4,1)' });
+    const k = document.createElement('b');
+    k.className = 'fs-fx-kanji'; k.textContent = FIGHTERS[id].kanji; fx.appendChild(k);
+    k.animate([{ transform: 'translate(-50%,-50%) scale(2.8)', opacity: 0 }, { transform: 'translate(-50%,-50%) scale(1)', opacity: 1, offset: .3 }, { transform: 'translate(-50%,-50%) scale(1.2)', opacity: 0 }], { duration: 640, easing: 'cubic-bezier(.2,1.2,.3,1)', fill: 'both' });
+    impact();
     setTimeout(() => fx.remove(), 760);
+  }
+  /* the hit lands on the whole screen: a short shake and the fighter flares. Finite, never blocks input. */
+  function impact() {
+    const shell = root.firstElementChild;
+    shell.classList.remove('fs-hit'); void shell.offsetWidth; shell.classList.add('fs-hit');
+    clearTimeout(impact.t); impact.t = setTimeout(() => shell.classList.remove('fs-hit'), 650);
+    try { if (navigator.vibrate) navigator.vibrate(14); } catch (e) {}
+  }
+  /* victory card: the fighter takes the full screen when a session or swim is finished. Tap or wait to continue. */
+  function playVictory(f, d, title, sub) {
+    if (reduceMotion) return;
+    const shell = root.firstElementChild, old = shell.querySelector('.fs-victory');
+    if (old) old.remove();
+    const el = document.createElement('div');
+    el.className = 'fs-victory'; el.setAttribute('role', 'status'); el.style.setProperty('--el', f.color);
+    el.innerHTML = '<span class="fs-v-kanji" aria-hidden="true">' + f.kanji + '</span><div class="fs-v-art" aria-hidden="true">' + art(f, d, 'timer') + '</div>' +
+      '<i class="fs-v-slash" aria-hidden="true"></i><i class="fs-v-slash is-b" aria-hidden="true"></i>' +
+      '<div class="fs-v-text"><small>' + f.name + '</small><strong>' + title + '</strong><span>' + sub + '</span></div><p class="fs-v-hint" aria-hidden="true">Tap to continue</p>';
+    shell.appendChild(el);
+    const close = () => { if (!el.isConnected || el.classList.contains('is-out')) return; el.classList.add('is-out'); setTimeout(() => el.remove(), 280); };
+    el.addEventListener('click', close);
+    setTimeout(close, 3000);
+    try { if (navigator.vibrate) navigator.vibrate([24, 50, 36]); } catch (e) {}
   }
   function playFinish(hero, id) {
     if (reduceMotion || !hero || !hero.animate) return;
@@ -782,6 +811,7 @@ function mount(root, opts) {
       wk[d.key + ':swim'] = !swimDone(d); write('checks:swim-core-v5:' + dateKey(weekOf(d.preview)), wk);
     }
     else if (a === 'sheet') { S.sheet = { kind: el.dataset.sheet, idx: +el.dataset.idx, topic: el.dataset.topic, gi: +el.dataset.gi, preview: S.view === 'today' ? false : S.preview }; S.sheetFrom = keyOf(el); }
+    else if (a === 'partner') { S.sheet = { kind: 'cardio', idx: +el.dataset.idx, preview: S.view === 'today' ? false : S.preview }; S.sheetFrom = '[data-act="sheet"][data-sheet="cardio"][data-idx="' + el.dataset.idx + '"]'; }
     else if (a === 'closesheet') { S.sheet = null; }
     else if (a === 'nav') { S.sheet = null; if (S.view === el.dataset.view) { S.day = null; S.topic = null; } S.view = el.dataset.view; if (S.view === 'today') { S.preview = false; S.day = null; } }
     else if (a === 'check') { const d = planFor(S.view === 'today' ? false : S.preview)[+el.dataset.idx], arr = done(d).slice(), i = +el.dataset.i, at = arr.indexOf(i); if (at >= 0) arr.splice(at, 1); else arr.push(i); setDone(d, arr); }
@@ -808,8 +838,12 @@ function mount(root, opts) {
       if (row && row.getAttribute('aria-pressed') === 'true') {
         const d = planFor(S.view === 'today' ? false : S.preview)[+el.dataset.idx];
         playCheck(row, d.id);
-        if (done(d).length === d.ex.length) playFinish(root.querySelector('.fs-hero'), d.id);
+        if (done(d).length === d.ex.length) playVictory(fighterOf(d), d, 'Session complete', d.name + ' · ' + d.ex.length + ' of ' + d.ex.length);
       }
+    }
+    if (a === 'checkswim' && ev.detail > 0 && S.sheet?.kind === 'cardio') {
+      const d = planFor(S.sheet.preview)[S.sheet.idx];
+      if (swimDone(d)) playVictory(FIGHTERS.pool, d, 'Swim complete', LONG[d.idx] + ' · ' + d.cardio.short);
     }
     if (a === 'closesheet' && S.sheetFrom) { const f = root.querySelector(S.sheetFrom); if (f) f.focus({ preventScroll: true }); }
   });
@@ -831,7 +865,7 @@ function mount(root, opts) {
   setInterval(refreshDate,30000);
   render();
   if (S.timer.running) run();
-  return { state: S, render: render, fx: { check: playCheck, finish: playFinish } };
+  return { state: S, render: render, fx: { check: playCheck, finish: playFinish, victory: id => playVictory(FIGHTERS[id] || FIGHTERS.rest, shownDay(), 'Session complete', (FIGHTERS[id] || FIGHTERS.rest).label) } };
 }
 
 global.FloatSting = { mount: mount };
