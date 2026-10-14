@@ -292,7 +292,7 @@ const FIGHTERS = {
 /* Thursday's rest belongs to Flash, Sunday's to Still; keyed to the session's original day so it follows a moved session */
 const fighterOf = d => d.id === 'rest' && d.origin === 3 ? FIGHTERS.flash : FIGHTERS[d.id] || FIGHTERS.rest;
 /* scene art shown on each fighter's own day: art/scenes/<key>-<n>.webp */
-const SCENES = { gale: [1,2,3,4,5], fang: [1,2,3,4,5], ember: [1,2,3,4,5], volt: [1,2,3,4,5], granite: [1,2,3,4,5], tide: [1,2,3,4,5], still: [1,2,3,4,5], flash: [1,2,3,4,5] };
+const SCENES = { gale: [1,2,3,4,5], fang: [1,2,3,4,5,6,7,8,9,10], ember: [1,2,3,4,5,6,7,8,9,10], volt: [1,2,3,4,5,6,7,8,9,10], granite: [1,2,3,4,5], tide: [1,2,3,4,5], still: [1,2,3,4,5], flash: [1,2,3,4,5] };
 /* Guide pages each borrow one fighter. Presentation only. */
 const TOPIC_CAST = { week: 'upper', sets: 'push', progress: 'pull', core: 'legs', cardio: 'pool', fuel: 'lower', care: 'rest' };
 const fid = f => Object.keys(FIGHTERS).find(k => FIGHTERS[k] === f);
