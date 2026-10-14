@@ -1,4 +1,4 @@
-const CACHE = 'floatsting-v20-side-by-side';
+const CACHE = 'floatsting-v21-portrait';
 const ASSETS = [
   './',
   './index.html',

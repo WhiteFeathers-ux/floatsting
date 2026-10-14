@@ -872,4 +872,8 @@ global.FloatSting = { mount: mount };
 })(window);
 
 window.floatStingApp=FloatSting.mount(document.getElementById('app'));
+/* no pinch or double-tap zoom: iOS ignores user-scalable, so its gesture events are cancelled too */
+['gesturestart','gesturechange','gestureend'].forEach(t=>document.addEventListener(t,e=>e.preventDefault(),{passive:false}));
+/* portrait only where the browser allows a lock (installed Android); iOS gets the turn-upright screen in app.css */
+try{if(screen.orientation&&screen.orientation.lock)screen.orientation.lock('portrait').catch(()=>{});}catch(e){}
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));

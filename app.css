@@ -811,3 +811,12 @@ html,body{height:100%;margin:0;background:#0c0a12}
   .fs-v-text{padding:0 64px 72px;max-width:760px}
   .fs-v-art .fs-art{left:62%;width:max(60cqw,70cqh)}
 }
+
+/* ============ no zoom, no landscape ============ */
+html,body{touch-action:pan-y;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.fs-app{touch-action:pan-y}
+/* phones turned sideways get one screen asking to turn back; tablets and laptops are unaffected */
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
+  body::after{content:"\21BB\A Turn your phone upright";white-space:pre;position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;text-align:center;
+    background:#0c0a12;color:#efe9dc;font:400 20px/1.6 "Dela Gothic One","Arial Black",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+}
