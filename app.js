@@ -292,6 +292,8 @@ const FIGHTERS = {
 /* Thursday's rest belongs to Flash, Sunday's to Still; keyed to the session's original day so it follows a moved session */
 const fighterOf = d => d.id === 'rest' && d.origin === 3 ? FIGHTERS.flash : FIGHTERS[d.id] || FIGHTERS.rest;
 /* scene art shown on each fighter's own day: art/scenes/<key>-<n>.webp */
+/* face x (0..1) for scenes whose subject is off center, so every face lands in the same spot */
+const SCENE_FX = {"ember-10": 0.39, "fang-1": 0.43, "fang-3": 0.64, "fang-6": 0.45, "fang-7": 0.38, "fang-8": 0.42, "gale-3": 0.41, "still-8": 0.59, "volt-4": 0.65, "volt-6": 0.42, "volt-7": 0.3};
 const SCENES = { gale: [1,2,3,4,5], fang: [1,2,3,4,5,6,7,8,9,10], ember: [1,2,3,4,5,6,7,8,9,10], volt: [1,2,3,4,5,6,7,8,9,10], granite: [1,2,3,4,5], tide: [1,2,3,4,5], still: [1,2,3,4,5,6,7,8,9], flash: [1,2,3,4,5] };
 /* Guide pages each borrow one fighter. Presentation only. */
 const TOPIC_CAST = { week: 'upper', sets: 'push', progress: 'pull', core: 'legs', cardio: 'pool', fuel: 'lower', care: 'rest' };
@@ -657,19 +659,20 @@ function mount(root, opts) {
     if (key === lastBack) return;
     lastBack = key;
     clearInterval(sceneTick); sceneTick = null;
-    elBack.innerHTML = '<span class="fs-kanji">' + f.kanji + '</span>' + (scenes ? '<div class="fs-scenes" data-n="0"><img class="fs-scene is-on" alt="" decoding="async" src="' + sceneSrc(scenes[0]) + '"></div>' : art(f, d, view));
+    elBack.innerHTML = '<span class="fs-kanji">' + f.kanji + '</span>' + (scenes ? '<div class="fs-scenes" data-n="0"><img class="fs-scene is-on" alt="" decoding="async" style="--fx:' + sceneFx(scenes[0]) + '" src="' + sceneSrc(scenes[0]) + '"></div>' : art(f, d, view));
     elBack.classList.remove('is-in'); void elBack.offsetWidth; elBack.classList.add('is-in');
     sceneList = scenes || [];
     if (sceneList.length > 1) sceneTick = setInterval(nextScene, 5000);
   }
   /* every day the stage cycles that fighter's scene art every 5 seconds (Timer keeps the pose); it holds still while art is paused, hidden or reduced */
   let sceneTick = null, sceneList = [];
+  const sceneFx = kn => SCENE_FX[kn[0] + '-' + kn[1]] || 0.5;
   const sceneSrc = kn => { const file = 'scenes/' + kn[0] + '-' + kn[1] + '.webp'; return global.FS_ART && global.FS_ART[file] || 'art/' + file; };
   function nextScene() {
     const box = elBack.querySelector('.fs-scenes');
     if (!box || !S.artMotion || document.hidden || reduceMotion || box.dataset.busy) return;
     const n = (+box.dataset.n + 1) % sceneList.length, img = new Image();
-    img.className = 'fs-scene'; img.alt = ''; img.decoding = 'async'; box.dataset.busy = '1';
+    img.className = 'fs-scene'; img.alt = ''; img.decoding = 'async'; img.style.setProperty('--fx', sceneFx(sceneList[n])); box.dataset.busy = '1';
     img.onload = () => {
       delete box.dataset.busy;
       if (!box.isConnected) return;

@@ -859,3 +859,10 @@ html,body{touch-action:pan-y;-webkit-text-size-adjust:100%;text-size-adjust:100%
   .fs-app .fs-ex{gap:4px}
   .fs-app .fs-ex .fs-row::before{font-size:46px}
 }
+
+/* ============ scenes framed in the open space: narrower column, each face centered over the art (Black 10/14) ============ */
+@container fs (max-width:899px){
+  .fs-app .fs-col>:not(.fs-hero):not(.fs-band):not(.fs-backrow):not(.fs-weekhead),.fs-app .fs-weekhead>:not(.fs-band){max-width:60%}
+  .fs-app .fs-backdrop:has(.fs-scenes){inset:0 0 0 30%}
+  .fs-app .fs-scene{left:62%;transform:translateX(calc(var(--fx,.5) * -100%))}
+}
