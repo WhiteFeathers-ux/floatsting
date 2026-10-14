@@ -1,4 +1,4 @@
-const CACHE = 'floatsting-v28-framing';
+const CACHE = 'floatsting-v29-still2';
 const ASSETS = [
   './',
   './index.html',
@@ -18,7 +18,6 @@ const ASSETS = [
   './art/granite-poses.webp',
   './art/still-poses.webp',
   './art/flash-poses.webp',
-  './art/still-sunday-poses.webp',
   './art/tide-pair-poses.webp',
   './fonts/fonts.css',
   './fonts/dela.woff2',
