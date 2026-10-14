@@ -461,9 +461,10 @@ function mount(root, opts) {
     h += '<div class="fs-prog"><span class="fs-bar"><i style="width:' + (dn.length / n * 100) + '%"></i></span>' +
       '<span class="fs-count' + (full ? ' is-done' : '') + '">' + (full ? 'Complete' : dn.length + ' of ' + n) + '</span>' +
       (dn.length ? '<button class="fs-reset" data-act="reset" data-idx="' + d.idx + '">Reset</button>' : '') + '</div>';
-    h += '<ul class="fs-ex">' + d.ex.map((e, i) => {
+    const up = d.ex.findIndex((e, i) => dn.indexOf(i) < 0);
+    h += '<ul class="fs-ex" style="--kj:\'' + f.kanji + '\'">' + d.ex.map((e, i) => {
       const rx = splitRx(e[2]), on = dn.indexOf(i) >= 0;
-      return '<li><button class="fs-row' + (opts.focusDemo === i ? ' is-focus' : '') + '" data-act="check" data-idx="' + d.idx + '" data-i="' + i + '" aria-pressed="' + on + '">' +
+      return '<li><button class="fs-row' + (opts.focusDemo === i ? ' is-focus' : '') + (i === up ? ' is-next' : '') + '" style="--i:' + i + '" data-act="check" data-idx="' + d.idx + '" data-i="' + i + '" aria-pressed="' + on + '">' +
         '<span class="fs-box"><span>' + e[0] + '</span>' + ICON.check + '</span><span class="fs-name">' + e[1] + '</span>' +
         '<span class="fs-rx"><b>' + rx[0] + '</b><small>rest ' + rx[1] + '</small></span></button></li>';
     }).join('') + '</ul>';
@@ -648,9 +649,9 @@ function mount(root, opts) {
     const d = shownDay(), own = fighterOf(d);
     let f = own; const view = S.view;
     if (S.view === 'guide') { const cur = GUIDE.find(g => g.id === S.topic); f = (cur && FIGHTERS[TOPIC_CAST[cur.id]]) || FIGHTERS[S.cast] || own; }
-    const mine = view === 'today' && f === own && SCENES[f.key];
+    const mine = view !== 'timer' && SCENES[f.key];
     /* swim days share the stage with Tide, alternating scenes */
-    const scenes = mine && (isSwim(d) ? [].concat.apply([], mine.map((n, i) => [[f.key, n], ['tide', SCENES.tide[i % SCENES.tide.length]]])) : mine.map(n => [f.key, n]));
+    const scenes = mine && (isSwim(d) && f === own ? [].concat.apply([], mine.map((n, i) => [[f.key, n], ['tide', SCENES.tide[i % SCENES.tide.length]]])) : mine.map(n => [f.key, n]));
     const key = f.key + '|' + view + '|' + d.origin + (scenes ? '|scenes' : '');
     root.firstElementChild.style.setProperty('--el2', f.color);
     if (key === lastBack) return;
@@ -661,7 +662,7 @@ function mount(root, opts) {
     sceneList = scenes || [];
     if (sceneList.length > 1) sceneTick = setInterval(nextScene, 5000);
   }
-  /* on the fighter's own day the Today stage cycles their scene art every 5 seconds; it holds still while art is paused, hidden or reduced */
+  /* every day the stage cycles that fighter's scene art every 5 seconds (Timer keeps the pose); it holds still while art is paused, hidden or reduced */
   let sceneTick = null, sceneList = [];
   const sceneSrc = kn => { const file = 'scenes/' + kn[0] + '-' + kn[1] + '.webp'; return global.FS_ART && global.FS_ART[file] || 'art/' + file; };
   function nextScene() {
