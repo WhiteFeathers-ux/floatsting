@@ -1,4 +1,4 @@
-const CACHE = 'floatsting-v13-flexible-forms';
+const CACHE = 'floatsting-v14-ninja-poses';
 const ASSETS = [
   './',
   './index.html',
@@ -10,13 +10,15 @@ const ASSETS = [
   './icon-192.png',
   './icon-512.png',
   './icon-512-maskable.png',
-  './art/gale.webp',
-  './art/fang.webp',
-  './art/ember.webp',
-  './art/tide.webp',
-  './art/volt.webp',
-  './art/granite.webp',
-  './art/still.webp',
+  './art/gale-poses.webp',
+  './art/fang-poses.webp',
+  './art/ember-poses.webp',
+  './art/tide-poses.webp',
+  './art/volt-poses.webp',
+  './art/granite-poses.webp',
+  './art/still-poses.webp',
+  './art/still-sunday-poses.webp',
+  './art/tide-pair-poses.webp',
   './fonts/fonts.css',
   './fonts/dela.woff2',
   './fonts/hanken-400.woff2',

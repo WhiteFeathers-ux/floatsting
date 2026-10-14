@@ -63,7 +63,7 @@ One fighter per kind of day. The fighter sets the element color (`--el`) for wha
 | Rest | Still | 静 | still |
 | Pool | Tide | 水 | tide |
 
-Art lives at `art/<fighter>.webp` (900 by 1125, transparent). Face framing per illustration is set by the `.fs-art-<fighter>` variables at the end of `app.css`; retune those when an illustration changes.
+Art lives at `art/<fighter>-poses.webp` (1122 by 1402, transparent), with four poses rendered through SVG viewBoxes: Today, Week, Guide and Timer. Still Sunday and Tide Swim B have separate 1536 by 1024 pairs for Today and Week. Select by original session identity so artwork follows a moved session. Per-pose face coordinates live in the app.js art helper. Keep each face centered when replacing an illustration.
 
 **The Art Rule.** Art never sits under text or a control. It gets its own box: the right side of the day hero, a round avatar, the top of the rest card, the top band of the pool sheet, or the desktop stage.
 

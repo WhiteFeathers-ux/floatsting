@@ -290,8 +290,6 @@ const FIGHTERS = {
 };
 const fighterOf = d => FIGHTERS[d.id] || FIGHTERS.rest;
 const isSwim = d => !!d.cardio && /swim/i.test(d.cardio.short) && !/optional/i.test(d.cardio.short);
-const art = f => '<img class="fs-art fs-art-' + f.key + '" src="art/' + f.key + '.webp" alt="" decoding="async" onerror="this.remove()">';
-const av = (f, cls) => '<span class="fs-av' + (cls ? ' ' + cls : '') + '" style="--el:' + f.color + '" aria-hidden="true">' + art(f) + '</span>';
 
 const svg = (d, extra) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"' + (extra || '') + '>' + d + '</svg>';
 const ICON = {
@@ -331,6 +329,31 @@ function mount(root, opts) {
     sheet: opts.sheet || null, sheetFrom: null,
     timer: Object.assign({ rounds: 3, work: 180, rest: 60, sound: true, round: 1, phase: 'ready', remaining: null, running: false }, opts.timer)
   };
+  function art(f, d, view) {
+    d = d || shownDay();
+    const context = view || S.view;
+    let pose = { today: 0, week: 1, guide: 2, timer: 3 }[context] || 0;
+    const alternate = (f.key === 'still' && d.origin === 6) || (f.key === 'tide' && d.origin === 5);
+    const extra = alternate && pose < 2;
+    const file = f.key + (extra ? (f.key === 'still' ? '-sunday' : '-pair') : '') + '-poses.webp';
+    const w = extra ? 1536 : 1122, h = extra ? 1024 : 1402;
+    const cw = w / 2, ch = extra ? h : h / 2;
+    const x = (pose % 2) * cw, y = extra ? 0 : Math.floor(pose / 2) * ch;
+    const faces = {
+      gale: [[58,24],[66,31],[54,21],[50,22]],
+      fang: [[50,26],[48,19],[44,18],[53,25]],
+      ember: [[51,18],[45,19],[48,16],[49,20]],
+      volt: [[65,30],[53,28],[67,21],[55,30]],
+      still: [[53,21],[48,20],[49,20],[49,21]],
+      tide: [[55,28],[52,26],[53,23],[53,26]],
+      granite: [[55,23],[55,22],[52,22],[53,23]]
+    };
+    const face = extra ? [50,23] : faces[f.key][pose];
+    const src = global.FS_ART ? global.FS_ART[file] : 'art/' + file;
+    return '<svg class="fs-art fs-art-' + f.key + '" data-pose="' + f.key + '-' + (extra ? pose + 4 : pose) + '" style="--zoom:270%;--fx:-' + face[0] + '%;--fy:-' + face[1] + '%" width="' + cw + '" height="' + ch + '" viewBox="' + [x,y,cw,ch].join(' ') + '" preserveAspectRatio="xMidYMin slice" overflow="hidden" aria-hidden="true"><image href="' + src + '" width="' + w + '" height="' + h + '"/></svg>';
+  }
+  const av = (f, cls, d, view) => '<span class="fs-av' + (cls ? ' ' + cls : '') + '" style="--el:' + f.color + '" aria-hidden="true">' + art(f, d, view) + '</span>';
+
   function read(key, fallback) {
     try { const v=localStorage.getItem('floatsting:'+key); return v===null?fallback:JSON.parse(v); }
     catch(e) { return fallback; }
@@ -408,15 +431,15 @@ function mount(root, opts) {
     h += '<header class="fs-head fs-hero"><div class="fs-hero-text">' +
       '<h1 class="fs-h1">' + d.name + '</h1><p class="fs-sub">' + (isRest ? 'No lifting, swimming or running today' : d.tag.replace(/ \+ /g, ', ')) + '</p>' +
       '<p class="fs-eyebrow fs-meta">' + LONG[d.idx] + stamp + '</p></div>' +
-      '<div class="fs-hero-art" aria-hidden="true"><span class="fs-kanji">' + f.kanji + '</span>' + art(f) + '<span class="fs-hero-name">' + f.name + '</span></div></header>';
+      '<div class="fs-hero-art" aria-hidden="true"><span class="fs-kanji">' + f.kanji + '</span>' + art(f, d) + '<span class="fs-hero-name">' + f.name + '</span></div></header>';
     if (S.storageError) h += '<p class="fs-notice" role="status">Progress could not be saved on this device. Keep this page open to retain these checks for now.</p>';
     if (isRest) {
       h += '<button class="fs-move" data-act="move" data-idx="' + d.idx + '">Move rest day</button>';
       const plan = planFor(d.preview);
       let nx = plan.slice(d.idx + 1).find(p => p.ex.length), when;
       if (nx) when = LONG[nx.idx]; else { nx = planFor(Number(d.preview) + 1).find(p => p.ex.length); when = 'Next ' + LONG[nx.idx]; }
-      h += '<div class="fs-rest"><div class="fs-rest-art" aria-hidden="true"><span class="fs-kanji">' + f.kanji + '</span>' + art(f) + '</div><p>' + d.note + '</p></div>' +
-        '<p class="fs-next">' + av(fighterOf(nx)) + '<span>Next session</span><b>' + when + ' · ' + nx.name + (nx.cardio ? ', ' + nx.cardio.short.toLowerCase() : '') + '</b></p>';
+      h += '<div class="fs-rest"><div class="fs-rest-art" aria-hidden="true"><span class="fs-kanji">' + f.kanji + '</span>' + art(f, d) + '</div><p>' + d.note + '</p></div>' +
+        '<p class="fs-next">' + av(fighterOf(nx), '', nx) + '<span>Next session</span><b>' + when + ' · ' + nx.name + (nx.cardio ? ', ' + nx.cardio.short.toLowerCase() : '') + '</b></p>';
       return h + '</div>';
     }
     const full = dn.length === n;
@@ -432,7 +455,7 @@ function mount(root, opts) {
     h += '<div class="fs-links">';
     if (d.cardio) {
       const c = splitCardio(d.cardio.note), sw = /swim/i.test(d.cardio.short) && !/optional/i.test(d.cardio.short);
-      h += '<button class="fs-link' + (sw ? ' is-pool" style="--el:' + FIGHTERS.pool.color : '') + '" data-act="sheet" data-sheet="cardio" data-idx="' + d.idx + '">' + (sw ? av(FIGHTERS.pool) : ICON.run) +
+      h += '<button class="fs-link' + (sw ? ' is-pool" style="--el:' + FIGHTERS.pool.color : '') + '" data-act="sheet" data-sheet="cardio" data-idx="' + d.idx + '">' + (sw ? av(FIGHTERS.pool, '', d) : ICON.run) +
         '<span class="fs-sumtext"><b>' + d.cardio.short + '</b><small>' + c[0].replace(/^[^:]*:\s*/, '') + '</small></span>' + ICON.chev + '</button>';
     }
     h += '<div class="fs-noteactions"><button class="fs-link" data-act="sheet" data-sheet="note" data-idx="' + d.idx + '">' + ICON.note +
@@ -451,8 +474,8 @@ function mount(root, opts) {
         const n = d.ex.length, dn = done(d).length, isToday = !S.preview && d.idx === todayIdx;
         const side = !n ? '<span class="fs-wside is-resttag">Rest</span>' : dn === n ? '<span class="fs-wside is-done">' + ICON.check + 'Done</span>' : dn ? '<span class="fs-wside">' + dn + ' of ' + n + '</span>' : '';
         return '<li><button class="fs-wrow' + (isToday ? ' is-today' : '') + (n ? '' : ' is-rest') + '" style="--el:' + fighterOf(d).color + '" data-act="openday" data-idx="' + d.idx + '"' + (d.idx === sel ? ' aria-current="true"' : '') + '>' +
-          '<span class="fs-date"><small>' + DAYS[d.idx] + '</small><b>' + d.date.getDate() + '</b></span>' + av(fighterOf(d)) +
-          '<span class="fs-wmain"><b>' + d.name + '</b><small>' + (isToday ? 'Today' + (d.cardio ? ' · ' : '') : '') + (d.cardio ? d.cardio.short + (swimDone(d) ? ' ✓' : '') : (n || isToday ? '' : 'Recover')) + '</small></span>' + (isSwim(d) ? av(FIGHTERS.pool, 'is-mini') : '') + side + ICON.chev + '</button></li>';
+          '<span class="fs-date"><small>' + DAYS[d.idx] + '</small><b>' + d.date.getDate() + '</b></span>' + av(fighterOf(d), '', d) +
+          '<span class="fs-wmain"><b>' + d.name + '</b><small>' + (isToday ? 'Today' + (d.cardio ? ' · ' : '') : '') + (d.cardio ? d.cardio.short + (swimDone(d) ? ' ✓' : '') : (n || isToday ? '' : 'Recover')) + '</small></span>' + (isSwim(d) ? av(FIGHTERS.pool, 'is-mini', d) : '') + side + ICON.chev + '</button></li>';
       }).join('') + '</ul></div>';
   }
 
@@ -508,7 +531,7 @@ function mount(root, opts) {
       pips = '<div class="fs-pips" aria-hidden="true">' + pips + '</div>';
     }
     return '<div class="fs-timer' + (openAdj ? ' is-adjust' : '') + '" data-phase="' + t.phase + '" style="--el:' + f.color + '"><span class="fs-timer-kanji" aria-hidden="true">' + f.kanji + '</span>' +
-      '<div class="fs-timer-top">' + av(f) + '<span><b>' + f.name + '</b><small>' + d.name + '</small></span><i class="fs-seal" aria-hidden="true">' + f.kanji + '</i></div>' +
+      '<div class="fs-timer-top">' + av(f, '', d) + '<span><b>' + f.name + '</b><small>' + d.name + '</small></span><i class="fs-seal" aria-hidden="true">' + f.kanji + '</i></div>' +
       '<div class="fs-ring"><svg viewBox="0 0 224 224">' + ticks + '<circle class="bg" cx="112" cy="112" r="' + R + '"/><circle class="fg" data-t="ring" cx="112" cy="112" r="' + R + '" stroke-dasharray="' + C + '" stroke-dashoffset="' + (C * (1 - Math.max(t.remaining, 0) / total)) + '"/></svg>' +
       '<div class="fs-clock"><p class="fs-phase" data-t="phase">' + label + '</p><b data-t="time">' + fmt(Math.max(t.remaining, 0)) + '</b><span data-t="round">Round ' + t.round + ' of ' + t.rounds + '</span></div></div>' + pips +
       '<div class="fs-ctl"><button class="fs-btn' + (t.running ? '' : ' is-primary') + '" data-act="toggletimer">' + btn + '</button><button class="fs-btn" data-act="resettimer">Reset</button></div>' +
@@ -528,7 +551,7 @@ function mount(root, opts) {
       eyebrow = shortDate(plan[0].date) + ' to ' + shortDate(plan[6].date); title = 'Move ' + d.name;
       body = '<p class="fs-sheet-lead">Swap with another day. Saved lift and swim checks move with the session.</p>' +
         (!S.sheet.preview && d.idx !== todayIdx ? '<button class="fs-btn is-primary" data-act="swap" data-to="' + todayIdx + '">Train today · swap with ' + plan[todayIdx].name + '</button>' : '') +
-        '<div class="fs-move-list">' + plan.filter(p => p.idx !== d.idx).map(p => '<button class="fs-link" data-act="swap" data-to="' + p.idx + '">' + av(fighterOf(p)) + '<span class="fs-sumtext"><b>' + LONG[p.idx] + '</b><small>' + p.name + (p.cardio ? ' + ' + p.cardio.short : '') + '</small></span>' + ICON.chev + '</button>').join('') + '</div>' +
+        '<div class="fs-move-list">' + plan.filter(p => p.idx !== d.idx).map(p => '<button class="fs-link" data-act="swap" data-to="' + p.idx + '">' + av(fighterOf(p), '', p) + '<span class="fs-sumtext"><b>' + LONG[p.idx] + '</b><small>' + p.name + (p.cardio ? ' + ' + p.cardio.short : '') + '</small></span>' + ICON.chev + '</button>').join('') + '</div>' +
         '<p class="fs-hint">This week only. Paired swims move too; five lifts, two swims and two full rest days stay in the plan.</p>';
     } else if (S.sheet.kind === 'guide') {
       const g = GUIDE.find(x => x.id === S.sheet.topic), it = topicItems(g.html)[S.sheet.gi];
@@ -540,7 +563,7 @@ function mount(root, opts) {
       if (pool) body += '<button class="fs-btn is-primary" data-act="checkswim" aria-pressed="' + swimDone(d) + '">' + (swimDone(d) ? 'Swim complete ✓ · Undo' : 'Mark swim complete') + '</button>';
     }
     return '<div class="fs-sheetwrap" data-act="closesheet"><div class="fs-sheet" role="dialog" aria-modal="true" aria-label="' + title.replace(/"/g, '') + '">' +
-      (pool ? '<div class="fs-sheet-art" style="--el:' + FIGHTERS.pool.color + '" aria-hidden="true"><span class="fs-kanji">' + FIGHTERS.pool.kanji + '</span>' + art(FIGHTERS.pool) + '</div>' : '') +
+      (pool ? '<div class="fs-sheet-art" style="--el:' + FIGHTERS.pool.color + '" aria-hidden="true"><span class="fs-kanji">' + FIGHTERS.pool.kanji + '</span>' + art(FIGHTERS.pool, planFor(S.sheet.preview)[S.sheet.idx]) + '</div>' : '') +
       '<h2 class="fs-h2">' + title + '</h2><p class="fs-eyebrow fs-meta">' + eyebrow + '</p>' + body + '<button class="fs-sheet-close" data-act="closesheet" data-close>Done</button></div></div>';
   }
 
@@ -552,8 +575,8 @@ function mount(root, opts) {
 
   function stageHTML(d) {
     const f = fighterOf(d);
-    return '<aside class="fs-stage" style="--el:' + f.color + '" aria-hidden="true"><span class="fs-kanji">' + f.kanji + '</span>' + art(f) +
-      (isSwim(d) ? '<span class="fs-stage-pool">' + av(FIGHTERS.pool) + '<b>' + d.cardio.short + '</b></span>' : '') +
+    return '<aside class="fs-stage" style="--el:' + f.color + '" aria-hidden="true"><span class="fs-kanji">' + f.kanji + '</span>' + art(f, d) +
+      (isSwim(d) ? '<span class="fs-stage-pool">' + av(FIGHTERS.pool, '', d) + '<b>' + d.cardio.short + '</b></span>' : '') +
       '<p><b>' + f.name + '</b><small>' + d.name + '</small></p></aside>';
   }
   function shownDay() {
