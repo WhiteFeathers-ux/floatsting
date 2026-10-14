@@ -1,4 +1,4 @@
-const CACHE = 'floatsting-v26-glam2';
+const CACHE = 'floatsting-v27-still';
 const ASSETS = [
   './',
   './index.html',
