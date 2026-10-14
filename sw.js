@@ -1,4 +1,4 @@
-const CACHE = 'floatsting-v22-nozoom';
+const CACHE = 'floatsting-v23-scenes';
 const ASSETS = [
   './',
   './index.html',
@@ -17,6 +17,7 @@ const ASSETS = [
   './art/volt-poses.webp',
   './art/granite-poses.webp',
   './art/still-poses.webp',
+  './art/flash-poses.webp',
   './art/still-sunday-poses.webp',
   './art/tide-pair-poses.webp',
   './fonts/fonts.css',

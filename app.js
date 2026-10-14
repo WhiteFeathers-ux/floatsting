@@ -286,9 +286,13 @@ const FIGHTERS = {
   pull: { key: 'volt', name: 'Volt', kanji: '雷', color: '#ffe14a', label: 'Pull', title: 'Storm dancer' },
   legs: { key: 'granite', name: 'Granite', kanji: '岩', color: '#b48cff', label: 'Lower B', title: 'Sand guardian' },
   pool: { key: 'tide', name: 'Tide', kanji: '水', color: '#22d3ee', label: 'Pool', title: 'Sea turtle sage' },
-  rest: { key: 'still', name: 'Still', kanji: '静', color: '#bcd6ff', label: 'Rest', title: 'Twin lion guardian' }
+  rest: { key: 'still', name: 'Still', kanji: '静', color: '#bcd6ff', label: 'Rest', title: 'Twin lion guardian' },
+  flash: { key: 'flash', name: 'Flash', kanji: '閃', color: '#5b8cff', label: 'Rest', title: 'Toad sage' }
 };
-const fighterOf = d => FIGHTERS[d.id] || FIGHTERS.rest;
+/* Thursday's rest belongs to Flash, Sunday's to Still; keyed to the session's original day so it follows a moved session */
+const fighterOf = d => d.id === 'rest' && d.origin === 3 ? FIGHTERS.flash : FIGHTERS[d.id] || FIGHTERS.rest;
+/* scene art shown on each fighter's own day: art/scenes/<key>-<n>.webp */
+const SCENES = { gale: [1,2,3,4,5], fang: [1,2,3,4,5], ember: [1,2,3,4,5], volt: [1,2,3,4,5], granite: [1,2,3,4,5], tide: [1,2,3,4,5], still: [1,2,3,4,5], flash: [1,2,3,4,5] };
 /* Guide pages each borrow one fighter. Presentation only. */
 const TOPIC_CAST = { week: 'upper', sets: 'push', progress: 'pull', core: 'legs', cardio: 'pool', fuel: 'lower', care: 'rest' };
 const fid = f => Object.keys(FIGHTERS).find(k => FIGHTERS[k] === f);
@@ -351,11 +355,12 @@ function mount(root, opts) {
       volt: [[50,27],[49,28],[50,17],[50,21]],
       still: [[54,25],[43,26],[48,21],[48,24]],
       tide: [[57,40],[46,39],[55,36],[51,45]],
-      granite: [[55,23],[55,22],[52,22],[53,23]]
+      granite: [[55,23],[55,22],[52,22],[53,23]],
+      flash: [[47,21],[46,31],[48,21],[58,32]]
     };
     const face = extra ? (f.key === 'still' ? [[51,25],[56,28]] : [[57,34],[48,35]])[pose] : faces[f.key][pose];
     const src = global.FS_ART ? global.FS_ART[file] : 'art/' + file;
-    const phase = ['gale','fang','ember','volt','still','tide','granite'].indexOf(f.key) * .7 + pose * .4;
+    const phase = ['gale','fang','ember','volt','still','tide','granite','flash'].indexOf(f.key) * .7 + pose * .4;
     return '<svg class="fs-art fs-art-' + f.key + '" data-pose="' + f.key + '-' + (extra ? pose + 4 : pose) + '" style="--art-phase:-' + phase + 's;--zoom:270%;--fx:-' + face[0] + '%;--fy:-' + face[1] + '%" width="' + cw + '" height="' + ch + '" viewBox="0 0 ' + cw + ' ' + ch + '" preserveAspectRatio="xMidYMin slice" overflow="hidden" aria-hidden="true">' +
       '<ellipse class="fs-art-energy" cx="' + cw*.5 + '" cy="' + ch*.55 + '" rx="' + cw*.35 + '" ry="' + ch*.3 + '" fill="' + f.color + '" opacity=".06"/>' +
       '<g class="fs-figure"><svg width="' + cw + '" height="' + ch + '" viewBox="' + [x,y,cw,ch].join(' ') + '" overflow="hidden"><image href="' + src + '" width="' + w + '" height="' + h + '"/></svg></g></svg>';
@@ -523,9 +528,9 @@ function mount(root, opts) {
 
   function guideHTML() {
     const cur = GUIDE.find(g => g.id === S.topic) || GUIDE[0];
-    const tid = planFor(false)[todayIdx].id, ck = FIGHTERS[S.cast] ? S.cast : FIGHTERS[tid] ? tid : 'rest', cf = FIGHTERS[ck], tf = FIGHTERS[TOPIC_CAST[cur.id]] || cf;
+    const tid = fid(fighterOf(planFor(false)[todayIdx])), ck = FIGHTERS[S.cast] ? S.cast : FIGHTERS[tid] ? tid : 'rest', cf = FIGHTERS[ck], tf = FIGHTERS[TOPIC_CAST[cur.id]] || cf;
     return '<div class="fs-md' + (S.topic ? ' has-detail' : '') + '"><div class="fs-col fs-md-list"><header class="fs-head fs-band fs-guidehero" style="--el:' + cf.color + '"><div class="fs-hero-text"><h1 class="fs-h1">Guide</h1><p class="fs-sub">How the plan works and why</p><p class="fs-eyebrow fs-meta">' + cf.label + ' · ' + cf.title + '</p></div>' + heroArt(cf, art(cf)) + '</header>' +
-      '<ul class="fs-cast" aria-label="The seven forms">' + ['upper', 'lower', 'push', 'pull', 'legs', 'pool', 'rest'].map(k => '<li style="--el:' + FIGHTERS[k].color + '"><button class="fs-castbtn" data-act="cast" data-k="' + k + '" aria-pressed="' + (k === ck) + '" aria-label="' + FIGHTERS[k].name + ', ' + FIGHTERS[k].label + '">' + av(FIGHTERS[k]) + '<b>' + FIGHTERS[k].name + '</b><small>' + FIGHTERS[k].label + '</small></button></li>').join('') + '</ul>' +
+      '<ul class="fs-cast" aria-label="The cast">' + ['upper', 'lower', 'push', 'pull', 'legs', 'pool', 'rest', 'flash'].map(k => '<li style="--el:' + FIGHTERS[k].color + '"><button class="fs-castbtn" data-act="cast" data-k="' + k + '" aria-pressed="' + (k === ck) + '" aria-label="' + FIGHTERS[k].name + ', ' + FIGHTERS[k].label + '">' + av(FIGHTERS[k]) + '<b>' + FIGHTERS[k].name + '</b><small>' + FIGHTERS[k].label + '</small></button></li>').join('') + '</ul>' +
       '<ul class="fs-topics">' + GUIDE.map(g => '<li><button class="fs-trow" data-act="opentopic" data-topic="' + g.id + '"' + (g.id === cur.id ? ' aria-current="true"' : '') + '><span><b>' + g.title + '</b><small>' + g.summary + '</small></span>' + ICON.chev + '</button></li>').join('') + '</ul>' +
       '<button class="fs-art-toggle" data-act="artmotion" aria-pressed="' + S.artMotion + '">' + (S.artMotion ? 'Pause art' : 'Animate art') + '</button></div>' +
       '<div class="fs-col fs-md-detail fs-read"><button class="fs-back" data-act="back">' + ICON.back + 'Guide</button><header class="fs-head fs-band fs-topichero" style="--el:' + tf.color + '"><div class="fs-hero-text"><h1 class="fs-h2">' + cur.title + '</h1><p class="fs-sub">' + cur.summary + '</p></div>' + heroArt(tf, art(tf)) + '</header>' + topicHTML(cur) + '</div></div>';
@@ -643,12 +648,36 @@ function mount(root, opts) {
     const d = shownDay(), own = fighterOf(d);
     let f = own; const view = S.view;
     if (S.view === 'guide') { const cur = GUIDE.find(g => g.id === S.topic); f = (cur && FIGHTERS[TOPIC_CAST[cur.id]]) || FIGHTERS[S.cast] || own; }
-    const key = f.key + '|' + view + '|' + d.origin;
+    const mine = view === 'today' && f === own && SCENES[f.key];
+    /* swim days share the stage with Tide, alternating scenes */
+    const scenes = mine && (isSwim(d) ? [].concat.apply([], mine.map((n, i) => [[f.key, n], ['tide', SCENES.tide[i % SCENES.tide.length]]])) : mine.map(n => [f.key, n]));
+    const key = f.key + '|' + view + '|' + d.origin + (scenes ? '|scenes' : '');
     root.firstElementChild.style.setProperty('--el2', f.color);
     if (key === lastBack) return;
     lastBack = key;
-    elBack.innerHTML = '<span class="fs-kanji">' + f.kanji + '</span>' + art(f, d, view);
+    clearInterval(sceneTick); sceneTick = null;
+    elBack.innerHTML = '<span class="fs-kanji">' + f.kanji + '</span>' + (scenes ? '<div class="fs-scenes" data-n="0"><img class="fs-scene is-on" alt="" decoding="async" src="' + sceneSrc(scenes[0]) + '"></div>' : art(f, d, view));
     elBack.classList.remove('is-in'); void elBack.offsetWidth; elBack.classList.add('is-in');
+    sceneList = scenes || [];
+    if (sceneList.length > 1) sceneTick = setInterval(nextScene, 5000);
+  }
+  /* on the fighter's own day the Today stage cycles their scene art every 5 seconds; it holds still while art is paused, hidden or reduced */
+  let sceneTick = null, sceneList = [];
+  const sceneSrc = kn => { const file = 'scenes/' + kn[0] + '-' + kn[1] + '.webp'; return global.FS_ART && global.FS_ART[file] || 'art/' + file; };
+  function nextScene() {
+    const box = elBack.querySelector('.fs-scenes');
+    if (!box || !S.artMotion || document.hidden || reduceMotion || box.dataset.busy) return;
+    const n = (+box.dataset.n + 1) % sceneList.length, img = new Image();
+    img.className = 'fs-scene'; img.alt = ''; img.decoding = 'async'; box.dataset.busy = '1';
+    img.onload = () => {
+      delete box.dataset.busy;
+      if (!box.isConnected) return;
+      const old = box.querySelector('.fs-scene.is-on');
+      box.appendChild(img); box.dataset.n = n; void img.offsetWidth; img.classList.add('is-on');
+      if (old) { old.classList.remove('is-on'); setTimeout(() => old.remove(), 1000); }
+    };
+    img.onerror = () => { delete box.dataset.busy; box.dataset.n = n; };
+    img.src = sceneSrc(sceneList[n]);
   }
   function render() {
     root.classList.toggle('is-art-paused', !S.artMotion || document.hidden);

@@ -137,3 +137,7 @@ Character art has slow breathing or water-drift motion with a soft elemental pul
 - Swim days add `.fs-partner` (Tide medallion, bottom right, same action as the swim row, out of the tab order).
 - The name tag button at the top right opens the cast gallery sheet.
 - Rejected on the way here: small card bands ("barely see the characters"), art behind translucent lists ("harder to see"), faint backdrop behind solid lists ("bland").
+
+## 2026-10-14: scene rotation and Flash
+- Today tab on phones: the day's fighter cycles their five scene illustrations (art/scenes/<key>-<n>.webp) every 5 seconds with a crossfade, in the same right-side slot as the standing figure. Swim days alternate the lift fighter with Tide. Holds still while art is paused, the page is hidden, or reduced motion is on. Scenes load one at a time and are runtime-cached, not precached.
+- Flash (Jiraiya + Minato, kanji 閃, #5b8cff) owns Thursday rest; Still keeps Sunday. Keyed to the session's original day (origin 3), so it follows a moved session. Guide cast is eight.

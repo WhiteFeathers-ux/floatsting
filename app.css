@@ -821,3 +821,12 @@ html,body{touch-action:pan-y;-webkit-text-size-adjust:100%;text-size-adjust:100%
   body::after{content:"\21BB\A Turn your phone upright";white-space:pre;position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;text-align:center;
     background:#0c0a12;color:#efe9dc;font:400 20px/1.6 "Dela Gothic One","Arial Black",sans-serif;letter-spacing:.06em;text-transform:uppercase}
 }
+
+/* ============ scene art: the day's fighter cycles through their scenes on Today ============ */
+@container fs (max-width:899px){
+  .fs-app .fs-scenes{position:absolute;inset:0}
+  .fs-app .fs-scene{position:absolute;top:0;left:72%;height:100%;width:auto;max-width:none;transform:translateX(-50%);opacity:0;transition:opacity .9s ease;
+    -webkit-mask-image:linear-gradient(#000 78%,transparent 99%);mask-image:linear-gradient(#000 78%,transparent 99%)}
+  .fs-app .fs-scene.is-on{opacity:1}
+  .fs-app .fs-scenes::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,10,18,.55),transparent 45%)}
+}
