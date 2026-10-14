@@ -119,3 +119,12 @@ Character art has slow breathing or water-drift motion with a soft elemental pul
 - Don't show invented statistics, streaks or history.
 - Don't use dashes in interface copy.
 - Don't bring back the single long page, accordion day panels, the glove, the FS monogram, or red and gold.
+
+## Cast across Week, Guide and Timer (2026-10-13)
+
+- `.fs-band` is the hero band used outside the day view: `.fs-weekhero`, `.fs-guidehero`, `.fs-topichero`, `.fs-timerhero`. It reuses `.fs-hero-text` and `.fs-hero-art` but is not `.fs-hero`, so the day hero stays unique.
+- Band art is framed by the measured face center of each pose (`--fx`, `--fy` set inline by `art()`), not by the per-fighter hero crops. Band height comes from `--bh`.
+- Week rows carry `.fs-wart`, the day's fighter behind the right side of the row. Avatars stay.
+- Guide: the cast row is a selector (`data-act="cast"`, `S.cast`, not saved). Each guide page borrows a fighter through `TOPIC_CAST`.
+- Phone widths (container under 900px): `.fs-hero` and `.fs-band` become a full-bleed stage with `flex:1`, so the fighter takes all spare height; art is sized in the stage's own container units and framed by the pose face center. Back links float over the stage. Desktop keeps the card bands and side stage.
+- The fighter steps in once (`fs-art-in`) when the tab or featured fighter changes; `.is-enter` is only set on those renders, so check taps and timer ticks do not replay it.

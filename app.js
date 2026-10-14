@@ -280,15 +280,20 @@ const KEYS = ['mon','tue','wed','thu','fri','sat','sun'];
 const PRESETS = [[3,180,60],[5,180,60],[12,180,60]];
 /* Cast: one fighter per kind of day, Tide owns the pool. Presentation only. */
 const FIGHTERS = {
-  upper: { key: 'gale', name: 'Gale', kanji: '風', color: '#5ef2a0', label: 'Upper' },
-  lower: { key: 'fang', name: 'Fang', kanji: '牙', color: '#ff3b6b', label: 'Lower A' },
-  push: { key: 'ember', name: 'Ember', kanji: '炎', color: '#ff7a3d', label: 'Push' },
-  pull: { key: 'volt', name: 'Volt', kanji: '雷', color: '#ffe14a', label: 'Pull' },
-  legs: { key: 'granite', name: 'Granite', kanji: '岩', color: '#b48cff', label: 'Lower B' },
-  pool: { key: 'tide', name: 'Tide', kanji: '水', color: '#22d3ee', label: 'Pool' },
-  rest: { key: 'still', name: 'Still', kanji: '静', color: '#bcd6ff', label: 'Rest' }
+  upper: { key: 'gale', name: 'Gale', kanji: '風', color: '#5ef2a0', label: 'Upper', title: 'Wood sage' },
+  lower: { key: 'fang', name: 'Fang', kanji: '牙', color: '#ff3b6b', label: 'Lower A', title: 'Wolf huntress' },
+  push: { key: 'ember', name: 'Ember', kanji: '炎', color: '#ff7a3d', label: 'Push', title: 'Raven flame' },
+  pull: { key: 'volt', name: 'Volt', kanji: '雷', color: '#ffe14a', label: 'Pull', title: 'Storm dancer' },
+  legs: { key: 'granite', name: 'Granite', kanji: '岩', color: '#b48cff', label: 'Lower B', title: 'Sand guardian' },
+  pool: { key: 'tide', name: 'Tide', kanji: '水', color: '#22d3ee', label: 'Pool', title: 'Sea turtle sage' },
+  rest: { key: 'still', name: 'Still', kanji: '静', color: '#bcd6ff', label: 'Rest', title: 'Twin lion guardian' }
 };
 const fighterOf = d => FIGHTERS[d.id] || FIGHTERS.rest;
+/* Guide pages each borrow one fighter. Presentation only. */
+const TOPIC_CAST = { week: 'upper', sets: 'push', progress: 'pull', core: 'legs', cardio: 'pool', fuel: 'lower', care: 'rest' };
+const fid = f => Object.keys(FIGHTERS).find(k => FIGHTERS[k] === f);
+const heroArt = (f, inner) => '<div class="fs-hero-art" aria-hidden="true"><span class="fs-kanji">' + f.kanji + '</span>' + inner + '</div><button class="fs-hero-name" data-act="castsheet" data-k="' + fid(f) + '" aria-label="View ' + f.name + '"><span>' + f.name + '</span></button>';
+const POSE_VIEWS = ['today', 'week', 'guide', 'timer'];
 const isSwim = d => !!d.cardio && /swim/i.test(d.cardio.short) && !/optional/i.test(d.cardio.short);
 
 const svg = (d, extra) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"' + (extra || '') + '>' + d + '</svg>';
@@ -326,7 +331,7 @@ function mount(root, opts) {
   const S = {
     view: opts.view || 'today', day: opts.day == null ? null : opts.day, topic: opts.topic || null,
     preview: !!opts.preview, checks: {}, orders: {}, storageError: !!opts.storageError, open: Object.assign({}, opts.open),
-    sheet: opts.sheet || null, sheetFrom: null,
+    sheet: opts.sheet || null, sheetFrom: null, cast: null,
     timer: Object.assign({ rounds: 3, work: 180, rest: 60, sound: true, round: 1, phase: 'ready', remaining: null, running: false }, opts.timer)
   };
   function art(f, d, view) {
@@ -436,7 +441,7 @@ function mount(root, opts) {
     h += '<header class="fs-head fs-hero"><div class="fs-hero-text">' +
       '<h1 class="fs-h1">' + d.name + '</h1><p class="fs-sub">' + (isRest ? 'No lifting, swimming or running today' : d.tag.replace(/ \+ /g, ', ')) + '</p>' +
       '<p class="fs-eyebrow fs-meta">' + LONG[d.idx] + stamp + '</p></div>' +
-      '<div class="fs-hero-art" aria-hidden="true"><span class="fs-kanji">' + f.kanji + '</span>' + art(f, d) + '<span class="fs-hero-name">' + f.name + '</span></div></header>';
+      heroArt(f, art(f, d)) + '</header>';
     if (S.storageError) h += '<p class="fs-notice" role="status">Progress could not be saved on this device. Keep this page open to retain these checks for now.</p>';
     if (isRest) {
       h += '<button class="fs-move" data-act="move" data-idx="' + d.idx + '">Move rest day</button>';
@@ -460,7 +465,7 @@ function mount(root, opts) {
     h += '<div class="fs-links">';
     if (d.cardio) {
       const c = splitCardio(d.cardio.note), sw = /swim/i.test(d.cardio.short) && !/optional/i.test(d.cardio.short);
-      h += '<button class="fs-link' + (sw ? ' is-pool" style="--el:' + FIGHTERS.pool.color : '') + '" data-act="sheet" data-sheet="cardio" data-idx="' + d.idx + '">' + (sw ? av(FIGHTERS.pool, '', d) : ICON.run) +
+      h += '<button class="fs-link' + (sw ? ' is-pool" style="--el:' + FIGHTERS.pool.color : '') + '" data-act="sheet" data-sheet="cardio" data-idx="' + d.idx + '">' + (sw ? '<span class="fs-wart" aria-hidden="true">' + art(FIGHTERS.pool, d) + '</span>' + av(FIGHTERS.pool, '', d) : ICON.run) +
         '<span class="fs-sumtext"><b>' + d.cardio.short + '</b><small>' + c[0].replace(/^[^:]*:\s*/, '') + '</small></span>' + ICON.chev + '</button>';
     }
     h += '<div class="fs-noteactions"><button class="fs-link" data-act="sheet" data-sheet="note" data-idx="' + d.idx + '">' + ICON.note +
@@ -471,15 +476,16 @@ function mount(root, opts) {
   function weekListHTML() {
     const plan = planFor(S.preview), a = plan[0].date, b = plan[6].date;
     const sel = S.day == null ? (S.preview ? 0 : todayIdx) : S.day;
-    return '<div class="fs-col fs-md-list"><header class="fs-weekhead"><div class="fs-head"><h1 class="fs-h1">' + (S.preview ? 'Next week' : 'This week') + '</h1>' +
-      '<p class="fs-eyebrow fs-meta">' + shortDate(a) + ' to ' + shortDate(b) + '</p></div>' +
+    const hd = plan[sel], hf = fighterOf(hd);
+    return '<div class="fs-col fs-md-list"><header class="fs-weekhead"><div class="fs-head fs-band fs-weekhero" style="--el:' + hf.color + '"><div class="fs-hero-text"><h1 class="fs-h1">' + (S.preview ? 'Next week' : 'This week') + '</h1>' +
+      '<p class="fs-sub">' + shortDate(a) + ' to ' + shortDate(b) + '</p><p class="fs-eyebrow fs-meta">' + (!S.preview && hd.idx === todayIdx ? 'Today' : DAYS[hd.idx]) + ' · ' + hd.name + '</p></div>' + heroArt(hf, art(hf, hd)) + '</div>' +
       '<div class="fs-seg" role="group" aria-label="Week"><button data-act="seg" data-preview="0" aria-pressed="' + !S.preview + '">This week</button><button data-act="seg" data-preview="1" aria-pressed="' + S.preview + '">Next week</button></div></header>' +
       '<p class="fs-tally"><span><b>' + plan.filter(d => d.ex.length).length + '</b> lifts</span><span class="is-pool"><b>' + plan.filter(isSwim).length + '</b> swims</span><span class="is-rest"><b>' + plan.filter(d => !d.ex.length).length + '</b> rest days</span></p>' +
       '<ul class="fs-week">' + plan.map(d => {
         const n = d.ex.length, dn = done(d).length, isToday = !S.preview && d.idx === todayIdx;
         const side = !n ? '<span class="fs-wside is-resttag">Rest</span>' : dn === n ? '<span class="fs-wside is-done">' + ICON.check + 'Done</span>' : dn ? '<span class="fs-wside">' + dn + ' of ' + n + '</span>' : '';
         return '<li><button class="fs-wrow' + (isToday ? ' is-today' : '') + (n ? '' : ' is-rest') + '" style="--el:' + fighterOf(d).color + '" data-act="openday" data-idx="' + d.idx + '"' + (d.idx === sel ? ' aria-current="true"' : '') + '>' +
-          '<span class="fs-date"><small>' + DAYS[d.idx] + '</small><b>' + d.date.getDate() + '</b></span>' + av(fighterOf(d), '', d) +
+          '<span class="fs-wart" aria-hidden="true">' + art(fighterOf(d), d) + '</span><span class="fs-date"><small>' + DAYS[d.idx] + '</small><b>' + d.date.getDate() + '</b></span>' + av(fighterOf(d), '', d) +
           '<span class="fs-wmain"><b>' + d.name + '</b><small>' + (isToday ? 'Today' + (d.cardio ? ' · ' : '') : '') + (d.cardio ? d.cardio.short + (swimDone(d) ? ' ✓' : '') : (n || isToday ? '' : 'Recover')) + '</small></span>' + (isSwim(d) ? av(FIGHTERS.pool, 'is-mini', d) : '') + side + ICON.chev + '</button></li>';
       }).join('') + '</ul></div>';
   }
@@ -515,10 +521,12 @@ function mount(root, opts) {
 
   function guideHTML() {
     const cur = GUIDE.find(g => g.id === S.topic) || GUIDE[0];
-    return '<div class="fs-md' + (S.topic ? ' has-detail' : '') + '"><div class="fs-col fs-md-list"><header class="fs-head fs-guidehead"><h1 class="fs-h1">Guide</h1><button class="fs-art-toggle" data-act="artmotion" aria-pressed="' + S.artMotion + '">' + (S.artMotion ? 'Pause art' : 'Animate art') + '</button><p class="fs-sub">How the plan works and why</p></header>' +
-      '<ul class="fs-cast" aria-label="The seven forms">' + ['upper', 'lower', 'push', 'pull', 'legs', 'pool', 'rest'].map(k => '<li style="--el:' + FIGHTERS[k].color + '">' + av(FIGHTERS[k]) + '<b>' + FIGHTERS[k].name + '</b><small>' + FIGHTERS[k].label + '</small></li>').join('') + '</ul>' +
+    const tid = planFor(false)[todayIdx].id, ck = FIGHTERS[S.cast] ? S.cast : FIGHTERS[tid] ? tid : 'rest', cf = FIGHTERS[ck], tf = FIGHTERS[TOPIC_CAST[cur.id]] || cf;
+    return '<div class="fs-md' + (S.topic ? ' has-detail' : '') + '"><div class="fs-col fs-md-list"><header class="fs-head fs-band fs-guidehero" style="--el:' + cf.color + '"><div class="fs-hero-text"><h1 class="fs-h1">Guide</h1><p class="fs-sub">How the plan works and why</p><p class="fs-eyebrow fs-meta">' + cf.label + ' · ' + cf.title + '</p></div>' + heroArt(cf, art(cf)) +
+      '<button class="fs-art-toggle" data-act="artmotion" aria-pressed="' + S.artMotion + '">' + (S.artMotion ? 'Pause art' : 'Animate art') + '</button></header>' +
+      '<ul class="fs-cast" aria-label="The seven forms">' + ['upper', 'lower', 'push', 'pull', 'legs', 'pool', 'rest'].map(k => '<li style="--el:' + FIGHTERS[k].color + '"><button class="fs-castbtn" data-act="cast" data-k="' + k + '" aria-pressed="' + (k === ck) + '" aria-label="' + FIGHTERS[k].name + ', ' + FIGHTERS[k].label + '">' + av(FIGHTERS[k]) + '<b>' + FIGHTERS[k].name + '</b><small>' + FIGHTERS[k].label + '</small></button></li>').join('') + '</ul>' +
       '<ul class="fs-topics">' + GUIDE.map(g => '<li><button class="fs-trow" data-act="opentopic" data-topic="' + g.id + '"' + (g.id === cur.id ? ' aria-current="true"' : '') + '><span><b>' + g.title + '</b><small>' + g.summary + '</small></span>' + ICON.chev + '</button></li>').join('') + '</ul></div>' +
-      '<div class="fs-col fs-md-detail fs-read"><button class="fs-back" data-act="back">' + ICON.back + 'Guide</button><h1 class="fs-h2">' + cur.title + '</h1>' + topicHTML(cur) + '</div></div>';
+      '<div class="fs-col fs-md-detail fs-read"><button class="fs-back" data-act="back">' + ICON.back + 'Guide</button><header class="fs-head fs-band fs-topichero" style="--el:' + tf.color + '"><div class="fs-hero-text"><h1 class="fs-h2">' + cur.title + '</h1><p class="fs-sub">' + cur.summary + '</p></div>' + heroArt(tf, art(tf)) + '</header>' + topicHTML(cur) + '</div></div>';
   }
 
   function timerHTML() {
@@ -536,7 +544,7 @@ function mount(root, opts) {
       pips = '<div class="fs-pips" aria-hidden="true">' + pips + '</div>';
     }
     return '<div class="fs-timer' + (openAdj ? ' is-adjust' : '') + '" data-phase="' + t.phase + '" style="--el:' + f.color + '"><span class="fs-timer-kanji" aria-hidden="true">' + f.kanji + '</span>' +
-      '<div class="fs-timer-top">' + av(f, '', d) + '<span><b>' + f.name + '</b><small>' + d.name + '</small></span><i class="fs-seal" aria-hidden="true">' + f.kanji + '</i></div>' +
+      '<div class="fs-band fs-timerhero"><div class="fs-hero-text"><p class="fs-timer-name">' + f.name + '</p><p class="fs-sub">' + d.name + '</p><p class="fs-eyebrow fs-meta">' + f.title + '</p></div>' + heroArt(f, art(f, d)) + '</div>' +
       '<div class="fs-ring"><svg viewBox="0 0 224 224">' + ticks + '<circle class="bg" cx="112" cy="112" r="' + R + '"/><circle class="fg" data-t="ring" cx="112" cy="112" r="' + R + '" stroke-dasharray="' + C + '" stroke-dashoffset="' + (C * (1 - Math.max(t.remaining, 0) / total)) + '"/></svg>' +
       '<div class="fs-clock"><p class="fs-phase" data-t="phase">' + label + '</p><b data-t="time">' + fmt(Math.max(t.remaining, 0)) + '</b><span data-t="round">Round ' + t.round + ' of ' + t.rounds + '</span></div></div>' + pips +
       '<div class="fs-ctl"><button class="fs-btn' + (t.running ? '' : ' is-primary') + '" data-act="toggletimer">' + btn + '</button><button class="fs-btn" data-act="resettimer">Reset</button></div>' +
@@ -551,6 +559,18 @@ function mount(root, opts) {
   function sheetHTML() {
     if (!S.sheet) return '';
     let eyebrow, title, body, pool = false;
+    if (S.sheet.kind === 'cast') {
+      const f = FIGHTERS[S.sheet.k] || FIGHTERS.rest, n = f.key === 'tide' || f.key === 'still' ? 6 : 4, p = Math.min(S.sheet.pose || 0, n - 1);
+      const pd = i => i < 4 ? [{ origin: -1 }, POSE_VIEWS[i]] : [{ origin: f.key === 'still' ? 6 : 5 }, POSE_VIEWS[i - 4]];
+      let poses = '';
+      for (let i = 0; i < n; i++) poses += '<button data-act="castpose" data-p="' + i + '" aria-pressed="' + (i === p) + '" aria-label="Pose ' + (i + 1) + '">' + av(f, '', pd(i)[0], pd(i)[1]) + '</button>';
+      return '<div class="fs-sheetwrap" data-act="closesheet"><div class="fs-sheet is-gallery" role="dialog" aria-modal="true" aria-label="' + f.name + '" style="--el:' + f.color + '">' +
+        '<div class="fs-gallery" aria-hidden="true"><span class="fs-kanji">' + f.kanji + '</span>' + art(f, pd(p)[0], pd(p)[1]) + '</div>' +
+        '<h2 class="fs-h2">' + f.name + '</h2><p class="fs-eyebrow fs-meta">' + f.label + ' · ' + f.title + '</p>' +
+        '<div class="fs-poses" role="group" aria-label="Poses">' + poses + '</div>' +
+        '<div class="fs-poses is-cast" role="group" aria-label="Fighters">' + Object.keys(FIGHTERS).map(k => '<button data-act="castsheet" data-k="' + k + '" aria-pressed="' + (FIGHTERS[k] === f) + '" aria-label="' + FIGHTERS[k].name + '" style="--el:' + FIGHTERS[k].color + '">' + av(FIGHTERS[k], '', { origin: -1 }, 'guide') + '</button>').join('') + '</div>' +
+        '<button class="fs-sheet-close" data-act="closesheet" data-close>Done</button></div></div>';
+    }
     if (S.sheet.kind === 'move') {
       const plan = planFor(S.sheet.preview), d = plan[S.sheet.idx];
       eyebrow = shortDate(plan[0].date) + ' to ' + shortDate(plan[6].date); title = 'Move ' + d.name;
@@ -598,9 +618,9 @@ function mount(root, opts) {
 
   /* ---------- paint ---------- */
   root.innerHTML = '<div class="fs-shell"><main class="fs-main" data-main></main><div data-sheethost></div><nav class="fs-nav" aria-label="App navigation">' +
-    [['today', 'Today'], ['week', 'Week'], ['guide', 'Guide'], ['timer', 'Timer']].map(v => '<button data-act="nav" data-view="' + v[0] + '">' + ICON[v[0]] + '<span data-navlabel>' + v[1] + '</span></button>').join('') + '</nav></div>';
-  const elMain = root.querySelector('[data-main]'), elTimerTab = root.querySelector('.fs-nav [data-view="timer"]'), elSheet = root.querySelector('[data-sheethost]');
-  let lastScreen = '';
+    [['today', 'Today'], ['week', 'Week'], ['guide', 'Guide'], ['timer', 'Timer']].map(v => '<button data-act="nav" data-view="' + v[0] + '">' + ICON[v[0]] + '<span data-navlabel>' + v[1] + '</span></button>').join('') + '</nav><div class="fs-backdrop" data-backdrop aria-hidden="true"></div></div>';
+  const elMain = root.querySelector('[data-main]'), elTimerTab = root.querySelector('.fs-nav [data-view="timer"]'), elSheet = root.querySelector('[data-sheethost]'), elBack = root.querySelector('[data-backdrop]');
+  let lastScreen = '', lastEnter = '';
   const reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   if (opts.intro !== false && !reduceMotion) {
     const f0 = fighterOf(planFor(false)[todayIdx]), intro = document.createElement('div');
@@ -615,14 +635,29 @@ function mount(root, opts) {
     if (!el || !el.dataset || !el.dataset.act) return null;
     return '[data-act="' + el.dataset.act + '"]' + ['idx', 'i', 'view', 'topic', 'preview', 'k', 'd', 'p', 'gi', 'sheet', 'to'].map(k => el.dataset[k] != null ? '[data-' + k + '="' + el.dataset[k] + '"]' : '').join('');
   }
+  /* the page ground: the day's fighter in another pose, or Tide on a swim day. Repainted only when it changes. */
+  let lastBack = '';
+  function paintBackdrop() {
+    const d = shownDay(), own = fighterOf(d);
+    let f = own, view = { today: 'guide', week: 'timer', guide: 'today', timer: 'week' }[S.view];
+    if (S.view === 'guide') { const cur = GUIDE.find(g => g.id === S.topic); f = (cur && FIGHTERS[TOPIC_CAST[cur.id]]) || FIGHTERS[S.cast] || own; }
+    else if (isSwim(d)) { f = FIGHTERS.pool; view = S.view; }
+    const key = f.key + '|' + view + '|' + d.origin;
+    root.firstElementChild.style.setProperty('--el2', f.color);
+    if (key === lastBack) return;
+    lastBack = key;
+    elBack.innerHTML = '<span class="fs-kanji">' + f.kanji + '</span>' + art(f, d, view);
+  }
   function render() {
     root.classList.toggle('is-art-paused', !S.artMotion || document.hidden);
     const screen = S.view + '|' + S.day + '|' + S.topic + '|' + S.preview;
+    elMain.classList.toggle('is-enter', screen + S.cast !== lastEnter); lastEnter = screen + S.cast;
     const fk = root.contains(document.activeElement) ? keyOf(document.activeElement) : null, st = elMain.scrollTop;
     elMain.innerHTML = mainHTML();
     elMain.classList.toggle('fs-night', S.view === 'timer');
     root.firstElementChild.dataset.view = S.view;
     root.firstElementChild.style.setProperty('--el', fighterOf(shownDay()).color);
+    paintBackdrop();
     elTimerTab.querySelector('[data-navlabel], span').outerHTML = navTimerLabel().replace('<span', '<span data-navlabel');
     elSheet.innerHTML = sheetHTML();
     elMain.inert=!!S.sheet; root.querySelector('.fs-nav').inert=!!S.sheet;
@@ -733,6 +768,9 @@ function mount(root, opts) {
     const a = el.dataset.act, t = S.timer;
     if (a === 'closesheet' && el.classList.contains('fs-sheetwrap') && ev.target !== el) return;
     if (a === 'artmotion') { S.artMotion = !S.artMotion; write('character-motion', S.artMotion); }
+    else if (a === 'cast') { S.cast = el.dataset.k; }
+    else if (a === 'castsheet') { if (!S.sheet || S.sheet.kind !== 'cast') S.sheetFrom = keyOf(el); S.sheet = { kind: 'cast', k: el.dataset.k, pose: 0 }; }
+    else if (a === 'castpose' && S.sheet?.kind === 'cast') { S.sheet.pose = +el.dataset.p; }
     else if (a === 'move') { S.sheet = { kind: 'move', idx: +el.dataset.idx, preview: S.view === 'today' ? false : S.preview }; S.sheetFrom = keyOf(el); }
     else if (a === 'swap' && S.sheet?.kind === 'move') {
       const preview = S.sheet.preview, to = +el.dataset.to;
