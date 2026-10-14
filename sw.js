@@ -1,4 +1,4 @@
-const CACHE = 'floatsting-v21-portrait';
+const CACHE = 'floatsting-v22-nozoom';
 const ASSETS = [
   './',
   './index.html',
@@ -43,10 +43,28 @@ self.addEventListener('activate', function (e) {
   );
 });
 
-// Cache-first for the complete offline app and its local artwork and fonts.
+// Network-first for the app shell so a deploy shows up on the next open; cache is the offline fallback.
+var SHELL = /\/(index\.html|app\.js|app\.css|sw\.js|manifest\.json)?$/;
+
+// Cache-first for the local artwork and fonts.
 self.addEventListener('fetch', function (e) {
   var req = e.request;
   if (req.method !== 'GET') return;
+  var url = new URL(req.url);
+  if (req.mode === 'navigate' || (url.origin === location.origin && SHELL.test(url.pathname))) {
+    e.respondWith(
+      fetch(req).then(function (res) {
+        if (res.ok) {
+          var copy = res.clone();
+          caches.open(CACHE).then(function (c) { try { c.put(req, copy); } catch (err) {} });
+        }
+        return res;
+      }).catch(function () {
+        return caches.match(req).then(function (hit) { return hit || caches.match('./index.html'); });
+      })
+    );
+    return;
+  }
   e.respondWith(
     caches.match(req).then(function (cached) {
       if (cached) return cached;

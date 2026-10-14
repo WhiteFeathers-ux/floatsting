@@ -814,7 +814,8 @@ html,body{height:100%;margin:0;background:#0c0a12}
 
 /* ============ no zoom, no landscape ============ */
 html,body{touch-action:pan-y;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-.fs-app{touch-action:pan-y}
+/* scroll containers start their own touch-action scope, so every descendant needs it too */
+.fs-app,.fs-app *{touch-action:pan-y}
 /* phones turned sideways get one screen asking to turn back; tablets and laptops are unaffected */
 @media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
   body::after{content:"\21BB\A Turn your phone upright";white-space:pre;position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;text-align:center;

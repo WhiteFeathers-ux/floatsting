@@ -874,6 +874,14 @@ global.FloatSting = { mount: mount };
 window.floatStingApp=FloatSting.mount(document.getElementById('app'));
 /* no pinch or double-tap zoom: iOS ignores user-scalable, so its gesture events are cancelled too */
 ['gesturestart','gesturechange','gestureend'].forEach(t=>document.addEventListener(t,e=>e.preventDefault(),{passive:false}));
+document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault();},{passive:false});
+/* iOS double-tap zoom fallback; controls are left alone so quick taps still register */
+(()=>{let last=0;document.addEventListener('touchend',e=>{const now=Date.now();if(now-last<300&&!e.target.closest('button,a,[data-act],input,select,textarea'))e.preventDefault();last=now;},{passive:false});})();
 /* portrait only where the browser allows a lock (installed Android); iOS gets the turn-upright screen in app.css */
 try{if(screen.orientation&&screen.orientation.lock)screen.orientation.lock('portrait').catch(()=>{});}catch(e){}
-if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+if('serviceWorker' in navigator){
+  /* a new deploy takes over mid-session; reload once so the phone runs it now, not on the next launch */
+  let hadController=!!navigator.serviceWorker.controller,reloaded=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadController){hadController=true;return;}if(!reloaded){reloaded=true;location.reload();}});
+  window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+}
