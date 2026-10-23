@@ -1,4 +1,4 @@
-const CACHE = 'floatsting-v29-still2';
+const CACHE = 'floatsting-v30-width';
 const ASSETS = [
   './',
   './index.html',

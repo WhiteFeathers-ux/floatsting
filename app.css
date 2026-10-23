@@ -866,3 +866,5 @@ html,body{touch-action:pan-y;-webkit-text-size-adjust:100%;text-size-adjust:100%
   .fs-app .fs-backdrop:has(.fs-scenes){inset:0 0 0 30%}
   .fs-app .fs-scene{left:62%;transform:translateX(calc(var(--fx,.5) * -100%))}
 }
+/* seven-exercise days (width block) tighten rows so the day still fits without scrolling */
+.fs-ex.is-long .fs-row,.fs-app .fs-ex.is-long .fs-row{min-height:42px;padding-top:3px;padding-bottom:3px}

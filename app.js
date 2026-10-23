@@ -27,12 +27,12 @@ const WORKOUTS = {
       [
         "4",
         "Lat Pulldown",
-        "2×8–12 · 2m"
+        "3×8–12 · 2m"
       ],
       [
         "5",
         "Lateral Raise",
-        "2×12–20 · 60–90s"
+        "3×12–20 · 60–90s"
       ],
       [
         "6",
@@ -40,7 +40,7 @@ const WORKOUTS = {
         "2×6–10 · 90s"
       ]
     ],
-    "note": "14 working sets. Complete each exercise before moving on. Rollouts: brace ribs over pelvis and move only as far as possible without the lower back arching. Start with a short kneeling range or a stability-ball rollout. Stop before losing trunk position; add range before load. First two weeks of this plan: do 2 sets wherever 3 are listed. Then use the listed sets only if lifting performance and swimming technique remain stable. Aim for 45–60 minutes; allow up to 65 with warm-ups and equipment waits. Do not shorten compound rest just to finish."
+    "note": "16 working sets. Lat pulldown: pull elbows down toward the hips and let the arms rise to a full stretch at the top. Lateral raise: lead with the elbow and stop just above shoulder height. Complete each exercise before moving on. Rollouts: brace ribs over pelvis and move only as far as possible without the lower back arching. Start with a short kneeling range or a stability-ball rollout. Stop before losing trunk position; add range before load. First two weeks of this plan: do 2 sets wherever 3 are listed. Then use the listed sets only if lifting performance and swimming technique remain stable. Aim for 45–60 minutes; allow up to 65 with warm-ups and equipment waits. Do not shorten compound rest just to finish."
   },
   "lower": {
     "type": "lo",
@@ -78,9 +78,14 @@ const WORKOUTS = {
         "6",
         "Cable Crunch",
         "3×10–15 · 90s"
+      ],
+      [
+        "7",
+        "Lateral Raise",
+        "2×12–20 · 60s"
       ]
     ],
-    "note": "16 working sets. Back squat is an alternative if a hack squat is unavailable; keep the choice consistent. Warm up separately for the hinge. Curl ribs toward pelvis during crunches. Add the smallest load once all sets reach 15 clean reps with 1–2 reps left. Swim A is a separate pool block, ideally at least 3 hours apart. First two weeks of this plan: do 2 sets wherever 3 are listed. Then use the listed sets only if lifting performance and swimming technique remain stable. Aim for 45–60 minutes; allow up to 65 with warm-ups and equipment waits. Do not shorten compound rest just to finish."
+    "note": "18 working sets. Lateral raise (cable or seated dumbbell): light load, lead with the elbow, stop before any shoulder pinch; go lighter if shoulders feel tired before the swim. Back squat is an alternative if a hack squat is unavailable; keep the choice consistent. Warm up separately for the hinge. Curl ribs toward pelvis during crunches. Add the smallest load once all sets reach 15 clean reps with 1–2 reps left. Swim A is a separate pool block, ideally at least 3 hours apart. First two weeks of this plan: do 2 sets wherever 3 are listed. Then use the listed sets only if lifting performance and swimming technique remain stable. Aim for 45–60 minutes; allow up to 65 with warm-ups and equipment waits. Do not shorten compound rest just to finish."
   },
   "push": {
     "type": "up",
@@ -141,26 +146,31 @@ const WORKOUTS = {
       ],
       [
         "3",
+        "Straight-Arm Cable Pulldown",
+        "2×12–15 · 90s"
+      ],
+      [
+        "4",
         "Reverse Pec Deck",
         "2×12–20 · 90s"
       ],
       [
-        "4",
+        "5",
         "Dumbbell Curl",
-        "3×10–15 · 90s"
+        "2×10–15 · 90s"
       ],
       [
-        "5",
+        "6",
         "Pallof Press",
         "2×10–12/side · 60–90s"
       ],
       [
-        "6",
+        "7",
         "Cable Crunch",
         "3×10–15 · 90s"
       ]
     ],
-    "note": "16 working sets. Pallof press: stand side-on to a cable at chest height, press straight out and pause 2 seconds without twisting. Train both sides. Cable crunch: curl ribs toward pelvis without pulling with the arms; build load gradually. Chest support limits lower-back fatigue before Saturday legs. Avoid forced reps. If shoulder or lat fatigue affects Saturday swimming, keep the pool session easy and shorten it. First two weeks of this plan: do 2 sets wherever 3 are listed. Then use the listed sets only if lifting performance and swimming technique remain stable. Aim for 45–60 minutes; allow up to 65 with warm-ups and equipment waits. Do not shorten compound rest just to finish."
+    "note": "17 working sets. Straight-arm pulldown: arms long with a soft elbow, sweep the bar to the thighs by driving with the lats, not the triceps. Pallof press: stand side-on to a cable at chest height, press straight out and pause 2 seconds without twisting. Train both sides. Cable crunch: curl ribs toward pelvis without pulling with the arms; build load gradually. Chest support limits lower-back fatigue before Saturday legs. Avoid forced reps. If shoulder or lat fatigue affects Saturday swimming, keep the pool session easy and shorten it. First two weeks of this plan: do 2 sets wherever 3 are listed. Then use the listed sets only if lifting performance and swimming technique remain stable. Aim for 45–60 minutes; allow up to 65 with warm-ups and equipment waits. Do not shorten compound rest just to finish."
   },
   "legs": {
     "type": "lo",
@@ -198,9 +208,14 @@ const WORKOUTS = {
         "6",
         "Suitcase Carry",
         "3×20–30s/side · 90s"
+      ],
+      [
+        "7",
+        "Lateral Raise",
+        "2×12–20 · 60s"
       ]
     ],
-    "note": "16 working sets; split squats mean two sets per leg, counted as two sets for each leg. Use hand support for balance. Suitcase carry: hold one dumbbell at the side and walk slowly without leaning or shrugging; repeat on the other side. Breathe normally. Add load after every set reaches 30 seconds with level shoulders. If grip limits the trunk work, use a side plank for the same time instead. Swim B is a separate pool block, ideally at least 3 hours apart. First two weeks of this plan: do 2 sets wherever 3 are listed. Then use the listed sets only if lifting performance and swimming technique remain stable. Aim for 45–60 minutes; allow up to 65 with warm-ups and equipment waits. Do not shorten compound rest just to finish."
+    "note": "18 working sets; split squats mean two sets per leg, counted as two sets for each leg. Lateral raise (cable or seated dumbbell): light load, lead with the elbow, stop before any shoulder pinch; go lighter if shoulders feel tired before the swim. Use hand support for balance. Suitcase carry: hold one dumbbell at the side and walk slowly without leaning or shrugging; repeat on the other side. Breathe normally. Add load after every set reaches 30 seconds with level shoulders. If grip limits the trunk work, use a side plank for the same time instead. Swim B is a separate pool block, ideally at least 3 hours apart. First two weeks of this plan: do 2 sets wherever 3 are listed. Then use the listed sets only if lifting performance and swimming technique remain stable. Aim for 45–60 minutes; allow up to 65 with warm-ups and equipment waits. Do not shorten compound rest just to finish."
   },
   "rest": {
     "type": "rest",
@@ -247,7 +262,7 @@ const GUIDE = [
     "id": "progress",
     "title": "Growth & recovery",
     "summary": "Weekly volume and adjustment rules",
-    "html": "<p class=\"lead\">Full target: 10 direct weekly sets each for chest, quads and hamstrings; 11 for back, 5 lateral-delt, 2 rear-delt, 2 shoulder-press, 3 direct biceps, 2 direct triceps and 6 calves. Core work comprises 6 cable-crunch sets, 2 rollout sets, 2 Pallof sets per side and 3 carry sets per side; these train different trunk functions and should not be treated as 13 equivalent hypertrophy sets. There are also 2 light external-rotation sets per side. Compound presses and pulls add indirect arm/shoulder work. Glutes work during squats, presses, split squats and hinges; swimming is not counted as lifting sets.</p><ul><li><b>Warm up.</b> Use 5–10 minutes of easy movement and progressively heavier warm-up sets for the first compound. Warm up again when switching to a different movement pattern.</li><li><b>Time budget.</b> Full sessions have 14–16 working sets across six exercises. Aim for 45–60 minutes including warm-ups and abs; some days may take 60–65. If time runs out, omit a lateral-raise or calf exercise that day; keep the core work. Do not make it up on rest days.</li><li><b>Transition.</b> First two weeks: cap all 3-set exercises at 2. Then move toward the displayed volume if technique, sleep and performance are stable. Keep swimming easy while lifting volume rises.</li><li><b>Review after 4–6 weeks.</b> Look for more reps or load at similar effort, stable swimming technique and a gradual body-weight trend. If one muscle stalls despite consistent training, food and recovery, add only 1–2 weekly sets for it and reassess. Do not add volume simply because there is no soreness.</li><li><b>Reduce when needed.</b> If performance drops over several sessions, soreness persists or shoulders are irritated, reduce sets by about half for a week and shorten swims. Persistent joint pain needs assessment.</li></ul><p class=\"lead\">This split and these exact doses are coaching choices, not a tested optimal protocol. Progressive loading and adequate volume are supported by the <a href=\"https://pubmed.ncbi.nlm.nih.gov/41843416/\" target=\"_blank\" rel=\"noopener\">2026 ACSM scientific review</a>.</p>"
+    "html": "<p class=\"lead\">Full target: 10 direct weekly sets each for chest, quads and hamstrings; 14 for back (8 of them lat-focused pulldowns), 10 lateral-delt, 2 rear-delt, 2 shoulder-press, 2 direct biceps, 2 direct triceps and 6 calves. Core work comprises 6 cable-crunch sets, 2 rollout sets, 2 Pallof sets per side and 3 carry sets per side; these train different trunk functions and should not be treated as 13 equivalent hypertrophy sets. There are also 2 light external-rotation sets per side. Compound presses and pulls add indirect arm/shoulder work. Glutes work during squats, presses, split squats and hinges; swimming is not counted as lifting sets.</p><ul><li><b>Warm up.</b> Use 5–10 minutes of easy movement and progressively heavier warm-up sets for the first compound. Warm up again when switching to a different movement pattern.</li><li><b>Time budget.</b> Full sessions have 14–18 working sets across six or seven exercises. Aim for 45–60 minutes including warm-ups and abs; some days may take 60–65. On lower days, fit the lateral raises into calf-raise rests. If time runs out, drop a calf set first; keep the lateral raises, pulldowns and core work. Do not make it up on rest days.</li><li><b>Width block.</b> Lats and side delts are the priority: pulldowns on Upper and Pull, straight-arm pulldowns on Pull, and lateral raises on four days. Swim days get only light lateral raises, no added back work. Judge it at 4–6 weeks by more pulldown and raise reps at similar effort.</li><li><b>Transition.</b> First two weeks: cap all 3-set exercises at 2. Then move toward the displayed volume if technique, sleep and performance are stable. Keep swimming easy while lifting volume rises.</li><li><b>Review after 4–6 weeks.</b> Look for more reps or load at similar effort, stable swimming technique and a gradual body-weight trend. If one muscle stalls despite consistent training, food and recovery, add only 1–2 weekly sets for it and reassess. Do not add volume simply because there is no soreness.</li><li><b>Reduce when needed.</b> If performance drops over several sessions, soreness persists or shoulders are irritated, reduce sets by about half for a week and shorten swims. Persistent joint pain needs assessment.</li></ul><p class=\"lead\">This split and these exact doses are coaching choices, not a tested optimal protocol. Progressive loading and adequate volume are supported by the <a href=\"https://pubmed.ncbi.nlm.nih.gov/41843416/\" target=\"_blank\" rel=\"noopener\">2026 ACSM scientific review</a>.</p>"
   },
   {
     "id": "core",
@@ -378,7 +393,17 @@ function mount(root, opts) {
     try { localStorage.setItem('floatsting:'+key,JSON.stringify(value)); S.storageError=false; }
     catch(e) { S.storageError=true; }
   }
-  S.artMotion = read('character-motion', true) !== false;
+  /* width block inserted Straight-Arm Pulldown at Pull row 2; shift saved Pull checks once so they stay on the same exercise */
+  if (!read('width-v1', false)) {
+    try {
+      Object.keys(localStorage).filter(k => k.indexOf('floatsting:checks:swim-core-v5:') === 0).forEach(k => {
+        const wk = JSON.parse(localStorage.getItem(k));
+        if (wk && Array.isArray(wk.fri)) { wk.fri = wk.fri.map(i => Number.isInteger(i) && i >= 2 ? i + 1 : i); localStorage.setItem(k, JSON.stringify(wk)); }
+      });
+    } catch(e) {}
+    write('width-v1', true);
+  }
+  S.artMotion =read('character-motion', true) !== false;
   const prefs=read('prefs',{}) || {};
   const valid=(v,min,max,fallback)=>Number.isInteger(v)&&v>=min&&v<=max?v:fallback;
   Object.assign(S.timer,{rounds:valid(prefs.rounds,1,20,3),work:valid(prefs.work,30,300,180),rest:valid(prefs.rest,15,180,60),sound:typeof prefs.sound==='boolean'?prefs.sound:true});
@@ -464,7 +489,7 @@ function mount(root, opts) {
       '<span class="fs-count' + (full ? ' is-done' : '') + '">' + (full ? 'Complete' : dn.length + ' of ' + n) + '</span>' +
       (dn.length ? '<button class="fs-reset" data-act="reset" data-idx="' + d.idx + '">Reset</button>' : '') + '</div>';
     const up = d.ex.findIndex((e, i) => dn.indexOf(i) < 0);
-    h += '<ul class="fs-ex" style="--kj:\'' + f.kanji + '\'">' + d.ex.map((e, i) => {
+    h += '<ul class="fs-ex' + (d.ex.length > 6 ? ' is-long' : '') + '" style="--kj:\'' + f.kanji + '\'">' + d.ex.map((e, i) => {
       const rx = splitRx(e[2]), on = dn.indexOf(i) >= 0;
       return '<li><button class="fs-row' + (opts.focusDemo === i ? ' is-focus' : '') + (i === up ? ' is-next' : '') + '" style="--i:' + i + '" data-act="check" data-idx="' + d.idx + '" data-i="' + i + '" aria-pressed="' + on + '">' +
         '<span class="fs-box"><span>' + e[0] + '</span>' + ICON.check + '</span><span class="fs-name">' + e[1] + '</span>' +
